@@ -2,7 +2,7 @@
 Title: MegaResume
 ---
 
-# fart
+# MegaResume
 ### startDate to endDate
 ### Platform: Web (Desktop and Mobile)
 ### Technologies: JavaScript, TypeScript, SvelteKit 
