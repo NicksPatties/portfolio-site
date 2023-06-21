@@ -7,7 +7,7 @@ Title: Sweet
 ### Platform: PC, macOS, Linux (Command line interface)
 ### Technologies: JavaScript, Python, Go
 
-Sweet is a **S**oft**w**are **E**ngineer **E**xercise for **T**yping. In other words, it's a touch typing exercise designed specifically for programmers! Instantly begin a typing game to warm yourself up
+Sweet is a **S**oft**w**are **E**ngineer **E**xercise for **T**yping. In other words, it's a touch typing exercise designed specifically for programmers! Instantly begin a typing game to warm yourself up for your day of programming. 
 
 ## Motivation
 
