@@ -1,5 +1,8 @@
 ---
-Title: MegaResume
+title: MegaResume
+summary: "A resume building application"
+startDate: 2020-01
+endDate: 2020-11
 ---
 
 # MegaResume

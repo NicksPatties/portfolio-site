@@ -1,11 +1,11 @@
 ---
-Title: The Two Eyes in Team
+Title: TimeClock
 ---
 
-# The Two Eyes in Team
+# TimeClock
 ### startDate to endDate
-### Platform: PC
-### Technologies: C#, Unity Game Engine
+### Platform: Android
+### Technologies: Kotlin, Android Studio, Jetpack Compose
 
 Basic Summary
 
@@ -20,3 +20,4 @@ What did I do during this project
 ## Results
 
 What were the results?
+

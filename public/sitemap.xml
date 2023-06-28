@@ -2,10 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/categories/</loc>
+    <loc>https://nickspatties.github.io/portfolio-site/categories/</loc>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>https://nickspatties.github.io/portfolio-site/projects/megaresume/</loc>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>https://nickspatties.github.io/portfolio-site/</loc>
+  </url><url>
+    <loc>https://nickspatties.github.io/portfolio-site/projects/</loc>
+  </url><url>
+    <loc>https://nickspatties.github.io/portfolio-site/resume/</loc>
+  </url><url>
+    <loc>https://nickspatties.github.io/portfolio-site/projects/sweet/</loc>
+  </url><url>
+    <loc>https://nickspatties.github.io/portfolio-site/tags/</loc>
+  </url><url>
+    <loc>https://nickspatties.github.io/portfolio-site/projects/thetwoeyesinteam/</loc>
+  </url><url>
+    <loc>https://nickspatties.github.io/portfolio-site/projects/timeclock/</loc>
   </url>
 </urlset>
