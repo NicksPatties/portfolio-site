@@ -1,0 +1,136 @@
+@font-face {
+  font-family: 'Titan One';
+  src: url('../fonts/titanone-regular-webfont.woff2') format('woff2'),
+       url('../fonts/titanone-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  src: url('../fonts/oswald-variablefont_wght-webfont.woff2') format('woff2'),
+       url('../fonts/oswald-variablefont_wght-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Oranienbaum';
+  src: url('../fonts/oranienbaum-regular-webfont.woff2') format('woff2'),
+       url('../fonts/oranienbaum-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  --background-color: #97B4B9;
+  --container-color: #D9D9D9;
+  --hero-font-family: Titan One, Arial, sans-serif;
+  --body-font-family: Oranienbaum, Times, serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  background-color: var(--background-color);
+  height: 1000px;
+}
+
+main {
+  margin: auto;
+  background-color: var(--container-color);
+  width: 860px;
+  height: 100%;
+}
+
+.section {
+  width: 100%;
+}
+
+.hero {
+  background-image: url("../images/burger_background_1080_720.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 512px;
+  display: flex;
+}
+
+.hero-text {
+  margin: auto;
+}
+
+.hero-text p {
+  font-family: var(--body-font-family);
+  margin: 0;
+  font-size: 3.5rem;
+}
+
+.hero-text p.two {
+  font-size: 2.5rem;
+}
+
+.hero-text h1 {
+  font-family: var(--hero-font-family);
+  font-size: 12.5rem;
+  font-weight: 100;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.section.intro {
+  padding: 50px;
+}
+
+.profile-container {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  grid-column-gap: 38px;
+}
+
+.profile-picture-border {
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 249px;
+  height: 249px;
+  border: 5px solid var(--background-color);
+  border-radius: 100%;
+}
+
+.profile-picture-crop {
+  width: 230px;
+  height: 230px;
+  display: flex;
+  border-radius: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-picture {
+  width: 260px;
+  height: 260px;
+  margin-left: 30px;
+}
+
+.profile-text {
+  grid-row: 1;
+}
+
+.profile-text h2 {
+  font-family: 'Oswald', Arial, sans-serif;
+  font-weight: 100;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+}
+
+.profile-text p {
+  font-family: 'Oranienbaum', Times, serif;
+  font-size: 1.5rem;
+  margin-top: 0.44rem;
+}
