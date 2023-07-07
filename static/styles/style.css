@@ -51,6 +51,8 @@ main {
   width: 100%;
 }
 
+/** Hero section **/
+
 .hero {
   background-image: url("../images/burger_background_1080_720.jpg");
   background-size: cover;
@@ -81,6 +83,8 @@ main {
   line-height: 0.9;
   margin: 0;
 }
+
+/** Profile section **/
 
 .section.intro {
   padding: 50px;
@@ -138,9 +142,11 @@ main {
   margin-top: 0.44rem;
 }
 
+/** Projects **/
+
 .section.projects {
   background: var(--container-color-2);
-  height: 1000px;
+  padding-top: 82px;
 }
 
 .fancy-heading {
@@ -167,10 +173,6 @@ main {
   width: 8.9375rem;
   height: 1.4375rem;
   flex-shrink: 0;
-}
-
-.section.projects {
-  padding-top: 82px;
 }
 
 .project-list {
@@ -210,4 +212,56 @@ main {
 .project-description {
   margin: 0;
   font-family: var(--body-font-family);
+}
+
+/** Companies section **/
+
+.section.companies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--container-color-3);
+  height: 500px;
+}
+
+.section.companies h2 {
+  font-family: var(--body-font-family);
+  font-weight: 100;
+  font-size: 1.5rem;
+  margin-top: 101px ;
+}
+
+.company-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 60px;
+  margin: 72px 0;
+  width: 676px;
+  height: 100px;
+}
+
+.company {
+  overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.oomba {
+  background-image: url("../images/oomba-inc-logo.jpg");
+}
+
+.amazon {
+  background-image: url("../images/amazon-logo.png");
+}
+
+.disney {
+  background-image: url("../images/walt-disney-company-logo.png");
+}
+
+.yours {
+  font-family: var(--body-font-family);
+  font-size: 1.5rem;
+  text-align: center;
+  align-self: center;
 }
