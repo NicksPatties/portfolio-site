@@ -25,7 +25,10 @@
 * {
   --background-color: #97B4B9;
   --container-color: #D9D9D9;
+  --container-color-2: #F3F3F3;
+  --container-color-3: #fff;
   --hero-font-family: Titan One, Arial, sans-serif;
+  --heading-font-family: 'Oswald', Arial, sans-serif;
   --body-font-family: Oranienbaum, Times, serif;
   box-sizing: border-box;
 }
@@ -123,14 +126,88 @@ main {
 }
 
 .profile-text h2 {
-  font-family: 'Oswald', Arial, sans-serif;
+  font-family: var(--heading-font-family);
   font-weight: 100;
   font-size: 2.5rem;
   margin-bottom: 0;
 }
 
 .profile-text p {
-  font-family: 'Oranienbaum', Times, serif;
+  font-family: var(--body-font-family);
   font-size: 1.5rem;
   margin-top: 0.44rem;
+}
+
+.section.projects {
+  background: var(--container-color-2);
+  height: 1000px;
+}
+
+.fancy-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fancy-heading p {
+  font-family: var(--body-font-family);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.fancy-heading h1 {
+  font-family: var(--heading-font-family);
+  font-weight: 100;
+  font-size: 4rem;
+  margin: 24px 0 10px 0;
+}
+
+.flourish {
+  width: 8.9375rem;
+  height: 1.4375rem;
+  flex-shrink: 0;
+}
+
+.section.projects {
+  padding-top: 82px;
+}
+
+.project-list {
+  display: grid;
+  justify-items: stretch;
+  grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+  row-gap: 22px;
+  column-gap: 39px;
+  padding: 36px 26px;
+}
+
+.project-container {
+  height: 309px;
+  padding: 5px;
+  background: var(--container-color);
+  place-self: center;
+}
+
+.project-image {
+  height: 188px;
+  background: var(--container-color-3);
+  margin-bottom: 5px;
+}
+
+.project-text {
+  height: 105px;
+  background: var(--container-color-3);
+  padding: 5px;
+}
+
+.project-title {
+  margin: 9px 0;
+  font-family: var(--heading-font-family);
+  font-weight: 100;
+}
+
+.project-description {
+  margin: 0;
+  font-family: var(--body-font-family);
 }
