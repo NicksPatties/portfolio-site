@@ -38,7 +38,7 @@
 body {
   margin: 0;
   position: relative;
-  background-color: var(--background-color);
+  background: linear-gradient(180deg, var(--background-color) 0%, var(--container-color) 100%);
 }
 
 main {
