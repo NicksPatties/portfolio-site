@@ -54,12 +54,24 @@ main {
 /** Hero section **/
 
 .hero {
-  background-image: url("../images/burger_background_1080_720.jpg");
-  background-size: cover;
-  background-position: center;
+  position: relative;
+  
   width: 100%;
   height: 512px;
+}
+
+.hero-text-background-container {
+  position: absolute;
+  background-image: url("../images/burger_background_mask_1080_720.jpg");
+  background-size: cover;
+  background-position: center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  width: 100%;
+  height: 100%;
   display: flex;
+  z-index: 10;
 }
 
 .hero-text {
@@ -82,6 +94,16 @@ main {
   font-weight: 100;
   line-height: 0.9;
   margin: 0;
+}
+
+.hero-background-container {
+  background-image: url("../images/burger_background_1080_720.jpg");
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
 }
 
 /** Profile section **/
