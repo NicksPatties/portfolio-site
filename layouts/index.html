@@ -44,38 +44,13 @@
         </div>
         <div class="project-list">
           <!-- start range of projects in here-->
-          <div class="project-container">
-            <div class="project-image">
-            </div>
-            <div class="project-text">
-              <h2 class="project-title">MegaResume</h2>
-              <p class="project-description">A resume building application that does some really cool stuff. This is the text for the beginning of the document. This is about three lines worth of text. Neato!</p>
-            </div>
-          </div>
-          <div class="project-container">
-            <div class="project-image">
-            </div>
-            <div class="project-text">
-              <h2 class="project-title">Sweet</h2>
-              <p class="project-description">A command line application that tests your typing ability! Focused on software engineers, typing blah blah heck yeah super cool,</p>
-            </div>
-          </div>
-          <div class="project-container">
-            <div class="project-image">
-            </div>
-            <div class="project-text">
-              <h2 class="project-title">The Two Eyes In Team</h2>
-              <p class="project-description">Another project that is really cool. This is a video game that I made many years ago while I was making fun stuff for school! Still impressive and fun looking!</p>
-            </div>
-          </div>
-          <div class="project-container">
-            <div class="project-image">
-            </div>
-            <div class="project-text">
-              <h2 class="project-title">TimeClock</h2>
-              <p class="project-description">This is an Android application that helped me keep on task and manage my time. To date, I have recorded over 360 hours worth of focus time. How useful!</p>
-            </div>
-          </div>
+          {{ partial "project-container.html" (dict "title" "MegaResume" "description" "A resume building application that does some really cool stuff. This is the text for the beginning of the document. This is about three lines worth of text. Neato!") }}
+
+          {{ partial "project-container.html" (dict "title" "Sweet" "description" "A command line application that test your typing abiliity! Focused on software engineers, typing blah blah heck yeah super cool.")}}
+
+          {{ partial "project-container.html" (dict "title" "The Two Eyes in Team" "description" "Another project that is really cool. This is a video game that I made many years ago while I was making fun stuff for school! Still impressive and fun looking!")}}
+
+          {{ partial "project-container.html" (dict "title" "TimeClock" "description" "This is an Android application that helped me keep on task and manage my time. To date, I have recorded over 360 hours worth of focus time. How useful!")}}
           <!-- end range of projects-->
         </div>
 
