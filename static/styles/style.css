@@ -23,6 +23,7 @@
 }
 
 * {
+  --font-color: #000;
   --background-color: #97B4B9;
   --container-color: #D9D9D9;
   --container-color-2: #F3F3F3;
@@ -302,6 +303,11 @@ main {
   justify-items: center;
   margin: 47px auto 0 auto;
   width: 271px;
+}
+
+.contact-row a, .contact-row a:-webkit-any-link {
+  text-decoration: none;
+  color: var(--font-color);
 }
 
 .contact-icon {
