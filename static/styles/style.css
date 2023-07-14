@@ -207,16 +207,15 @@ main {
 }
 
 .project-container {
-  height: 309px;
   padding: 5px;
   background: var(--container-color);
   place-self: center;
 }
 
 .project-image {
-  height: 188px;
+  height: 213.78px; /* 1.78 ratio with width */
+  width: 100%;
   background: var(--container-color-3);
-  margin-bottom: 5px;
 }
 
 .project-text {
