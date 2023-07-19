@@ -44,13 +44,17 @@
         </div>
         <div class="project-list">
           <!-- start range of projects in here-->
-          {{ partial "project-container.html" (dict "title" "MegaResume" "description" "A resume building application that does some really cool stuff. This is the text for the beginning of the document. This is about three lines worth of text. Neato!") }}
+          {{ $megaresumeTags := slice "SvelteKit" "TypeScript" "HTML" "CSS" "One billion tags" "the best"}}
+          {{ partial "project-container.html" (dict "title" "MegaResume" "description" "A resume building application that does some really cool stuff. This is the text for the beginning of the document. This is about three lines worth of text. Neato!" "tags" $megaresumeTags) }}
 
-          {{ partial "project-container.html" (dict "title" "Sweet" "description" "A command line application that test your typing abiliity! Focused on software engineers, typing blah blah heck yeah super cool.")}}
+          {{ $sweetTags := slice "Go" "CLI" }}
+          {{ partial "project-container.html" (dict "title" "Sweet" "description" "A command line application that test your typing abiliity! Focused on software engineers, typing blah blah heck yeah super cool." "tags" $sweetTags) }}
 
-          {{ partial "project-container.html" (dict "title" "The Two Eyes in Team" "description" "Another project that is really cool. This is a video game that I made many years ago while I was making fun stuff for school! Still impressive and fun looking!")}}
+          {{ $teitTags := slice "Game development" "Unity" "C#" }}
+          {{ partial "project-container.html" (dict "title" "The Two Eyes in Team" "description" "Another project that is really cool. This is a video game that I made many years ago while I was making fun stuff for school! Still impressive and fun looking!" "tags" $teitTags)}}
 
-          {{ partial "project-container.html" (dict "title" "TimeClock" "description" "This is an Android application that helped me keep on task and manage my time. To date, I have recorded over 360 hours worth of focus time. How useful!")}}
+          {{ $timeClockTags := slice "Mobile development" "Android" "Kotlin"}}
+          {{ partial "project-container.html" (dict "title" "TimeClock" "description" "This is an Android application that helped me keep on task and manage my time. To date, I have recorded over 360 hours worth of focus time. How useful!" "tags" $timeClockTags)}}
           <!-- end range of projects-->
         </div>
 

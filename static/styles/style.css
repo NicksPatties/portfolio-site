@@ -199,7 +199,8 @@ main {
 
 .project-list {
   display: grid;
-  justify-items: stretch;
+  justify-items: center;
+  align-items: top;
   grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
   row-gap: 22px;
   column-gap: 39px;
@@ -236,13 +237,14 @@ main {
 }
 
 .tag-list {
-  margin: 12px 0 6px 0;
+  margin: 12px 0 0 0;
   list-style: none;
   padding: 0;
   display: inline-block;
 }
 
 .tag-list li {
+  margin-bottom: 6px;
   display: inline-block;
   padding: 5px;
   background: black;
