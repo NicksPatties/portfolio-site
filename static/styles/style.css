@@ -219,7 +219,6 @@ main {
 }
 
 .project-text {
-  height: 105px;
   background: var(--container-color-3);
   padding: 5px;
 }
@@ -233,6 +232,21 @@ main {
 .project-description {
   margin: 0;
   font-family: var(--body-font-family);
+  line-clamp: 3;
+}
+
+.tag-list {
+  margin: 12px 0 6px 0;
+  list-style: none;
+  padding: 0;
+  display: inline-block;
+}
+
+.tag-list li {
+  display: inline-block;
+  padding: 5px;
+  background: black;
+  color: white;
 }
 
 /** Companies section **/
