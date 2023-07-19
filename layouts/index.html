@@ -58,6 +58,15 @@
           <!-- end range of projects-->
         </div>
 
+        <!-- NOTE: ne is Not equal, NOT any! -->
+        <ul>
+          {{ range where .Site.Pages "Section" "==" "projects" }}
+            {{ if ne .Permalink "/projects/" }}
+              <li>{{ . }}</li>
+            {{ end }}
+          {{ end }}
+        </ul>
+        
       </div>
 
       <div class="section companies">
