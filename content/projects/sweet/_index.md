@@ -1,8 +1,8 @@
 ---
 title: Sweet
 summary: "A touch typing command line application for programmers"
-startDate: 2020-01
-endDate: 2020-11
+startDate: 2023-05
+endDate: 2023-06
 tags:
 - Command line applications
 - Go (Golang)
