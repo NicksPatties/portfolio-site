@@ -1,5 +1,13 @@
 ---
-Title: The Two Eyes in Team
+title: The Two Eyes in Team
+summary: "A cooperative game in which two players each control a single eyeball in a person's head"
+startDate: 2013-08
+endDate: 2014-08
+tags:
+- Game development
+- Unity
+- C#
+- Project management
 ---
 
 # The Two Eyes in Team

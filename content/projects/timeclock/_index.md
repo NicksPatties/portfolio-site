@@ -1,5 +1,12 @@
 ---
-Title: TimeClock
+title: TimeClock
+summary: "Keep track of the time you spend doing the things you want with this Android app"
+startDate: 2021-09
+endDate: 2022-09
+tags:
+- Mobile development
+- Android
+- Kotlin
 ---
 
 # TimeClock
