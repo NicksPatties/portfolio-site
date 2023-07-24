@@ -1,6 +1,7 @@
 ---
 title: The Two Eyes in Team
 summary: "A cooperative game in which two players each control a single eyeball in a person's head"
+description: "Another project that is really cool. This is a video game that I made many years ago while I was making fun stuff for school! Still impressive and fun looking!"
 startDate: 2013-08
 endDate: 2014-08
 tags:

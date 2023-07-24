@@ -1,6 +1,7 @@
 ---
 title: Sweet
 summary: "A touch typing command line application for programmers"
+description: "A command line application that test your typing abiliity! Focused on software engineers, typing blah blah heck yeah super cool."
 startDate: 2023-05
 endDate: 2023-06
 tags:

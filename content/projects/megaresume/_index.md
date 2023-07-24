@@ -1,6 +1,7 @@
 ---
 title: MegaResume
 summary: "A resume building application"
+description: "A resume building application that does some really cool stuff. This is the text for the beginning of the document. This is about three lines worth of text. Neato!"
 startDate: 2020-01
 endDate: 2020-11
 tags:

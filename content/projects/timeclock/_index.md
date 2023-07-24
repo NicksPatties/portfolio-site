@@ -1,6 +1,7 @@
 ---
 title: TimeClock
 summary: "Keep track of the time you spend doing the things you want with this Android app"
+description: "This is an Android application that helped me keep on task and manage my time. To date, I have recorded over 360 hours worth of focus time. How useful!"
 startDate: 2021-09
 endDate: 2022-09
 tags:
