@@ -61,8 +61,8 @@
         <!-- NOTE: ne is Not equal, NOT any! -->
         <ul>
           {{ range where .Site.Pages "Section" "==" "projects" }}
-            {{ if ne .Permalink "/projects/" }}
-              <li>{{ . }}</li>
+            {{ if ne "projects" .File.ContentBaseName }}
+              <li>{{ . }} {{ .File.ContentBaseName }}</li>
             {{ end }}
           {{ end }}
         </ul>
