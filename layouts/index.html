@@ -44,7 +44,7 @@
         </div>
         <div class="project-list">
           {{ range where .Site.Pages "Section" "==" "projects" }}
-            {{ if ne "projects" .File.ContentBaseName }}
+            {{ if ne .File.ContentBaseName "projects" }}
               {{ partial "project-container.html" (dict "title" .Params.title "description" .Params.description "tags" .Params.tags) }}
             {{ end }}
           {{ end }}
