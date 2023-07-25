@@ -277,11 +277,17 @@ main {
   height: 100px;
 }
 
-.company {
+.company.oomba, .company.amazon, .company.disney {
   overflow: hidden;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  filter: grayscale(1);
+  transition: filter 200ms linear;
+}
+
+.company:hover {
+  filter: none
 }
 
 .oomba {
@@ -322,7 +328,7 @@ main {
 
 .contact-row a, .contact-row a:-webkit-any-link {
   text-decoration: none;
-  color: var(--font-color);
+  color: #555;
 }
 
 .contact-icon {
@@ -333,6 +339,11 @@ main {
 p.contact-icon {
   font-family: var(--heading-font-family);
   margin: 0;
+}
+
+.contact-icon:hover {
+  transition: color 200ms linear;
+  color: blue;
 }
 
 /** Footer **/
