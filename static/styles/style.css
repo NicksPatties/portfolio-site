@@ -213,6 +213,11 @@ main {
   place-self: center;
 }
 
+.project-link {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
 .project-image {
   height: 213.78px; /* 1.78 ratio with width */
   width: 100%;
