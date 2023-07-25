@@ -1,7 +1,6 @@
-{{ $dashedTitle := replace .title " " "-" }}
 <a href="projects/{{ .link }}" class="project-link">
   <div class="project-container">
-    <img class="project-image" src="images/projects/{{ lower $dashedTitle }}-cover.jpg"/>
+    <img class="project-image" src="images/projects/{{ .link }}-cover.jpg"/>
     <div class="project-text">
       <h2 class="project-title">{{ .title }}</h2>
       <p class="project-description">{{ .description }}</p>
