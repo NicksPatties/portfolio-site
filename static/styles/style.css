@@ -24,10 +24,13 @@
 
 * {
   --font-color: #000;
+  --icon-no-hover-color: #555;
+  --icon-hover-color: blue;
   --background-color: #97B4B9;
   --container-color: #D9D9D9;
   --container-color-2: #F3F3F3;
   --container-color-3: #fff;
+  --fade-animation: 200ms linear;
   --footer-background-color: #0A2433;
   --footer-font-color: #fff;
   --hero-font-family: Titan One, Arial, sans-serif;
@@ -288,7 +291,7 @@ main {
   background-position: center;
   background-repeat: no-repeat;
   filter: grayscale(1);
-  transition: filter 200ms linear;
+  transition: filter var(--fade-animation);
 }
 
 .company:hover {
@@ -333,7 +336,7 @@ main {
 
 .contact-row a, .contact-row a:-webkit-any-link {
   text-decoration: none;
-  color: #555;
+  color: var(--icon-no-hover-color);
 }
 
 .contact-icon {
@@ -347,8 +350,8 @@ p.contact-icon {
 }
 
 .contact-icon:hover {
-  transition: color 200ms linear;
-  color: blue;
+  transition: color var(--fade-animation);
+  color: var(--icon-hover-color);
 }
 
 /** Footer **/
