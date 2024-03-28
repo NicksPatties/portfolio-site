@@ -127,6 +127,11 @@ Output
 </html>
 ```
 
+```js
+const add = (a, b) => {
+  return a + b;
+}
+```
 ## List Types
 
 ### Ordered List
