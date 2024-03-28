@@ -1,17 +1,19 @@
 /**
- * Gruvbox dark theme
+ * Gruvbox theme
  *
  * Adapted from a theme based on:
- * Vim Gruvbox dark Theme (https://github.com/morhetz/gruvbox)
+ * Vim Gruvbox Theme (https://github.com/morhetz/gruvbox)
+ * 
+ * Made it more universal by assigning variables to the color names
  *
  * @author Azat S. <to@azat.io>
+ * @author NicksPatties <nickspatties@gmail.com>
  * @version 1.0
  */
 
 code[class*="language-"],
 pre[class*="language-"] {
   color: var(--fg1);
-  /* fg1 / fg */
   font-family: Consolas, Monaco, "Andale Mono", monospace;
   direction: ltr;
   text-align: left;
@@ -35,9 +37,7 @@ pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::-moz-selection,
 code[class*="language-"] ::-moz-selection {
   color: var(--fg0);
-  /* fg0 */
   background: var(--bg4);
-  /* bg4 */
 }
 
 pre[class*="language-"]::selection,
@@ -45,9 +45,7 @@ pre[class*="language-"] ::selection,
 code[class*="language-"]::selection,
 code[class*="language-"] ::selection {
   color: var(--fg0);
-  /* fg0 */
   background: var(--bg4);
-  /* bg4 */
 }
 
 /* Code blocks */
@@ -60,7 +58,6 @@ pre[class*="language-"] {
 :not(pre)>code[class*="language-"],
 pre[class*="language-"] {
   background: var(--bg0_h);
-  /* bg0_h */
 }
 
 /* Inline code */
@@ -73,7 +70,6 @@ pre[class*="language-"] {
 .token.prolog,
 .token.cdata {
   color: var(--fg4);
-  /* fg4 / gray1 */
 }
 
 .token.delimiter,
@@ -83,14 +79,12 @@ pre[class*="language-"] {
 .token.important,
 .token.atrule {
   color: var(--red2);
-  /* red2 */
 }
 
 .token.operator,
 .token.punctuation,
 .token.attr-name {
   color: var(--fg4);
-  /* fg4 / gray1 */
 }
 
 .token.tag,
@@ -98,49 +92,41 @@ pre[class*="language-"] {
 .token.doctype,
 .token.builtin {
   color: var(--yellow2);
-  /* yellow2 */
 }
 
 .token.entity,
 .token.number,
 .token.symbol {
   color: var(--purple2);
-  /* purple2 */
 }
 
 .token.property,
 .token.constant,
 .token.variable {
   color: var(--red2);
-  /* red2 */
 }
 
 .token.string,
 .token.char {
   color: var(--green2);
-  /* green2 */
 }
 
 .token.attr-value,
 .token.attr-value .punctuation {
   color: var(--fg4);
-  /* fg4 / gray1 */
 }
 
 .token.url {
   color: var(--green2);
-  /* green2 */
   text-decoration: underline;
 }
 
 .token.function {
   color: var(--yellow2);
-  /* yellow2 */
 }
 
 .token.regex {
   background: var(--green2)2
-    /* green2 */
 }
 
 .token.bold {
@@ -153,10 +139,8 @@ pre[class*="language-"] {
 
 .token.inserted {
   background: var(--fg4);
-  /* fg4 / gray1 */
 }
 
 .token.deleted {
   background: var(--red2);
-  /* red2 */
 }
