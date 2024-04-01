@@ -6,7 +6,8 @@ import { SITE_TITLE } from "../consts";
 <header>
   <nav>
     <h2>
-      <a href="/">{SITE_TITLE}</a>
+      <a id="home" href="/">{SITE_TITLE}</a>
+      <a id="home-small" href="/">🍔</a>
     </h2>
     <div>
       <HeaderLink href="/blog">Blog</HeaderLink>
@@ -21,12 +22,13 @@ import { SITE_TITLE } from "../consts";
     background: var(--bg1);
     background: linear-gradient(var(--bg1), var(--bg));
   }
-
   h2 {
     margin: 0;
     font-size: 1em;
   }
-
+  #home-small {
+    display: none;
+  }
   h2 a,
   h2 a.active {
     text-decoration: none;
@@ -46,13 +48,28 @@ import { SITE_TITLE } from "../consts";
     text-decoration: none;
     border-bottom-color: var(--orange1);
   }
-  .social-links,
-  .social-links a {
-    display: flex;
-  }
-  @media (max-width: 720px) {
-    .social-links {
+  /* Only display the burger */
+  @media (max-width: 340px) {
+    #home-small {
+      display: block;
+    }
+
+    #home {
       display: none;
+    }
+  }
+  /* Stack home link and other nav links vertically */
+  @media (max-width: 227px) {
+    #home-small {
+      display: none;
+    }
+
+    #home {
+      display: block;
+    }
+
+    nav {
+      flex-direction: column;
     }
   }
 </style>
