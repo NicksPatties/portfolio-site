@@ -5,9 +5,10 @@ import { SITE_TITLE } from "../consts";
 
 <header>
   <nav>
-    <h2><a href="/">{SITE_TITLE}</a></h2>
+    <h2>
+      <a href="/">{SITE_TITLE}</a>
+    </h2>
     <div>
-      <HeaderLink href="/">Home</HeaderLink>
       <HeaderLink href="/blog">Blog</HeaderLink>
       <HeaderLink href="/resume">Resume</HeaderLink>
     </div>
@@ -20,6 +21,7 @@ import { SITE_TITLE } from "../consts";
     background: var(--bg1);
     background: linear-gradient(var(--bg1), var(--bg));
   }
+
   h2 {
     margin: 0;
     font-size: 1em;
