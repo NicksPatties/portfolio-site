@@ -6,8 +6,8 @@ import { SITE_TITLE } from "../consts";
 <header>
   <nav>
     <h2>
-      <a id="home" href="/">{SITE_TITLE}</a>
-      <a id="home-small" href="/">🍔</a>
+      <a class="home" href="/">{SITE_TITLE}</a>
+      <a class="home-small" href="/">🍔</a>
     </h2>
     <div>
       <HeaderLink href="/blog">Blog</HeaderLink>
@@ -26,7 +26,7 @@ import { SITE_TITLE } from "../consts";
     margin: 0;
     font-size: 1em;
   }
-  #home-small {
+  .home-small {
     display: none;
   }
   h2 a,
@@ -50,22 +50,22 @@ import { SITE_TITLE } from "../consts";
   }
   /* Only display the burger */
   @media (max-width: 340px) {
-    #home-small {
-      display: block;
+    .home-small {
+      display: inline;
     }
 
-    #home {
+    .home {
       display: none;
     }
   }
   /* Stack home link and other nav links vertically */
   @media (max-width: 227px) {
-    #home-small {
+    .home-small {
       display: none;
     }
 
-    #home {
-      display: block;
+    .home {
+      display: inline;
     }
 
     nav {
