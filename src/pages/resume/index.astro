@@ -1,0 +1,90 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+import resume from "../../../resume.json";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead description="Nicholas Patti resume" title="Resume" />
+    <style>
+      p {
+        margin: 0;
+      }
+
+      p.last {
+        margin-bottom: 20px;
+      }
+
+      .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        list-style: none;
+        padding: 0;
+      }
+
+      .skills-list li:not(:last-child) {
+        margin-right: 5px;
+      }
+
+      .skills-list li:not(:last-child)::after {
+        content: ", ";
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>Nick Patti</h1>
+      <p>{resume.basics.label}</p>
+      <p class="last">{resume.basics.location}</p>
+
+      <h2>Skills</h2>
+      <ul class="skills-list">
+        {resume.tags.map((skill) => <li>{skill.name}</li>)}
+      </ul>
+
+      <h2>Experience</h2>
+      {
+        resume.work.map((work) => {
+          return (
+            <>
+              <h3>{work.name}</h3>
+              <p>{work.position}</p>
+              <i>
+                {work.startYear} - {work.current ? "Present" : work.endYear}
+              </i>
+              <ul>
+                {work.highlights.map((h) => (
+                  <li>{h.content}</li>
+                ))}
+              </ul>
+            </>
+          );
+        })
+      }
+
+      <h2>Education</h2>
+      {
+        resume.education.map((edu) => {
+          return (
+            <>
+              <h3>{edu.name}</h3>
+              <p>{edu.degree}</p>
+              <p>{edu.major}</p>
+              <p class="last">
+                <i>
+                  {edu.startYear} - {edu.current ? "Present" : edu.endYear}
+                </i>
+              </p>
+            </>
+          );
+        })
+      }
+    </main>
+    <Footer />
+  </body>
+</html>
