@@ -1,0 +1,497 @@
+{
+  "basics": {
+    "name": "Nicholas Patti",
+    "label": "Software Engineer: Front-End",
+    "image": "",
+    "phone": "(925) 389-7100",
+    "email": "nickspatties@gmail.com",
+    "summary": "A capable and collaborative software engineer who revels in improving interactions between man and machine.",
+    "location": "Seattle, WA (Remote)"
+  },
+  "work": [
+    {
+      "visible": true,
+      "name": "MegaResume",
+      "position": "Software Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Created a resume building web application, which was used to build this document! Fine-tuning a resume to match job application requirements is about 10 times faster than editing a word document by hand.",
+          "tagNames": [
+            "JavaScript",
+            "TypeScript",
+            "SvelteKit",
+            "CSS",
+            "HTML",
+            "git",
+            "Web Development",
+            "Node.js",
+            "Vite"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Automated deployments using GitHub CI/CD pipelines. Changes are tested, built, and deployed in under two minutes.",
+          "tagNames": [
+            "CI/CD",
+            "Automation"
+          ]
+        }
+      ],
+      "startYear": "2022",
+      "endYear": "2023",
+      "current": true,
+      "startMonth": "08"
+    },
+    {
+      "visible": true,
+      "name": "Sweet",
+      "position": "Software Engineer (Go)",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Designed, built, and released Sweet, a command line touch typing game for software engineers written in Go. Since using it, my coding typing speed has increased by 10 words per minute.",
+          "tagNames": [
+            "Golang (Go)",
+            "Software Development",
+            "CLIs"
+          ]
+        },
+        {
+          "visible": false,
+          "content": "Sweet has a start up time that is at least 100 times faster than popular web based touch-typing games. (monkeytype.com: 2.0s, speedtyper.net: 1.7s, Sweet: 17ms)",
+          "tagNames": []
+        }
+      ],
+      "startYear": "2023",
+      "endYear": "2023",
+      "startMonth": "06",
+      "endMonth": "07",
+      "current": false
+    },
+    {
+      "visible": false,
+      "name": "Time Clock",
+      "position": "Android Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Created Android Jetpack Compose application that helps users manage their time. Using this application, I've managed about 360 hours of my time to help improve my focus.",
+          "tagNames": [
+            "Android",
+            "Kotlin",
+            "Mobile Development",
+            "User Experience",
+            "SQL"
+          ]
+        },
+        {
+          "visible": false,
+          "content": "Created issue templates to simplify issue and bug reporting. Used GitHub Projects and Issues to manage user stories and sprints. Improved communication with users, and documentation for developers.",
+          "tagNames": [
+            "Communication",
+            "Project management",
+            "Customer Obsession"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Released the Time Clock application to both Google Play and F-Droid marketplaces, and used Fastlane to quickly deploy updates to both marketplaces.",
+          "tagNames": [
+            "Android",
+            "CI/CD"
+          ]
+        }
+      ],
+      "startYear": "2021",
+      "startMonth": "09",
+      "endYear": "2022",
+      "endMonth": "09"
+    },
+    {
+      "visible": true,
+      "name": "The Walt Disney Company",
+      "position": "Software Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Replaced deprecated components for user management software with modern UI components, improving the user experience and security for customers of ESPN, National Geographic, Disney Parks, and more.",
+          "tagNames": [
+            "JavaScript",
+            "ReactJS",
+            "SCSS",
+            "HTML",
+            "Web Development",
+            "Node.js",
+            "Redux"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Coordinated with mobile development teams to build a bridge between the web authentication application and native Android applications. Teams saved months of effort by unifying the user management platform.",
+          "tagNames": [
+            "Android",
+            "Mobile Development",
+            "Operational Excellence",
+            "Communication"
+          ]
+        }
+      ],
+      "startYear": "2020",
+      "startMonth": "02",
+      "endYear": "2021",
+      "endMonth": "02"
+    },
+    {
+      "visible": true,
+      "name": "Climb Tournament Systems",
+      "position": "Android Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Built a custom, interactive tournament bracket view, allowing tournament organizers to quickly identify and navigate to matches on their mobile devices.",
+          "tagNames": [
+            "Android",
+            "Kotlin",
+            "Mobile Development"
+          ]
+        }
+      ],
+      "startYear": "2021",
+      "startMonth": "04",
+      "endYear": "2021",
+      "endMonth": "08"
+    },
+    {
+      "visible": true,
+      "name": "Amazon Fulfillment Technologies",
+      "position": "Web Development Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Replaced slow fulfillment workflow application with a client-side task orchestration framework. This software sent less requests, loaded faster, and was more responsive to user interaction, improving the user experience for fulfillment associates all around the world.",
+          "tagNames": [
+            "JavaScript",
+            "Ruby",
+            "ReactJS",
+            "Web Development",
+            "Mobile Development"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Built over 50 responsive, animating UI components, which rendered smoothly on all screen sizes and old hardware, saving millions of dollars on replacing technology.",
+          "tagNames": [
+            "ReactJS",
+            "JavaScript",
+            "CSS",
+            "HTML",
+            "User Experience"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Created a badge scanner login process for fulfillment associates. By scanning a badge instead of typing credentials, associates could log in and start their workday in a tenth of the time.",
+          "tagNames": [
+            "JavaScript",
+            "ReactJS",
+            "HTML",
+            "CSS"
+          ]
+        },
+        {
+          "visible": false,
+          "content": "Documented a process to test software changes directly on fulfillment devices. Bugs that were not identifiable in device emulators were caught and removed before changes went live.",
+          "tagNames": [
+            "Communication",
+            "Operational Excellence"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Replaced end-of-life, custom JavaScript build software with community standard tools, reducing build times from minutes to seconds, positively impacting the development experience and software deployments.",
+          "tagNames": [
+            "Operational Excellence",
+            "JavaScript",
+            "Node.js",
+            "Webpack"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Communicated with UX designers, product managers, and software engineers to define technical requirements for large scale projects.",
+          "tagNames": [
+            "Communication"
+          ]
+        }
+      ],
+      "startYear": "2016",
+      "startMonth": "06",
+      "endYear": "2019",
+      "endMonth": "08"
+    },
+    {
+      "visible": true,
+      "name": "Oomba, Inc.",
+      "position": "Software Engineer and Founder",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Developed a robust tournament management web application, handling player sign ups, scheduling, and placements. Used in weekly local tournaments, and national tournaments at Gen Con.",
+          "tagNames": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "AngularJS",
+            "Ruby on Rails",
+            "REST",
+            "jQuery",
+            "Postgres"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Added features to the tournament management interface, including drag-and-drop player assignments. Feedback from tournament organizers was positive, citing easier match and score assignments.",
+          "tagNames": [
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "Customer Obsession",
+            "User Experience",
+            "jQuery"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Created a live-updating leader-board, improving the tournament experience by immediately notifying users of table changes and celebrating player accomplishments.",
+          "tagNames": [
+            "JavaScript",
+            "HTML",
+            "CSS"
+          ]
+        }
+      ],
+      "startYear": "2014",
+      "endYear": "2016",
+      "startMonth": "11",
+      "endMonth": "03"
+    },
+    {
+      "visible": false,
+      "name": "The Two Eyes in Team",
+      "position": "Game Director",
+      "url": "",
+      "startMonth": "",
+      "startYear": "2013",
+      "current": false,
+      "endMonth": "",
+      "endYear": "2014",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Directed a team of game designers, programmers, artists, musicians, and sound designers to create a cooperative mutliplayer PC game using the Unity game engine.",
+          "tagNames": [
+            "C#",
+            "Unity",
+            "Game Design",
+            "Communication",
+            "Project management"
+          ]
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "visible": true,
+      "name": "UC Santa Cruz",
+      "degree": "Master of Science",
+      "major": "Games and Playable Media",
+      "startMonth": "",
+      "startYear": "2013",
+      "current": false,
+      "endMonth": "",
+      "endYear": "2014"
+    },
+    {
+      "visible": true,
+      "name": "UC Santa Cruz",
+      "degree": "Bachelor of Science",
+      "major": "Computer Science: Computer Game Design",
+      "startMonth": "",
+      "startYear": "2008",
+      "current": false,
+      "endMonth": "",
+      "endYear": "2013"
+    }
+  ],
+  "tags": [
+    {
+      "name": "JavaScript",
+      "visible": true
+    },
+    {
+      "name": "TypeScript",
+      "visible": true
+    },
+    {
+      "name": "SvelteKit",
+      "visible": false
+    },
+    {
+      "name": "CSS",
+      "visible": true
+    },
+    {
+      "name": "HTML",
+      "visible": true
+    },
+    {
+      "name": "CI/CD",
+      "visible": true
+    },
+    {
+      "name": "git",
+      "visible": true
+    },
+    {
+      "name": "Golang (Go)",
+      "visible": false
+    },
+    {
+      "name": "Android",
+      "visible": false
+    },
+    {
+      "name": "Kotlin",
+      "visible": false
+    },
+    {
+      "name": "Web Development",
+      "visible": true
+    },
+    {
+      "name": "Software Development",
+      "visible": false
+    },
+    {
+      "name": "Mobile Development",
+      "visible": false
+    },
+    {
+      "name": "Communication",
+      "visible": false
+    },
+    {
+      "name": "Project management",
+      "visible": false
+    },
+    {
+      "name": "ReactJS",
+      "visible": true
+    },
+    {
+      "name": "SCSS",
+      "visible": true
+    },
+    {
+      "name": "Ruby",
+      "visible": false
+    },
+    {
+      "name": "Operational Excellence",
+      "visible": false
+    },
+    {
+      "name": "AngularJS",
+      "visible": false
+    },
+    {
+      "name": "Ruby on Rails",
+      "visible": false
+    },
+    {
+      "name": "Customer Obsession",
+      "visible": false
+    },
+    {
+      "name": "Node.js",
+      "visible": false
+    },
+    {
+      "name": "Webpack",
+      "visible": false
+    },
+    {
+      "name": "C#",
+      "visible": false
+    },
+    {
+      "name": "Unity",
+      "visible": false
+    },
+    {
+      "name": "Game Design",
+      "visible": false
+    },
+    {
+      "name": "REST",
+      "visible": false
+    },
+    {
+      "name": "User Experience",
+      "visible": false
+    },
+    {
+      "name": "CLIs",
+      "visible": false
+    },
+    {
+      "name": "Figma",
+      "visible": false
+    },
+    {
+      "name": "jQuery",
+      "visible": false
+    },
+    {
+      "name": "Vite",
+      "visible": false
+    },
+    {
+      "name": "Automation",
+      "visible": false
+    },
+    {
+      "name": "Postgres",
+      "visible": false
+    },
+    {
+      "name": "SQL",
+      "visible": false
+    },
+    {
+      "name": "GitHub",
+      "visible": false
+    },
+    {
+      "name": "Redux",
+      "visible": true
+    }
+  ]
+}

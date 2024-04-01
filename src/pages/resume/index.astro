@@ -1,0 +1,60 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+import resume from "../../../resume.json";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead description="Nicholas Patti resume" title="Resume" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h1>{resume.basics.name}</h1>
+      <p>{resume.basics.label}</p>
+      <p>{resume.basics.location}</p>
+
+      <h2>Summary</h2>
+      <p>{resume.basics.summary}</p>
+
+      <h2>Work Experience</h2>
+      {
+        resume.work.map(work => {
+          return (
+            <>
+              <h3>{work.name}</h3>
+              <p>{work.position}</p>
+              <i>
+                {work.startYear} - {work.current ? "Present" : work.endYear}
+              </i>
+              <ul>
+                {work.highlights.map((h) => (
+                  <li>{h.content}</li>
+                ))}
+              </ul>
+            </>
+          );
+        })
+      }
+
+      <h2>Education</h2>
+      {
+        resume.education.map(edu => {
+          return (
+            <>
+              <h3>{edu.name}</h3>
+              <p>{edu.degree}</p>
+              <p>{edu.major}</p>
+              <i>{edu.startYear} - {edu.current ? "Present" : edu.endYear}</i>
+            </>
+          )
+        })
+      }
+    </main>
+    <Footer />
+  </body>
+</html>
