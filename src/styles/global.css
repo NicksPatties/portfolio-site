@@ -41,10 +41,28 @@ body {
 }
 
 main {
+	/* 
+	  @see src/components/Header.astro 
+	  line height + top padding + bottom padding + border bottom
+	*/
+	--header-height: calc(1.7em + 1em + 1em + 4px);
+	/*
+	  @see src/components/Footer.astro
+    line height + padding top + padding bottom
+  */
+	--footer-height: calc(1.7em + 2em + 6em);
+	--main-padding: calc(3em * 2);
+	min-height: calc(100svh - var(--main-padding) - var(--header-height) - var(--footer-height));
 	width: 720px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
+}
+
+@media (max-width: 720px) {
+	main {
+		--main-padding: calc(1em * 2);
+	}
 }
 
 h1,
