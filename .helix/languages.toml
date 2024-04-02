@@ -13,6 +13,7 @@ config = { typescript = { tsdk = "node_modules/typescript/lib/"}}
 [[language]]
 name = "astro"
 scope = "source.astro"
+formatter = { command = "prettier", args = ["--parser", "astro"]}
 auto-format = true
 file-types = ["astro"]
 injection-regex = "astro"
