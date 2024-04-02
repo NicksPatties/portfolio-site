@@ -66,7 +66,7 @@ injection-regex = "md"
 scope = "text.markdown"
 roots = ["package.json"]
 formatter = { command = "prettier", args = ['--parser', "markdown"]}
-auto-format = false
+auto-format = true
 
 [language-server.ltex-ls.config.ltex.dictionary]
 "en-US" = [] 
