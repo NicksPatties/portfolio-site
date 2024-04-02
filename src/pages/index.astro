@@ -44,10 +44,21 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         transform: rotate(5deg);
       }
 
-      @media (max-width: 720px) {
+      @media (max-width: 760px) {
+        .hero .burger {
+          transform: translate(-50%, -50%) rotate(5deg);
+          top: 50%;
+          left: 50%;
+        }
+
+        .hero .tasty {
+          font-size: 5em;
+        }
+
+        .hero .serving,
         .hero .tasty,
         .hero .since {
-          text-align: start;
+          text-align: center;
         }
       }
     </style>
