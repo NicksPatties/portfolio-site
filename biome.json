@@ -4,10 +4,11 @@
     "enabled": true
   },
   "linter": {
-    "enabled": false
+    "enabled": true
   },
   "formatter": {
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "indentWidth": 2
   },
   "vcs": {
     "enabled": true,

@@ -9,7 +9,7 @@ import FormattedDate from "../../components/FormattedDate.astro";
 const isDev = import.meta.env.MODE === "development";
 const posts = (await getCollection("blog"))
   .filter((p) => isDev || (!isDev && p.data.published))
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
 ---
 
 <!doctype html>
