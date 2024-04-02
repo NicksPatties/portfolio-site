@@ -6,7 +6,7 @@
 name = "astro"
 scope = "source.astro"
 auto-format = true
-formatter = { command = "biome", args = ['lsp-proxy']}
+formatter = { command = "prettier" , args = ["--parser", "astro"]}
 file-types = ["astro"]
 injection-regex = "astro"
 roots = ["package.json", "astro.config.js"]
@@ -21,7 +21,7 @@ config = { typescript = { tsdk = "node_modules/typescript/lib/"}}
 [[language]]
 name = "javascript"
 formatter = { command = "biome", args = ['lsp-proxy']}
-auto-format = true
+auto-format = false
 
 [[language]]
 name = "typescript"
