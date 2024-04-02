@@ -143,6 +143,7 @@ pre {
 	padding: 1.5em;
 	border-radius: 8px;
 	scrollbar-color: var(--bg1) var(--bg0_h);
+	font-size: 0.9em;
 }
 
 pre>code {
@@ -174,6 +175,10 @@ mark {
 	main {
 		--main-padding: calc(1em * 2);
 		padding: 1em;
+	}
+
+	pre {
+		font-size: 0.85em;
 	}
 }
 

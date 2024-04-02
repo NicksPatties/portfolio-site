@@ -1,8 +1,8 @@
 ---
-title: 'Markdown Syntax Highlighting'
-description: 'This is a test of the syntax highlighting system'
-pubDate: 'Mar 28 2024'
-heroImage: ''
+title: "Markdown Syntax Highlighting"
+description: "This is a test of the syntax highlighting system"
+pubDate: "Mar 28 2024"
+heroImage: ""
 ---
 
 Here are some code snippets to verify that my code is being highlighted properly.
@@ -11,13 +11,13 @@ Here are some code snippets to verify that my code is being highlighted properly
 
 ```typescript
 class Greeter {
-    greeting: string;
-    constructor(message: string) {
-        this.greeting = message;
-    }
-    greet() {
-        return "Hello, " + this.greeting;
-    }
+  greeting: string;
+  constructor(message: string) {
+    this.greeting = message;
+  }
+  greet() {
+    return "Hello, " + this.greeting;
+  }
 }
 
 let greeter = new Greeter("world");
@@ -25,6 +25,8 @@ console.log(greeter.greet());
 ```
 
 # Go
+
+This is code for the go programming language. It's really cool and can be found at the location that I don't really care to link. Whatever.
 
 ```go
 package main
@@ -42,7 +44,7 @@ func main() {
 class Greeter:
     def __init__(self, message):
         self.message = message
-    
+
     def greet(self):
         return f"Hello, {self.message}"
 
@@ -77,13 +79,13 @@ fn main() {
 
 ```js
 class Greeter {
-    constructor(message) {
-        this.message = message;
-    }
+  constructor(message) {
+    this.message = message;
+  }
 
-    greet() {
-        return `Hello, ${this.message}`;
-    }
+  greet() {
+    return `Hello, ${this.message}`;
+  }
 }
 
 let greeter = new Greeter("world");
