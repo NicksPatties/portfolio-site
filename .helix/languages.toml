@@ -11,37 +11,63 @@ file-types = ["astro"]
 injection-regex = "astro"
 roots = ["package.json", "astro.config.js"]
 indent = { tab-width = 2, unit = "  " }
-language-servers = ["astro-ls"]
+language-servers = ["astro-ls", "biome"]
 
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
 config = { typescript = { tsdk = "node_modules/typescript/lib/"}}
 
+# [[language]]
+# name = "javascript"
+# formatter = { command = "biome", args = ['lsp-proxy']}
+# auto-format = true
+
+# [[language]]
+# name = "typescript"
+# formatter = { command = "biome", args = ['lsp-proxy']}
+# auto-format = true
+
+# [[language]]
+# name = "tsx"
+# formatter = { command = "biome", args = ['lsp-proxy']}
+# auto-format = true
+
+# [[language]]
+# name = "jsx"
+# formatter = { command = "biome", args = ['lsp-proxy']}
+# auto-format = true
+
+# [[language]]
+# name = "json"
+# formatter = { command = "biome", args = ['lsp-proxy']}
+# auto-format = true
+[language-server]
+biome = { command = "biome", args = ["lsp-proxy"] }
+
 [[language]]
 name = "javascript"
-formatter = { command = "biome", args = ['lsp-proxy']}
-auto-format = false
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+auto-format = true
 
 [[language]]
 name = "typescript"
-formatter = { command = "biome", args = ['lsp-proxy']}
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
 auto-format = true
 
 [[language]]
 name = "tsx"
-formatter = { command = "biome", args = ['lsp-proxy']}
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
 auto-format = true
 
 [[language]]
 name = "jsx"
-formatter = { command = "biome", args = ['lsp-proxy']}
+language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
 auto-format = true
 
 [[language]]
 name = "json"
-formatter = { command = "biome", args = ['lsp-proxy']}
-auto-format = true
+language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
 
 # HTML emmet language configuration
 [[language]]
