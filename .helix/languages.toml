@@ -1,6 +1,6 @@
 # Helix languages configuration file
 [language-server.biome]
-command = "biome"
+command = "node_modules/@biomejs/biome/bin/biome"
 args = ["lsp-proxy"]
 
 [language-server.astro-ls]
@@ -21,30 +21,36 @@ roots = ["package.json", "astro.config.js"]
 indent = { tab-width = 2, unit = "  " }
 language-servers = ["astro-ls", "biome"]
 
+[[language]]
+name = "css"
+formatter = { command = "prettier", args = ["--parser", "css"]}
+auto-format = true
+
 # Adding language support with biome
+# Currently, only linting is supported with biome right now
 [[language]]
 name = "javascript"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+language-servers = [ "typescript-language-server", "biome" ]
 auto-format = true
 
 [[language]]
 name = "typescript"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+language-servers = [ "typescript-language-server", "biome" ]
 auto-format = true
 
 [[language]]
 name = "tsx"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+language-servers = [ "typescript-language-server", "biome" ]
 auto-format = true
 
 [[language]]
 name = "jsx"
-language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
+language-servers = [ "typescript-language-server", "biome" ]
 auto-format = true
 
 [[language]]
 name = "json"
-language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
+language-servers = [ "vscode-json-language-server", "biome" ]
 
 # HTML emmet language configuration
 [language-server.emmet-lsp]
