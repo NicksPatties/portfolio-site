@@ -7,63 +7,67 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			hr {
-				/* This is the same spacing as in the blog template */
-				margin-top: 45.2px;
-				margin-bottom: 50px;
-			}
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      hr {
+        /* This is the same spacing as in the blog template */
+        margin-top: 45.2px;
+        margin-bottom: 50px;
+      }
 
-			.hero {
-				position: relative;
-			}
+      .hero {
+        position: relative;
+      }
 
-			.hero .tasty  {
-			  display: block;
-			  font-family: 'Titan One';
-				font-weight: normal;
-				font-size: 5.28em;
-				line-height: normal;
-				z-index: 100;
-				margin: 0;
-			}
+      .hero .tasty {
+        display: block;
+        font-family: "Titan One";
+        font-weight: normal;
+        font-size: 5.28em;
+        line-height: normal;
+        z-index: 100;
+        margin: 0;
+      }
 
-			.hero .since {
-			  text-align: end;
-			}
+      .hero .since {
+        text-align: end;
+      }
 
-			.hero .burger {
-				position: absolute;
-				height: 100%;
-				top: 0;
-				right: 0;
-				opacity: 0.66;
-				z-index: -1;
-				transform: rotate(5deg);
-			}
-	 
-			@media (max-width: 720px) {
-			  .hero .tasty, .hero .since {
-					text-align: start;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-		  <div class="hero">
-				<img src="burger.svg" alt="" class="burger"></img>
-				<h1 class="serving">Serving up</h1>
-				<p class="tasty">TASTY BYTES</p>
-				<h1 class="since">since 2014</h1>
-			</div>
-			<hr/>
-			<h2>Nice to meet you!</h2>
-			<p>My name's Nick Patti. I'm a software engineer with an appetite for learning and making cool stuff. Thanks for visiting!</p>
-		</main>
-		<Footer />
-	</body>
+      .hero .burger {
+        position: absolute;
+        height: 100%;
+        top: 0;
+        right: 0;
+        opacity: 0.66;
+        z-index: -1;
+        transform: rotate(5deg);
+      }
+
+      @media (max-width: 720px) {
+        .hero .tasty,
+        .hero .since {
+          text-align: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <div class="hero">
+        <img src="burger.svg" alt="" class="burger" />
+        <h1 class="serving">Serving up</h1>
+        <p class="tasty">TASTY BYTES</p>
+        <h1 class="since">since 2014</h1>
+      </div>
+      <hr />
+      <h2>Nice to meet you!</h2>
+      <p>
+        My name's Nick Patti. I'm a software engineer with an appetite for
+        learning and making cool stuff. Thanks for visiting!
+      </p>
+    </main>
+    <Footer />
+  </body>
 </html>
