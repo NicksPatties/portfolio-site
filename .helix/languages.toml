@@ -1,50 +1,26 @@
 # Helix languages configuration file
-#
-# I assign biome as the formatter for JS(X), TS(X), JSON,
-# and Astro. So far, it works much faster than prettier!
-[[language]]
-name = "astro"
-scope = "source.astro"
-auto-format = true
-formatter = { command = "prettier" , args = ["--parser", "astro"]}
-file-types = ["astro"]
-injection-regex = "astro"
-roots = ["package.json", "astro.config.js"]
-indent = { tab-width = 2, unit = "  " }
-language-servers = ["astro-ls", "biome"]
+[language-server.biome]
+command = "biome"
+args = ["lsp-proxy"]
 
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
 config = { typescript = { tsdk = "node_modules/typescript/lib/"}}
 
-# [[language]]
-# name = "javascript"
-# formatter = { command = "biome", args = ['lsp-proxy']}
-# auto-format = true
+# Formatting is currently done with prettier since biome
+# only partially supports astro files
+[[language]]
+name = "astro"
+scope = "source.astro"
+auto-format = true
+file-types = ["astro"]
+injection-regex = "astro"
+roots = ["package.json", "astro.config.js"]
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["astro-ls", "biome"]
 
-# [[language]]
-# name = "typescript"
-# formatter = { command = "biome", args = ['lsp-proxy']}
-# auto-format = true
-
-# [[language]]
-# name = "tsx"
-# formatter = { command = "biome", args = ['lsp-proxy']}
-# auto-format = true
-
-# [[language]]
-# name = "jsx"
-# formatter = { command = "biome", args = ['lsp-proxy']}
-# auto-format = true
-
-# [[language]]
-# name = "json"
-# formatter = { command = "biome", args = ['lsp-proxy']}
-# auto-format = true
-[language-server]
-biome = { command = "biome", args = ["lsp-proxy"] }
-
+# Adding language support with biome
 [[language]]
 name = "javascript"
 language-servers = [ { name = "typescript-language-server", except-features = [ "format" ] }, "biome" ]
@@ -70,14 +46,14 @@ name = "json"
 language-servers = [ { name = "vscode-json-language-server", except-features = [ "format" ] }, "biome" ]
 
 # HTML emmet language configuration
+[language-server.emmet-lsp]
+command = "emmet-language-server"
+args = ["--stdio"]
+
 [[language]]
 name = "html"
 roots = ["package.json"]
 language-servers = ["emmet-lsp"]
-
-[language-server.emmet-lsp]
-command = "emmet-language-server"
-args = ["--stdio"]
 
 # Markdown language configuration
 #
@@ -94,28 +70,7 @@ roots = ["package.json"]
 formatter = { command = "prettier", args = ['--parser', "markdown"]}
 auto-format = true
 
+# This contains words that I know are spelled correctly,
+# so ltex-ls doesn't give me a warning
 [language-server.ltex-ls.config.ltex.dictionary]
 "en-US" = [] 
-
-# Mdx language configuration
-#
-# Similar to Markdown configuration, but with MDX specific features
-[[language]]
-name = "mdx"
-language-servers = [{name = "mdx-language-server"}, { name = "ltex-ls"}] #, { name = "marksman"}]
-file-types = ["mdx"]
-scope = "source.mdx"
-injection-regex = "mdx"
-roots = ["package.json"]
-formatter = { command = "prettier", args = ['--parser', "mdx"]}
-auto-format = false
-
-[language-server.mdx-language-server]
-command = "mdx-language-server"
-args = ["--stdio"]
-config = { typescript = { enabled = true, tsdk = "node_modules/typescript/lib/"}}
-
-# Using markdown tree sitter first just to see if I can get it working...
-[[grammar]]
-name = "mdx"
-source = { git = "https://github.com/MDeiml/tree-sitter-markdown", rev = "aaf76797aa8ecd9a5e78e0ec3681941de6c945ee", subpath = "tree-sitter-markdown" }
