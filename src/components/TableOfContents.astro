@@ -5,8 +5,26 @@ const { headings } = Astro.props;
 
 <style>
   .toc {
+    border-radius: 8px;
+    padding: 1em;
+    background-color: var(--bg1);
+  }
+
+  ul {
     --list-spacing: 40px;
     margin: 0;
+  }
+
+  nav {
+    overflow: hidden;
+  }
+
+  input[type="checkbox"] + nav {
+    display: none;
+  }
+
+  input[type="checkbox"]:checked + nav {
+    display: block;
   }
 
   li.d2 {
@@ -34,16 +52,24 @@ const { headings } = Astro.props;
     list-style-type: square;
   }
 </style>
-<ul class="toc">
-  {
-    headings.map((h: MarkdownHeading) => {
-      const className = `d${h.depth}`;
-      const href = `#${h.slug}`;
-      return (
-        <li class={className}>
-          <a href={href}>{h.text}</a>
-        </li>
-      );
-    })
-  }
-</ul>
+<div class="toc">
+  <label for="toc-toggle">
+    <span class="show">Show contents</span>
+  </label>
+  <input id="toc-toggle" type="checkbox" />
+  <nav>
+    <ul>
+      {
+        headings.map((h: MarkdownHeading) => {
+          const className = `d${h.depth}`;
+          const href = `#${h.slug}`;
+          return (
+            <li class={className}>
+              <a href={href}>{h.text}</a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+</div>
