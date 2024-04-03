@@ -12,7 +12,7 @@ config = { typescript = { tsdk = "node_modules/typescript/lib/"}}
 name = "astro"
 scope = "source.astro"
 formatter = { command = "biome", args = ["format", "--stdin-file-path", "test.astro"] }
-auto-format = true
+auto-format = false
 file-types = ["astro"]
 injection-regex = "astro" 
 roots = ["package.json", "astro.config.js"]
