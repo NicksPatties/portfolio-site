@@ -7,7 +7,7 @@ heroImage: ""
 
 Here are some code snippets to verify that my code is being highlighted properly.
 
-## TypeScript
+# TypeScript
 
 ```typescript
 class Greeter {
@@ -38,7 +38,7 @@ func main() {
 }
 ```
 
-## Python
+# Python
 
 ```python
 class Greeter:
@@ -52,7 +52,7 @@ greeter = Greeter("world")
 print(greeter.greet())
 ```
 
-## Rust
+# Rust
 
 ```rust
 struct Greeter {
@@ -75,7 +75,7 @@ fn main() {
 }
 ```
 
-## JavaScript
+# JavaScript
 
 ```js
 class Greeter {

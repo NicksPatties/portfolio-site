@@ -1,0 +1,49 @@
+---
+import type { MarkdownHeading } from "astro";
+const { headings } = Astro.props;
+---
+
+<style>
+  .toc {
+    --list-spacing: 40px;
+    margin: 0;
+  }
+
+  li.d2 {
+    margin-inline-start: calc(var(--list-spacing) * 1);
+    list-style-type: circle;
+  }
+
+  li.d3 {
+    margin-inline-start: calc(var(--list-spacing) * 2);
+    list-style-type: square;
+  }
+
+  li.d4 {
+    margin-inline-start: calc(var(--list-spacing) * 3);
+    list-style-type: disc;
+  }
+
+  li.d5 {
+    margin-inline-start: calc(var(--list-spacing) * 4);
+    list-style-type: circle;
+  }
+
+  li.d6 {
+    margin-inline-start: calc(var(--list-spacing) * 5);
+    list-style-type: square;
+  }
+</style>
+<ul class="toc">
+  {
+    headings.map((h: MarkdownHeading) => {
+      const className = `d${h.depth}`;
+      const href = `#${h.slug}`;
+      return (
+        <li class={className}>
+          <a href={href}>{h.text}</a>
+        </li>
+      );
+    })
+  }
+</ul>
