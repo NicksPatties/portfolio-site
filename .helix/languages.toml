@@ -19,7 +19,7 @@ file-types = ["astro"]
 injection-regex = "astro"
 roots = ["package.json", "astro.config.js"]
 indent = { tab-width = 2, unit = "  " }
-language-servers = ["astro-ls", "biome"]
+language-servers = ["astro-ls"]
 
 [[language]]
 name = "css"

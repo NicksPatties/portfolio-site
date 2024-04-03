@@ -1,13 +1,13 @@
 ---
-title: 'Markdown Style Guide'
-description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
-pubDate: 'Jul 01 2022'
-heroImage: '/blog-placeholder-1.jpg'
+title: "Markdown Style Guide"
+description: "Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro."
+pubDate: "Jul 01 2022"
+heroImage: "/blog-placeholder-1.jpg"
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
 
-## Headings
+# Headings
 
 The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
 
@@ -130,8 +130,9 @@ Output
 ```js
 const add = (a, b) => {
   return a + b;
-}
+};
 ```
+
 ## List Types
 
 ### Ordered List
