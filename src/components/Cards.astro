@@ -1,0 +1,81 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+const { posts } = Astro.props;
+
+function liStyle(post) {
+  const style = {
+    "background-image": `url(${post.data.heroImage})`,
+  };
+  const noHeroImage = {
+    "background-color": "var(--bg0_h)"
+  }
+  return post.data.heroImage ? style : noHeroImage;
+}
+---
+
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul li {
+    padding: 2em 1em;
+    margin: 1em 0;
+    border-radius: 12px;
+    background: no-repeat center;
+    background-size: 100%;
+  }
+  ul a {
+    text-decoration: none;
+    transition: 0.2s ease;
+  }
+  ul li img {
+    margin-bottom: 0.5rem;
+    border-radius: 12px;
+  }
+  ul a li {
+    display: block;
+    transition: background-size 0.2s ease; 
+  }
+  .title {
+    margin: 0;
+    color: rgb(var(--black));
+    line-height: 1;
+  }
+  .date {
+    margin: 0;
+    color: rgb(var(--gray));
+  }
+  ul a:hover li h3,
+  ul a:hover li .date {
+    color: rgb(var(--accent));
+  }
+
+  ul a:focus li h3 {
+    color: rgb(var(--accent));
+  }
+  ul a:focus li {
+    background-size: 105%;
+  }
+
+  ul a:hover li {
+    background-size: 105%;
+  }
+</style>
+<section>
+  <ul>
+    {
+      posts.map((post) => (
+        <a href={`/blog/${post.slug}/`}>
+          <li style={liStyle(post)}>
+            <h3 class="title">{post.data.title}</h3>
+            <p class="date">
+              <FormattedDate date={post.data.pubDate} />
+            </p>
+          </li>
+        </a>
+      ))
+    }
+  </ul>
+</section>
