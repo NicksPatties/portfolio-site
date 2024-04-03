@@ -1,4 +1,4 @@
-# Helix languages configuration file
+# Astro server configuration 
 [language-server.biome]
 command = "node_modules/@biomejs/biome/bin/biome"
 args = ["lsp-proxy"]
@@ -8,49 +8,54 @@ command = "astro-ls"
 args = ["--stdio"]
 config = { typescript = { tsdk = "node_modules/typescript/lib/"}}
 
-# Formatting is currently done with prettier since biome
-# only partially supports astro files
 [[language]]
 name = "astro"
 scope = "source.astro"
-formatter = { command = "prettier", args = ["--parser", "astro"]}
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "test.astro"] }
 auto-format = true
 file-types = ["astro"]
-injection-regex = "astro"
+injection-regex = "astro" 
 roots = ["package.json", "astro.config.js"]
 indent = { tab-width = 2, unit = "  " }
-language-servers = ["astro-ls"]
+language-servers = ["astro-ls", "biome"]
 
 [[language]]
 name = "css"
-formatter = { command = "prettier", args = ["--parser", "css"]}
+formatter = { command = "prettier", args = ["--pa:rser", "css"]}
 auto-format = true
 
 # Adding language support with biome
-# Currently, only linting is supported with biome right now
 [[language]]
 name = "javascript"
-language-servers = [ "typescript-language-server", "biome" ]
+language-servers = [ "typescript-language-server", "biome" ] 
+# The arguments for the --stdin-file-path flag only has to match the file extension
+# @see https://biomejs.dev/reference/cli/#biome-format
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "test.js"] }
 auto-format = true
 
 [[language]]
 name = "typescript"
 language-servers = [ "typescript-language-server", "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "test.ts"] }
 auto-format = true
 
 [[language]]
 name = "tsx"
 language-servers = [ "typescript-language-server", "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "test.tsx"] }
 auto-format = true
 
 [[language]]
 name = "jsx"
 language-servers = [ "typescript-language-server", "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "test.jsx"] }
 auto-format = true
 
 [[language]]
 name = "json"
 language-servers = [ "vscode-json-language-server", "biome" ]
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "test.json"] }
+auto-format = true
 
 # HTML emmet language configuration
 [language-server.emmet-lsp]
