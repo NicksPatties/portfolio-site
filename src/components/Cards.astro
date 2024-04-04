@@ -4,14 +4,6 @@ import FormattedDate from "./FormattedDate.astro";
 
 const { posts } = Astro.props;
 type Blog = CollectionEntry<"blog">;
-
-function liStyle(post: Blog) {
-  const style = {
-    "background-image": `url(${post.data.heroImage})`,
-  };
-  const noHeroImage = {};
-  return post.data.heroImage ? style : noHeroImage;
-}
 ---
 
 <style>
@@ -46,7 +38,6 @@ function liStyle(post: Blog) {
   .title {
     line-height: 1;
   }
-
 
   a:hover .title,
   a:hover .date {
@@ -95,7 +86,14 @@ function liStyle(post: Blog) {
     {
       posts.map((post: Blog) => (
         <li>
-          <a style={liStyle(post)} href={`/blog/${post.slug}/`}>
+          <a
+            style={
+              post.data.heroImage && {
+                "background-image": `url(${post.data.heroImage})`,
+              }
+            }
+            href={`/blog/${post.slug}/`}
+          >
             <h3 class="title">{post.data.title}</h3>
             <p class="date">
               <FormattedDate date={post.data.pubDate} />
