@@ -9,9 +9,7 @@ function liStyle(post: Blog) {
   const style = {
     "background-image": `url(${post.data.heroImage})`,
   };
-  const noHeroImage = {
-    "background-color": "var(--bg0_h)",
-  };
+  const noHeroImage = {};
   return post.data.heroImage ? style : noHeroImage;
 }
 ---
@@ -42,16 +40,13 @@ function liStyle(post: Blog) {
     position: relative;
     z-index: 10;
     transition: color var(--animation);
+    margin: 0;
   }
 
   .title {
-    margin: 0;
     line-height: 1;
   }
 
-  .date {
-    margin: 0;
-  }
 
   a:hover .title,
   a:hover .date {
@@ -83,9 +78,16 @@ function liStyle(post: Blog) {
     transition: opacity var(--animation);
   }
 
-  ul a:focus .mask,
-  ul a:hover .mask {
+  a:focus .mask,
+  a:hover .mask {
     opacity: 0.5;
+  }
+
+  @media (prefers-color-scheme: light) {
+    a:focus .mask,
+    a:hover .mask {
+      opacity: 0.85;
+    }
   }
 </style>
 <section>
