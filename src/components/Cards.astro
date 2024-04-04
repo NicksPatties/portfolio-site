@@ -24,35 +24,24 @@ function liStyle(post: Blog) {
     padding: 0;
   }
 
-  ul li {
+  ul a {
+    display: block;
     padding: 2em 1em;
     margin: 1em 0;
     border-radius: 12px;
     background: no-repeat center;
     background-size: 100%;
-  }
-
-  ul a {
     position: relative;
     text-decoration: none;
-    transition: var(--animation);
-  }
-
-  ul li img {
-    margin-bottom: 0.5rem;
-    border-radius: 12px;
-  }
-
-  ul a li {
-    display: block;
     transition: background-size var(--animation);
   }
 
   .title,
   .date {
-    color: var(--orange1);
+    color: var(--orange2);
     position: relative;
     z-index: 10;
+    transition: color var(--animation);
   }
 
   .title {
@@ -64,25 +53,26 @@ function liStyle(post: Blog) {
     margin: 0;
   }
 
-  ul a:hover li .title,
-  ul a:hover li .date {
-    color: rgb(var(--accent));
+  a:hover .title,
+  a:hover .date {
+    color: var(--green2);
   }
 
-  ul a:focus li .title,
-  ul a:focus li .date {
-    color: rgb(var(--accent));
+  a:focus .title,
+  a:focus .date {
+    color: var(--green2);
   }
 
-  ul a:focus li {
+  ul a:focus {
     background-size: 105%;
   }
 
-  ul a:hover li {
+  ul a:hover {
     background-size: 105%;
   }
 
   .mask {
+    border-radius: 12px;
     position: absolute;
     top: 0;
     left: 0;
@@ -93,7 +83,8 @@ function liStyle(post: Blog) {
     transition: opacity var(--animation);
   }
 
-  ul a:focus li .mask,  ul a:hover li .mask {
+  ul a:focus .mask,
+  ul a:hover .mask {
     opacity: 0.5;
   }
 </style>
@@ -101,15 +92,15 @@ function liStyle(post: Blog) {
   <ul>
     {
       posts.map((post: Blog) => (
-        <a href={`/blog/${post.slug}/`}>
-          <li style={liStyle(post)}>
+        <li>
+          <a style={liStyle(post)} href={`/blog/${post.slug}/`}>
             <h3 class="title">{post.data.title}</h3>
             <p class="date">
               <FormattedDate date={post.data.pubDate} />
             </p>
             <div class="mask" />
-          </li>
-        </a>
+          </a>
+        </li>
       ))
     }
   </ul>

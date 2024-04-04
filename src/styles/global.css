@@ -102,15 +102,15 @@ b {
 }
 
 a {
-  color: var(--orange1);
+  color: var(--orange2);
 }
 
 a:focus {
-  color: var(--orange2);
+  color: var(--green2);
 }
 
 a:hover {
-  color: var(--orange2);
+  color: var(--green2);
 }
 
 p {
