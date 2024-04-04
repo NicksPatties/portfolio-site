@@ -16,3 +16,17 @@
 Edit the `resume.json` file to add new information.
 
 This file follows the JSON format as seen in MegaResume. Here are some [details](https://github.com/NicksPatties/megaresume/blob/e798e819630448d1169ac10f0216da609a3c2eae/src/data/data.ts) about the expected JSON format.
+
+## Adding a blog post
+
+```md
+---
+title: "Blog title"
+description: "Blog description"
+pubDate: "Jul 08 2022"
+# optional, assumes image is in the `public` folder
+heroImage: "/blog-placeholder-3.jpg"
+# optional, set this to true if you want it on the site
+published: true
+---
+```
