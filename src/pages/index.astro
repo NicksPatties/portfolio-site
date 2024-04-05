@@ -20,11 +20,20 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         position: relative;
       }
 
+      .hero .serving,
+      .hero .since {
+        display: block;
+        font-weight: bold;
+        margin: 0 0 0.5rem;
+        line-height: 1.2;
+      }
+
       .hero .tasty {
         display: block;
+        text-align: center;
         font-family: "Titan One";
         font-weight: normal;
-        font-size: 5.28em;
+        font-size: 6.6rem;
         line-height: normal;
         z-index: 100;
         margin: 0;
@@ -52,7 +61,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         }
 
         .hero .tasty {
-          font-size: 5em;
+          font-size: 6rem;
         }
 
         .hero .serving,
@@ -66,11 +75,13 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
   <body>
     <Header />
     <main>
-      <div class="hero">
-        <img src="burger.svg" alt="" class="burger" />
-        <h1 class="serving">Serving up</h1>
-        <p class="tasty">TASTY BYTES</p>
-        <h1 class="since">since 2014</h1>
+      <div id="content-start" class="hero">
+        <img src="burger.svg" alt="A cartoon cheeseburger with a flag sticking out" class="burger" />
+        <h1>
+          <span class="serving">Serving up</span>
+          <span class="tasty">TASTY BYTES</span>
+          <span class="since">since 2014</span>
+        </h1>
       </div>
       <hr />
       <h2>Nice to meet you!</h2>

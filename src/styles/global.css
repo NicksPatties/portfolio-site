@@ -205,3 +205,19 @@ mark {
   /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }
+
+.sr-only.focusable-nav:focus {
+  display: block;
+  padding: 0.5em;
+  height: initial;
+  width: initial;
+  overflow: initial;
+  clip: initial;
+  /* maybe deprecated but we need to support legacy browsers */
+  clip: initial;
+  /* modern browsers, clip-path works inwards from each corner */
+  clip-path: initial;
+  background: var(--bg0_h);
+  border: thin solid var(--fg0);
+  border-radius: 2px;
+}
