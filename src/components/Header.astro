@@ -5,13 +5,14 @@ import { SITE_TITLE } from "../consts";
 
 <header>
   <nav>
+    <a class="sr-only focusable-nav" href="#content-start">Skip navigation</a>
     <h2>
-      <a class="home" href="/">🍔 {SITE_TITLE}</a>
-      <a class="home-small" href="/">🍔</a>
+      <a class="home" aria-label={SITE_TITLE} href="/">🍔 {SITE_TITLE}</a>
+      <a class="home-small" aria-label={SITE_TITLE} href="/">🍔</a>
     </h2>
     <div>
       <HeaderLink href="/blog">Blog</HeaderLink>
-      <HeaderLink href="/resume">Resume</HeaderLink>
+      <HeaderLink aria-label="Résumé" href="/resume">Resume</HeaderLink>
     </div>
   </nav>
 </header>
