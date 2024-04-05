@@ -24,7 +24,7 @@ const posts = (await getCollection("blog"))
   </head>
   <body>
     <Header />
-    <main>
+    <main id="content-start">
       <Cards {posts} />
     </main>
     <Footer />

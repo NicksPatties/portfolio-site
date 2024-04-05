@@ -220,4 +220,7 @@ mark {
   background: var(--bg0_h);
   border: thin solid var(--fg0);
   border-radius: 2px;
+  color: var(--fg0);
+  text-decoration: none;
 }
+
