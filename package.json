@@ -16,9 +16,12 @@
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.1.1",
     "astro": "^4.4.12",
+    "rehype-autolink-headings": "^7.1.0",
+    "remark-toc": "^9.0.0",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@astrojs/markdown-remark": "^5.0.0",
     "@biomejs/biome": "1.6.3",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0"
