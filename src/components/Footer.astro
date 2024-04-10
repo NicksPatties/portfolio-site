@@ -9,10 +9,9 @@ const today = new Date();
   <ul class="social-links">
     <li>
       <a
-        aria-label="LinkedIn Profile"
+        aria-label="Visit my LinkedIn Profile"
         href="https://www.linkedin.com/in/nick-patti-34675053/"
       >
-        <!-- linkedin logo -->
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -27,7 +26,7 @@ const today = new Date();
         </svg>
       </a>
       <li>
-        <a aria-label="GitHub Profile" href="https://github.com/NicksPatties">
+        <a aria-label="Visit my GitHub Profile" href="https://github.com/NicksPatties">
           <svg
             aria-hidden="true"
             viewBox="0 0 16 16"
@@ -43,7 +42,7 @@ const today = new Date();
         </a>
       </li>
       <li>
-        <a aria-label="GitLab Profile" href="https://gitlab.com/NicksPatties">
+        <a aria-label="Visit my GitLab Profile" href="https://gitlab.com/NicksPatties">
           <svg
             width="24"
             height="24"
@@ -71,15 +70,19 @@ const today = new Date();
     ul {
       display: flex;
       flex-direction: row;
+      gap: 1rem;
       align-items: center;
       justify-content: center;
       list-style: none;
       padding: 0;
     }
 
-    li {
+    li a {
       display:block;
-      margin: 1em;
+    }
+
+    li a svg {
+      margin: 1rem;
     }
   </style>
 </footer>
