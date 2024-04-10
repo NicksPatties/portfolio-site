@@ -16,7 +16,8 @@ const icon = {
     height: "100%",
     width: "100%",
     preserveAspectRatio: "none",
-    viewBox: "0 0 32 32"
+    viewBox: "0 0 32 32",
+    fill: "currentColor"
   },
   children: [{
     type: 'element',

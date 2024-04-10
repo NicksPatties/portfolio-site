@@ -224,7 +224,6 @@ a.link-icon-container {
 }
 
 .link-icon path {
-  fill: var(--orange1);
   height: 100%;
   opacity: 0.2;
 }
@@ -240,7 +239,6 @@ h6:hover path {
 
 a.link-icon-container:hover path,
 a.link-icon-container:focus path {
-  fill: var(--green2);
   opacity: 1.0;
 }
 
