@@ -72,6 +72,7 @@ h6 {
   line-height: 1.2;
 }
 
+
 h1 {
   font-size: 3em;  
 }
@@ -225,7 +226,22 @@ a.link-icon-container {
 .link-icon path {
   fill: var(--orange1);
   height: 100%;
-  opacity: 0.5;
+  opacity: 0.2;
+}
+
+h1:hover path,
+h2:hover path,
+h3:hover path,
+h4:hover path,
+h5:hover path,
+h6:hover path {
+  opacity: 1.0;
+}
+
+a.link-icon-container:hover path,
+a.link-icon-container:focus path {
+  fill: var(--green2);
+  opacity: 1.0;
 }
 
 .sr-only {
