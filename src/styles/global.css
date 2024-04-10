@@ -73,27 +73,47 @@ h6 {
 }
 
 h1 {
-  /* 
-		A font size that is 3em or above does not render on
-		my mobile browser for some reason 
-	*/
-  font-size: 3em;
+  font-size: 3em;  
+}
+
+h1 a {
+  --link-icon-size: 2rem;
 }
 
 h2 {
   font-size: 2.441em;
 }
 
+h2 a {
+  --link-icon-size: 1.8rem;
+}
+
 h3 {
   font-size: 1.953em;
+}
+
+h3 a {
+  --link-icon-size: 1.6rem; 
 }
 
 h4 {
   font-size: 1.563em;
 }
 
+h4 a {  
+  --link-icon-size: 1.4rem;
+}
+
 h5 {
   font-size: 1.25em;
+}
+
+h5 a {
+  --link-icon-size: 1.2rem;
+}
+
+h6 a {
+  --link-icon-size: 1rem;
 }
 
 strong,
@@ -186,6 +206,26 @@ mark {
   pre {
     font-size: 0.85em;
   }
+}
+
+a.link-icon-container {
+  display: inline-block;
+  margin-left: 1rem;
+  position: relative;
+  height: var(--link-icon-size);
+  width: var(--link-icon-size);
+}
+
+.link-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.link-icon path {
+  fill: var(--orange1);
+  height: 100%;
+  opacity: 0.5;
 }
 
 .sr-only {
