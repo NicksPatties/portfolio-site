@@ -18,6 +18,6 @@ console.log(remarkPluginFrontmatter)
 ---
 
 <BlogPost {...post.data}>
-  <TableOfContents {headings}/>
+  { headings.length > 0 && <TableOfContents {headings}/> }
   <Content />
 </BlogPost>
