@@ -10,13 +10,11 @@ published: true
 
 Hello, and thanks for visiting! This marks this site's first, official blog post.
 
-# What's this site for?
-
 I'd like to use this blog as a platform to share my findings and projects. It's an opportunity for me to demonstrate my abilities, and improve my understanding of my own work. Perhaps we can learn together!
 
-To start, let's talk about my portfolio site, and my process of getting to the point where I am at today. Every idea starts somewhere. Perhaps it's a problem that needs to be solved, or something creative that is yet to be explored.
+To start, let's talk about my portfolio site, and my process of getting to the point where I am today. Let's talk about what I wanted from a portfolio site.
 
-## What am I trying to solve?
+# What am I trying to solve?
 
 This project in particular came from some friction that I've experienced while searching for employment.
 
@@ -32,16 +30,29 @@ So, I want this site to be a place where my content is easy to find, easy to rea
 
 So what can I use to make this happen?
 
+# Static Site Generators
+
+This is a good choice for a Static Site Generator. These take a text file (usually Markdown) and some templates (usually HTML, but can be JSX, or TSX) and smash them together to create a collection of web pages. Since pages are just written in Markdown, they are straightforward to write, which solves my first requirement!
+
+Once these web pages are built, they can then be deployed to a web server for everyone to see. The quickest approach, I concluded, was to use an SSG to create my site, then deploy those assets to something like GitHub Pages. Doing so can be automated each time I merge a pull request into my project's repository.
+
+Jamstack.org was a great resource for finding an SSG that would work for me. After some perusing, I found my first option.
+
 # Hugo
 
-At first, I thought Hugo was a good choice. I was introduced to Hugo's CLI, which offered the ability to create content, or deploy my site with single commands. The development server was also very snappy.
+Why did I pick Hugo?
+
+- I just finished creating CLI for `go` and was having fun with the language. I wanted to see if I could use this in a web based project.
+- This was easily suited for my use case. I could create blog pages, tags, and connect them together. Themes that I could choose from seemed appealing, but I wanted to create my own.
+- _Blazing fast_ performance
+
+Using Hugo's CLI, I was able to create content with single, easy-to-use commands. Building my site was almost instantaneous.
 
 I went to work on my home page, and came up with this:
 
 [Picture of Hugo site]()
 
 This didn't require a lot of knowledge about collections and such just yet. The plan was to add the contents manually first, and then define the collections for projects and work experience later, then use the contents of those items to populate this home page.
-
 Of course, this was the start. I wanted to familiarize myself with templating to write pages for different collections.
 
 Context was confusing. Defining collections was a pain. Finding the right thing to access in my template was a pain. It kinda reminded me of `erb` templates in Ruby on Rails, so I was interested in trying it out. But, trying to find what information I actually wanted to have in my page was confusing.
@@ -73,6 +84,8 @@ Passing variables into fragment functions was also strange. It was weird that I 
 2. Using git submodules for themes
 
 - I don't prefer this way of including themes in my project.
+
+3.
 
 Perhaps it was time to look for something better.
 
@@ -108,7 +121,7 @@ The themes were a good starting point for this blog. This started from the origi
 
 This was my final choice!
 
-# Starting from scratch
+# Starting from scratch with Astro
 
 I started from the blog template and went from there. I did this for a few reasons:
 
