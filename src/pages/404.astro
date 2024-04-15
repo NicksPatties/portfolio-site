@@ -1,0 +1,35 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+const path = new URL(Astro.request.url).pathname;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={"404 error"}
+      description={`404 error - couldn't find page ${path}`}
+    />
+    <style>
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <h3>Whoops!</h3>
+      <code>404 Not Found</code>
+      <p>Couldn't find page: <code>{path}</code></p>
+    </main>
+  </body>
+</html>
