@@ -22,10 +22,10 @@ This file follows the JSON format as seen in MegaResume. Here are some [details]
 ```md
 ---
 title: "Blog title"
-description: "Blog description"
-pubDate: "Jul 08 2022"
+description: "A description of the blog I'm writing."
+pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
 # optional, assumes image is in the `public` folder
-heroImage: "/blog-placeholder-3.jpg"
+heroImage: "/blog-hero-image.jpg"
 # optional, set this to true if you want it on the site
 published: true
 ---
