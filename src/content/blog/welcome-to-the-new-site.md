@@ -4,7 +4,7 @@ description: "An introduciton to my new portfolio, and the technology that power
 # watch out date is in standard time shows up wrong fix it
 pubDate: "2024-04-18PDT"
 # optional, assumes image is in the `public` folder
-heroImage: ""
+heroImage: "/welcome-to-the-new-site-cover-pexels-pixabay.jpg"
 published: true
 ---
 
