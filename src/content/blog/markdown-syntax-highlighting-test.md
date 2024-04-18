@@ -3,7 +3,7 @@ title: "Markdown Syntax Highlighting"
 description: "This is a test of the syntax highlighting system"
 pubDate: "Mar 28 2024"
 heroImage: ""
-published: true
+published: false
 ---
 
 Here are some code snippets to verify that my code is being highlighted properly.
