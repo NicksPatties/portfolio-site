@@ -2,7 +2,7 @@
 title: "Welcome to the new site!"
 description: "An introduciton to my new portfolio, and the technology that powers it."
 # watch out date is in standard time shows up wrong fix it
-pubDate: "2024-04-19"
+pubDate: "2024-04-18PDT"
 # optional, assumes image is in the `public` folder
 heroImage: ""
 published: true
