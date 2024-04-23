@@ -1,7 +1,7 @@
 # Astro server configuration 
-[language-server.biome]
-command = "node_modules/@biomejs/biome/bin/biome"
-args = ["lsp-proxy"]
+# [language-server.biome]
+# command = "node_modules/@biomejs/biome/bin/biome"
+# args = ["lsp-proxy"]
 
 [language-server.astro-ls]
 command = "astro-ls"
@@ -22,32 +22,6 @@ language-servers = ["astro-ls"]
 [[language]]
 name = "css"
 formatter = { command = "prettier", args = ["--parser", "css"]}
-auto-format = true
-
-# Adding language support with biome
-[[language]]
-name = "javascript"
-language-servers = [ "typescript-language-server" ] 
-auto-format = true
-
-[[language]]
-name = "typescript"
-language-servers = [ "typescript-language-server" ]
-auto-format = true
-
-[[language]]
-name = "tsx"
-language-servers = [ "typescript-language-server" ]
-auto-format = true
-
-[[language]]
-name = "jsx"
-language-servers = [ "typescript-language-server" ]
-auto-format = true
-
-[[language]]
-name = "json"
-language-servers = [ "vscode-json-language-server" ]
 auto-format = true
 
 # HTML emmet language configuration

@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getEntry, getEntries } from "astro:content";
+import { type CollectionEntry, getEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
 type Blog = CollectionEntry<"blog">;
@@ -43,8 +43,8 @@ const posts: Blog[] = Astro.props.posts;
     font-style: italic;
   }
 
-  .tag-list li::before {
-    content: "#";
+  .tag-list li::after {
+    content: " ";
   }
 
   .title {
@@ -98,7 +98,7 @@ const posts: Blog[] = Astro.props.posts;
 <section>
   <ul>
     {
-      posts.map(async (post: Blog, i: number) => {
+      posts.map(async (post: Blog) => {
         return (
           <li>
             <a
@@ -117,7 +117,7 @@ const posts: Blog[] = Astro.props.posts;
                 {post.data.tags &&
                   post.data.tags.map(async (g) => {
                     const tag: Tag = await getEntry("tags", g.id);
-                    return <li>{tag.data.name}</li>;
+                    return <li>#{tag.data.name}</li>;
                   })}
               </ul>
               <div class="mask" />

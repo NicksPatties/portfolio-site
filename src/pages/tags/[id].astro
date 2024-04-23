@@ -17,6 +17,7 @@ export async function getStaticPaths() {
     };
   });
 }
+
 const { id } = Astro.params;
 const currTag: Tag = await getEntry("tags", id);
 const name = currTag.data.name;
@@ -25,8 +26,7 @@ const isDev = import.meta.env.MODE === "development";
 const posts = (
   await getCollection("blog", (p: Blog) => {
     const hasTag =
-      p.data.tags !== undefined &&
-      !!p.data.tags.find((tag: Tag) => tag.id === id);
+      p.data.tags && !!p.data.tags.find((tagRef) => tagRef.id === id);
     return (isDev || (!isDev && p.data.published)) && hasTag;
   })
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());

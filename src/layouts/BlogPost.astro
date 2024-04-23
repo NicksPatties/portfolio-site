@@ -1,14 +1,16 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { type CollectionEntry, getEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Blog = CollectionEntry<"blog">;
+type Tag = CollectionEntry<"tags">;
+const props: Blog = Astro.props as Blog;
 
-const { title, description, pubDate, updatedDate, heroImage }: Props =
-  Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } =
+  props.data;
 ---
 
 <html lang="en">
@@ -52,8 +54,17 @@ const { title, description, pubDate, updatedDate, heroImage }: Props =
       .last-updated-on {
         font-style: italic;
       }
-      .icon::before {
-        content: 'a';
+      .tag-list {
+        list-style: none;
+        text-align: center;
+        padding: 0;
+      }
+      .tag-list li {
+        display: inline;
+        font-style: italic;
+      }
+      .tag-list li::after {
+        content: " ";
       }
     </style>
   </head>
@@ -82,6 +93,15 @@ const { title, description, pubDate, updatedDate, heroImage }: Props =
               }
             </div>
             <h1>{title}</h1>
+            <ul class="tag-list">
+              {
+                tags &&
+                  tags.map(async (t) => {
+                    const tag: Tag = await getEntry("tags", t.id);
+                    return <li><a href=`/tags/${t.id}`>#{tag.data.name}</a></li>;
+                  })
+              }
+            </ul>
             <hr />
           </div>
           <slot />

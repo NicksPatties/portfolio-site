@@ -8,6 +8,9 @@ heroImage: ""
 published: false
 tags:
   - "javascript"
+  - "typescript"
+  - "portfolio-site"
+  - "astro"
 ---
 
 Here's my notes/post for adding tags
@@ -72,3 +75,9 @@ This sometimes happens in the getStaticPaths function inside a dynamic route.
 If you do not return the correct array of objects, then the routes cannot be generated. You may get an error called something like expected `slug` to be a string. This happens when there is no property in each object of the array you return that matches the name of the variable name in your file.
 
 For a while I was looking in the `getStaticPaths` function for something that was wrong. I thought there was an issue with the objects I was using to generate the array. Because I was only looking at my code instead of my file
+
+## Finding the correct type
+
+Since I'm using TypeScript, I need to make sure I'm getting the right types when I'm doing operations on collections. Specifically, I need to find the right type for _references to collections_ from within another collection.
+
+I'm trying to do this to have my find call work correctly
