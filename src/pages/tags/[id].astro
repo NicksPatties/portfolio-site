@@ -20,16 +20,18 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 const currTag: Tag = await getEntry("tags", id);
-const name = currTag.data.name;
+const tagName = currTag.data.name;
 
 const isDev = import.meta.env.MODE === "development";
-const posts = (
-  await getCollection("blog", (p: Blog) => {
-    const hasTag =
-      p.data.tags && !!p.data.tags.find((tagRef) => tagRef.id === id);
-    return (isDev || (!isDev && p.data.published)) && hasTag;
-  })
-).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const filteredPosts = await getCollection("blog", (p: Blog) => {
+  const hasTag =
+    p.data.tags && !!p.data.tags.find((tagRef) => tagRef.id === id);
+  return (isDev || (!isDev && p.data.published)) && hasTag;
+});
+
+const posts = filteredPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
@@ -40,7 +42,7 @@ const posts = (
   <body>
     <Header />
     <main id="content-start">
-      <h1>{name}</h1>
+      <h1>{tagName}</h1>
       <Cards {posts} />
     </main>
     <Footer />

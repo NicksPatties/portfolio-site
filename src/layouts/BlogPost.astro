@@ -1,4 +1,6 @@
 ---
+import '../styles/tags.css'
+
 import { type CollectionEntry, getEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
@@ -7,8 +9,8 @@ import FormattedDate from "../components/FormattedDate.astro";
 
 type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
-const props: Blog = Astro.props as Blog;
 
+const props: Blog = Astro.props as Blog;
 const { title, description, pubDate, updatedDate, heroImage, tags } =
   props.data;
 ---
@@ -53,18 +55,6 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
       }
       .last-updated-on {
         font-style: italic;
-      }
-      .tag-list {
-        list-style: none;
-        text-align: center;
-        padding: 0;
-      }
-      .tag-list li {
-        display: inline;
-        font-style: italic;
-      }
-      .tag-list li::after {
-        content: " ";
       }
     </style>
   </head>

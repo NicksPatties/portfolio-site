@@ -1,8 +1,3 @@
-# Astro server configuration 
-# [language-server.biome]
-# command = "node_modules/@biomejs/biome/bin/biome"
-# args = ["lsp-proxy"]
-
 [language-server.astro-ls]
 command = "astro-ls"
 args = ["--stdio"]
@@ -23,6 +18,8 @@ language-servers = ["astro-ls"]
 name = "css"
 formatter = { command = "prettier", args = ["--parser", "css"]}
 auto-format = true
+
+# TODO: Add auto-formatting to JS/TS if I'd like
 
 # HTML emmet language configuration
 [language-server.emmet-lsp]

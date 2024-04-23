@@ -7,7 +7,7 @@ pubDate: "2024-04-18PDT"
 heroImage: "/welcome-to-the-new-site-cover-pexels-pixabay.jpg"
 published: true
 tags:
-  - "javascript"
+  - "astro"
 ---
 
 Hello, and thanks for visiting! This marks this site's first, official blog post.

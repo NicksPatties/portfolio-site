@@ -1,0 +1,21 @@
+.tag-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tag-list li {
+  color: var(--orange2);
+  position: relative;
+  z-index: 10;
+  transition: color var(--animation);
+  margin: 0;
+}
+
+.tag-list li {
+  display: inline;
+  font-style: italic;
+}
+
+.tag-list li::after {
+  content: " ";
+}

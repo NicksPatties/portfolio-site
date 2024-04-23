@@ -1,5 +1,6 @@
-
 ---
+import '../../styles/tags.css'
+
 import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
@@ -18,9 +19,11 @@ const tags = await getCollection("tags")
     <Header />
     <main id="content-start">
       <h1>Tags</h1>
-      {tags.map(t => {
-        return <a href=`/tags/${t.id}`>{t.data.name}</a>
-      })}
+      <ul class="tag-list">
+      {tags.map(t => (
+         <li><a href=`/tags/${t.id}`>#{t.data.name}</a></li>
+      ))}
+      </ul>
     </main>
     <Footer />
   </body>

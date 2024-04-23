@@ -1,4 +1,6 @@
 ---
+import "../styles/tags.css";
+
 import { type CollectionEntry, getEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
@@ -36,15 +38,6 @@ const posts: Blog[] = Astro.props.posts;
     z-index: 10;
     transition: color var(--animation);
     margin: 0;
-  }
-
-  .tag-list li {
-    display: inline;
-    font-style: italic;
-  }
-
-  .tag-list li::after {
-    content: " ";
   }
 
   .title {
