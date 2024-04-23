@@ -10,8 +10,18 @@ const blog = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
-    published: z.boolean().default(false)
+    published: z.boolean().default(false),
+    tagSlugs: z.array(z.string()).optional()
   }),
 });
 
-export const collections = { blog };
+const tags = defineCollection({
+  type: "data",
+  schema: z.object({
+    name: z.string(),
+    slug: z.string(),
+    color: z.string().optional(),
+  })
+})
+
+export const collections = { blog, tags };
