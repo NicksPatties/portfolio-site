@@ -1,9 +1,11 @@
 ---
-import { type CollectionEntry, getEntry } from "astro:content";
+import { type CollectionEntry, getEntry, getEntries } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
-const { posts } = Astro.props;
 type Blog = CollectionEntry<"blog">;
+type Tag = CollectionEntry<"tags">;
+
+const posts: Blog[] = Astro.props.posts;
 ---
 
 <style>
@@ -27,7 +29,8 @@ type Blog = CollectionEntry<"blog">;
   }
 
   .title,
-  .date {
+  .date,
+  .tag-list li {
     color: var(--orange2);
     position: relative;
     z-index: 10;
@@ -35,17 +38,28 @@ type Blog = CollectionEntry<"blog">;
     margin: 0;
   }
 
+  .tag-list li {
+    display: inline;
+    font-style: italic;
+  }
+
+  .tag-list li::before {
+    content: "#";
+  }
+
   .title {
     line-height: 1;
   }
 
   a:hover .title,
-  a:hover .date {
+  a:hover .date,
+  a:hover .tag-list li {
     color: var(--green2);
   }
 
   a:focus .title,
-  a:focus .date {
+  a:focus .date,
+  a:focus .tag-list li {
     color: var(--green2);
   }
 
@@ -84,25 +98,33 @@ type Blog = CollectionEntry<"blog">;
 <section>
   <ul>
     {
-      posts.map((post: Blog) => (
-        <li>
-          <a
-            style={
-              post.data.heroImage && {
-                "background-image": `url(${post.data.heroImage})`,
+      posts.map(async (post: Blog, i: number) => {
+        return (
+          <li>
+            <a
+              style={
+                post.data.heroImage && {
+                  "background-image": `url(${post.data.heroImage})`,
+                }
               }
-            }
-            href={`/blog/${post.slug}/`}
-          >
-            <h3 class="title">{post.data.title}</h3>
-            <p class="date">
-              <FormattedDate date={post.data.pubDate} />
-            </p>
-            <ul />
-            <div class="mask" />
-          </a>
-        </li>
-      ))
+              href={`/blog/${post.slug}/`}
+            >
+              <h3 class="title">{post.data.title}</h3>
+              <p class="date">
+                <FormattedDate date={post.data.pubDate} />
+              </p>
+              <ul class="tag-list">
+                {post.data.tags &&
+                  post.data.tags.map(async (g) => {
+                    const tag: Tag = await getEntry("tags", g.id);
+                    return <li>{tag.data.name}</li>;
+                  })}
+              </ul>
+              <div class="mask" />
+            </a>
+          </li>
+        );
+      })
     }
   </ul>
 </section>
