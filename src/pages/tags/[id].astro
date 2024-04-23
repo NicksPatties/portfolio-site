@@ -36,16 +36,11 @@ const posts = (
 <html lang="en">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    <style>
-      main {
-        width: 960px;
-      }
-    </style>
   </head>
   <body>
     <Header />
     <main id="content-start">
-      <h1>Posts tagged with {name}</h1>
+      <h1>{name}</h1>
       <Cards {posts} />
     </main>
     <Footer />
