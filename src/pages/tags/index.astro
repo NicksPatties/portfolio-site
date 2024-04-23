@@ -24,7 +24,7 @@ const tags = await getCollection("tags")
     <main id="content-start">
       <h1>Tags</h1>
       {tags.map(t => {
-        return <a href=`/tags/${t.data.slug}`>{t.data.name}</a>
+        return <a href=`/tags/${t.id}`>{t.data.name}</a>
       })}
     </main>
     <Footer />

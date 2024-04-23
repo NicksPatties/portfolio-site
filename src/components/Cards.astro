@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { type CollectionEntry, getEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 
 const { posts } = Astro.props;
@@ -98,6 +98,7 @@ type Blog = CollectionEntry<"blog">;
             <p class="date">
               <FormattedDate date={post.data.pubDate} />
             </p>
+            <ul />
             <div class="mask" />
           </a>
         </li>

@@ -6,9 +6,8 @@ pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
 heroImage: ""
 # optional, set this to true if you want it on the site
 published: false
-tagSlugs:
+tags:
   - "javascript"
-  - "typescript"
 ---
 
 Here's my notes/post for adding tags
@@ -53,3 +52,23 @@ How do other people add tags on their pages?
 
 1. Create a content type of Tag in config.ts
 2. Attach a tags property to my blog
+
+# Adding the tags
+
+I created some configuration in my content/config.ts file. This configuration defined the data type of tag.
+
+At first, I figured having a `slug` property would make this process easier. This would allow me to only have to assign the slug to the blog post that I wanted. I could create urls that looked more sane.
+
+However, I ran into an issue. I didn't have a clean way to obtain the tags with just the slug alone. I needed this to print the pretty name of the tag in the tags list on each of my cards.
+
+Re-reviewing the documentation, I can create references to many tags by just providing the name of the file that contains the tag data.
+
+Instead of creating a `slug` property for my use case, I created a `decorated` property, which contains the printable name, along with the rest of the tag data
+
+## Weird expected `blank` to be a string error
+
+This sometimes happens in the getStaticPaths function inside a dynamic route.
+
+If you do not return the correct array of objects, then the routes cannot be generated. You may get an error called something like expected `slug` to be a string. This happens when there is no property in each object of the array you return that matches the name of the variable name in your file.
+
+For a while I was looking in the `getStaticPaths` function for something that was wrong. I thought there was an issue with the objects I was using to generate the array. Because I was only looking at my code instead of my file
