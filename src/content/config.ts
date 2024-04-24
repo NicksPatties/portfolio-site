@@ -19,7 +19,7 @@ const tags = defineCollection({
   type: "data",
   schema: z.object({
     name: z.string(),
-    color: z.string().optional(),
+    // TODO add additional properties for tags here once you need them
   })
 })
 
