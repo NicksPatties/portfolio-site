@@ -1,0 +1,50 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Cards from "../../components/Cards.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+
+type Blog = CollectionEntry<"blog">;
+type Tag = CollectionEntry<"tags">;
+
+export async function getStaticPaths() {
+  const tags: Tag[] = await getCollection("tags");
+  return tags.map((t: Tag) => {
+    return {
+      params: { id: t.id },
+    };
+  });
+}
+
+const { id } = Astro.params;
+const currTag: Tag = await getEntry("tags", id);
+const tagName = currTag.data.name;
+
+const isDev = import.meta.env.MODE === "development";
+const filteredPosts = await getCollection("blog", (p: Blog) => {
+  const hasTag =
+    p.data.tags && !!p.data.tags.find((tagRef) => tagRef.id === id);
+  return (isDev || (!isDev && p.data.published)) && hasTag;
+});
+
+const posts = filteredPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main id="content-start">
+      <h1>{tagName}</h1>
+      <Cards {posts} />
+    </main>
+    <Footer />
+  </body>
+</html>

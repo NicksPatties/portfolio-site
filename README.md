@@ -30,3 +30,9 @@ heroImage: "/blog-hero-image.jpg"
 published: true
 ---
 ```
+
+## Adding new tags
+
+1. Create a new YAML file (this filename is pretty much the slug of the tag)
+2. Add a `name` property to the file
+3. Add the tag filename to your blog posts in the `tags` array.
