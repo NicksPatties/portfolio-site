@@ -35,7 +35,9 @@ const posts = filteredPosts.sort(
 const title = `Posts tagged "${tagName}"`;
 const description =
   posts.length > 0
-    ? `Nick has written ${posts.length} posts about this topic, which you can find here!`
+    ? `Nick has written ${posts.length} ${
+        posts.length === 1 ? "post" : "posts"
+      } about this topic, which you can find here!`
     : `Nick hasn't written any posts about this topic yet. Come back later!`;
 ---
 
