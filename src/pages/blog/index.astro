@@ -3,19 +3,21 @@ import BaseHead from "../../components/BaseHead.astro";
 import Header from "../../components/Header.astro";
 import Cards from "../../components/Cards.astro";
 import Footer from "../../components/Footer.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 
 const isDev = import.meta.env.MODE === "development";
-const posts = (await getCollection("blog"))
-  .filter((p) => isDev || (!isDev && p.data.published))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = (
+  await getCollection("blog", (p) => isDev || (!isDev && p.data.published))
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead
+      title={"Nick's blog"}
+      description={`Read Nick's thoughts about web development, JavaScript, and more!`}
+    />
   </head>
   <body>
     <Header />
