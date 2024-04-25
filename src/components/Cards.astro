@@ -24,9 +24,11 @@ const posts: Blog[] = Astro.props.posts;
     margin: 1em 0;
     border-radius: 12px;
     background: no-repeat center;
+    background-color: var(--bg2);
     background-size: 100%;
     position: relative;
     text-decoration: none;
+    text-shadow: 0 0 3px var(--bg0_h);
     transition: background-size var(--animation);
   }
 
@@ -79,13 +81,6 @@ const posts: Blog[] = Astro.props.posts;
   a:focus .mask,
   a:hover .mask {
     opacity: 0.5;
-  }
-
-  @media (prefers-color-scheme: light) {
-    a:focus .mask,
-    a:hover .mask {
-      opacity: 0.85;
-    }
   }
 </style>
 <section>
