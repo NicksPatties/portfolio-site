@@ -11,6 +11,7 @@ const today = new Date();
       <a
         aria-label="Visit my LinkedIn Profile"
         href="https://www.linkedin.com/in/nick-patti-34675053/"
+        target="_blank"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +27,11 @@ const today = new Date();
         </svg>
       </a>
       <li>
-        <a aria-label="Visit my GitHub Profile" href="https://github.com/NicksPatties">
+        <a
+          aria-label="Visit my GitHub Profile"
+          href="https://github.com/NicksPatties"
+          target="_blank"
+        >
           <svg
             aria-hidden="true"
             viewBox="0 0 16 16"
@@ -42,7 +47,11 @@ const today = new Date();
         </a>
       </li>
       <li>
-        <a aria-label="Visit my GitLab Profile" href="https://gitlab.com/NicksPatties">
+        <a
+          aria-label="Visit my GitLab Profile"
+          href="https://gitlab.com/NicksPatties"
+          target="_blank"
+        >
           <svg
             width="24"
             height="24"
@@ -78,11 +87,12 @@ const today = new Date();
     }
 
     li a {
-      display:block;
+      display: block;
       color: var(--fg4);
     }
 
-    li a:focus, li a:hover {
+    li a:focus,
+    li a:hover {
       color: var(--green2);
     }
 
