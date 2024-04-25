@@ -36,7 +36,7 @@ const title = `Posts tagged "${tagName}"`;
 const description =
   posts.length > 0
     ? `Nick has written ${posts.length} posts about this topic, which you can find here!`
-    : `Nick hasn't written any posts about this topic. Come back later!`;
+    : `Nick hasn't written any posts about this topic yet. Come back later!`;
 ---
 
 <!doctype html>
@@ -48,7 +48,7 @@ const description =
     <Header />
     <main id="content-start">
       <h1>Posts tagged <code>{tagName}</code></h1>
-      <Cards {posts} />
+      {posts.length > 0 ? <Cards {posts} /> : <p>{description}</p>}
     </main>
     <Footer />
   </body>

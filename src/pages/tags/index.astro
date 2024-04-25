@@ -8,7 +8,6 @@ import { getCollection } from "astro:content";
 
 const tags = await getCollection("tags")
 const description = `Nick has written about ${tags.length} topics. Check them out here!`
-console.log(description)
 ---
 
 <!doctype html>
