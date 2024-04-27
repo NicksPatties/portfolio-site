@@ -1,8 +1,5 @@
 ---
-import BaseHead from "@components/BaseHead.astro";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import Cards from "@components/Cards.astro";
+import Project from "@layouts/Project.astro";
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
 
 type Project = CollectionEntry<"projects">;
@@ -14,27 +11,19 @@ export async function getStaticPaths() {
     return {
       params: { id: p.id },
       props: {
-        project: p.data,
+        project: p,
       },
     };
   });
 }
 
 const { id } = Astro.params;
-const { name, description } = Astro.props.project as Project;
+const project = Astro.props.project as Project;
+console.log("inside [id]");
+console.log("project", project);
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={"hey"} description={"there"} />
-  </head>
-  <body>
-    <Header />
-    <main id="content-start">
-      {name}
-      {description}
-    </main>
-    <Footer />
-  </body>
-</html>
+<Project {project}>
+  <h1>Motivation</h1>
+  {project.data.motivation}
+</Project>
