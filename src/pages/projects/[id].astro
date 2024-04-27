@@ -1,0 +1,40 @@
+---
+import BaseHead from "@components/BaseHead.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Cards from "@components/Cards.astro";
+import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+
+type Project = CollectionEntry<"projects">;
+type Tag = CollectionEntry<"tags">;
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((p: project) => {
+    return {
+      params: { id: p.id },
+      props: {
+        project: p.data,
+      },
+    };
+  });
+}
+
+const { id } = Astro.params;
+const { name, description } = Astro.props.project as Project;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={"hey"} description={"there"} />
+  </head>
+  <body>
+    <Header />
+    <main id="content-start">
+      {name}
+      {description}
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -11,9 +11,21 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
     published: z.boolean().default(false),
-    tags: z.array(reference('tags')).optional()
+    tags: z.array(reference('tags')).optional(),
+    project: reference('projects').optional(),
   }),
 });
+
+const projects = defineCollection({
+  type: "data",
+  schema: z.object({
+    name: z.string(),
+    description: z.string(),
+    heroImage: z.string().optional(),
+    tags: z.array(reference('tags')).optional(),
+    motivation: z.string(),
+  })
+})
 
 const tags = defineCollection({
   type: "data",
@@ -23,4 +35,4 @@ const tags = defineCollection({
   })
 })
 
-export const collections = { blog, tags };
+export const collections = { blog, projects, tags };

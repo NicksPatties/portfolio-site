@@ -8,6 +8,17 @@ type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
 
 const posts: Blog[] = Astro.props.posts;
+/*
+options on how to do this:
+- extract card out, have card only accept specific parameters
+  - I can keep most of the code the same as before
+  - The card component only can have specific props
+- I can have this component take in either an array of Blogs or an array of Projects[]
+  - Need to write even less code, perhaps
+  - Blogs have a publishDate, while projects do not. THIS WILL NOT WORK
+- Have the card be have slots for their content?
+  - This allows me to change 
+*/
 ---
 
 <style>
