@@ -49,4 +49,4 @@ auto-format = true
 # This contains words that I know are spelled correctly,
 # so ltex-ls doesn't give me a warning
 [language-server.ltex-ls.config.ltex.dictionary]
-"en-US" = [] 
+"en-US" = ["pnpm"] 
