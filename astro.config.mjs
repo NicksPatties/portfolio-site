@@ -3,8 +3,6 @@ import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import remarkToc from "remark-toc";
-
 
 const icon = {
   type: 'element',
@@ -46,7 +44,6 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   markdown: {
     syntaxHighlight: "prism",
-    remarkPlugins: [remarkToc],
     rehypePlugins: [
       rehypeHeadingIds,
       [rehypeAutolinkHeadings, autolinkOptions]
