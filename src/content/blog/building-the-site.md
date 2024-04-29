@@ -119,21 +119,19 @@ Which jobs are the ones I actually care about? It's difficult to say, but removi
 
 Now that my deployments were taken care of, I began building off the blog template.
 
-# Things to change
-
 Although, as you can see in the image above, the original blog template is not bad. However, there were some things I wanted to add to improve it.
 
-## More accessibility
+# More accessibility
 
 The Google Lighthouse rating for the base blog is 100. However, there are things Lighthouse cannot detect. There are still a few accessibility improvements I wanted to make with the site.
 
-### Keyboard navigation
+## Keyboard navigation
 
 For one, I want to allow me to **navigate with my keyboard**. This will make it easier for those with limited vision, and anyone who doesn't want to use a mouse (including me) to navigate through the website easier.
 
 I added some buttons in the nav bar to navigate the user to the content. You see these "Skip to content" buttons on different sites, like GitHub, or other blog sites.
 
-#### Rehype Autolink Headings
+### Rehype Autolink Headings
 
 Astro supports both remark and rehype plugins. They modify the contents of the page when the markdown for content pages is converted to HTML elements.
 
@@ -175,7 +173,7 @@ const autolinkOptions = {
 
 At the end of this process, each header in my blog posts now have a link that is automatically appended to it. This makes it easier to link specific parts to blog posts if needed. Additionally, it enables simple keyboard navigation to each header with the `Tab` key.
 
-### Better screen reader support
+## Better screen reader support
 
 I needed to verify that **screen readers worked effectively**. While working on the application, I double-checked my pages by using a screen reader to navigate through the pages.
 
@@ -209,7 +207,7 @@ After Astro builds this component, the result looks like this:
 
 With these attributes assigned to these elements, screen readers will now read the link correctly, while keeping the appearance of the link that I like.
 
-### Dark mode support
+## Dark mode support
 
 There's also no **dark mode support** in the old theme. Without a dark color scheme, readers (including me) may wince due to eye strain when reading my site in low light conditions. This is unacceptable.
 
