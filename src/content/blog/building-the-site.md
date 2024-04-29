@@ -8,7 +8,8 @@ heroImage: ""
 published: true
 tags:
   - "astro"
-  # - "accessibility"
+  - "automation"
+  - "accessibility"
   # - "web design"
   # - "typescript"
   # - "css"
@@ -30,7 +31,7 @@ There's no need to re-do work that has already been done, so to speed up develop
 
 Using this tool, I was able to configure a project with little trouble. [I followed the instructions here.](https://docs.astro.build/en/install/auto/)
 
-Since I'm using pnpm as my package manager, I used the following command in my terminal to start the setup.
+Since I use pnpm as my package manager, I used the following command in my terminal to start the setup.
 
 ```sh
 pnpm create astro@latest
@@ -66,7 +67,7 @@ And what I got was this:
 
 ![The initial blog template's home page](/src/assets/blog/building-the-site/initial-blog-template.png)
 
-For a starting template, this is pretty good! It contains a home page, some sample blog posts, and some images. It was a good collection of files that you likely find in a website.
+For a starting template, this is pretty good! It contains a home page, some sample blog posts, and some images. It was a good collection of files that would likely be in a website.
 
 Although I haven't written any content yet, this is enough to get started on the next step: building and deploying the website.
 
@@ -74,7 +75,39 @@ Although I haven't written any content yet, this is enough to get started on the
 
 I wanted to automatically build and deploy my site whenever I make changes to the codebase. Configuring this as soon as possible saves me time, making it **easy to share** my updates. To make this very simple, I'm deploying my website to GitHub Pages.
 
-[Again, Astro's documentation made this process very straightforward.](https://docs.astro.build/en/guides/deploy/github/) In the `deploy.yml` file, you can see the process is split into two jobs: building the project, and deploying the code to GitHub Pages. These steps run whenever I push a change to my `main` branch.
+[Again, Astro's documentation made this process very straightforward.](https://docs.astro.build/en/guides/deploy/github/) The code to enable this feature can be copied and pasted from this page, but I'll explain the basics of this file. [The file's included here for reference.](https://github.com/NicksPatties/portfolio-site/blob/9b6c43f345ca6f24ccbe00118a1519ae69e74adb/.github/workflows/deploy.yml)
+
+The `deploy.yml` file defines the configuration for automated deployments to GitHub Pages. The `name` defined in this file makes this clear:
+
+```yml
+name: Deploy to GitHub Pages
+```
+
+Changes will be made every time I push code to the `main` branch. This usually happens when I push code to my repository, and verify my changes are made through a merge request:
+
+```yml
+on:
+  push:
+    branches: [main]
+```
+
+The deployment is split into two jobs, `build` and `deploy`. These jobs are also broken down into individual steps:
+
+```yml
+jobs:
+  build:
+    # ...
+    steps:
+      # individual steps for build...
+
+  deploy:
+    needs: build # this step can't happen unless build completes
+    # ...`
+    steps:
+      # individual steps for deploy...
+```
+
+Once these two steps are complete, my site will be online and available for all to see. With this configuration complete, I can focus exclusively on writing content and adding features to the site!
 
 ## Gotcha: colliding deployments
 
@@ -102,17 +135,25 @@ For one, I want to allow me to **navigate with my keyboard**. This will make it 
 
 I added some buttons in the nav bar to navigate the user to the content. You see these "Skip to content" buttons on different sites, like GitHub, or other blog sites.
 
+#### Rehype Autolink Headings
+
+Astro supports both remark and rehype plugins. They modify the contents of the page when the markdown for content pages is converted to HTML elements.
+
+You can add different plugins to support different things. To allow these links
+
+There's also a table of contents plugin, but I didn't like how it turned out, so I created my own component. I'll talk about that in a future blog post.
+
 ### Better screen reader support
 
-Also, I just want to verify that **screen readers work effectively**. While working on the application, I double-checked my pages by using a screen reader to navigate through the pages.
+I needed to verify that **screen readers worked effectively**. While working on the application, I double-checked my pages by using a screen reader to navigate through the pages.
 
-Primarily, I needed to make sure my links had the appropriate `aira-label`s, so screen readers would pronounce them correctly.
+The biggest catch was my navigation link to the <span aria-hidden="true">Resume</span><span class="sr-only">résumé</span> page. Here it is highlighted below:
 
-The biggest catch was my navigation link to the Resume page. Here it is highlighted below:
+![Picture of my navigation link to the résumé page](/src/assets/blog/building-the-site/resume-nav-link.png)
 
-![Picture of my navigation link to the resume page](/src/assets/blog/building-the-site/resume-nav-link.png)
+Although "<span aria-hidden="true">Resume</span><span class="sr-only">résumé</span>" is a valid spelling of the word to describe my list of professional experience and education, screen readers would pronounce the link "resume," as in "begin" or "start again."
 
-Although "Resume" is a valid spelling of the word, screen readers would pronounce the link "resume," as in "begin" or "start again."
+To fix this,
 
 ### Dark mode support
 
@@ -148,72 +189,8 @@ New tasks become less daunting for me when I make things easy for me.
 
 With these changes, I aimed to make the reading experience as comfortable and easy as possible for readers with different needs. There was more to improve, though.
 
-## Improved design
+# Conclusion
 
-Some of the components in the original blog template were pretty good, but I wanted to improve their design. The blog should focus on prose first, and then with visuals. Some of the starter components were ill-suited to satisfy that goal.
+In short, I used Astro's CLI to create a simple blog template, and enhanced it with some accessible changes to make it **easy to read**. I also automated my project to update my live site on changes, making the page **easy to write** and **easy to share** with readers.
 
-### The `Hero` component
-
-Here's what the original blog page looks like.
-
-[Image of original blog theme]()
-
-The first thing you see is this? Nah, let's make this more fun.
-
-This is the first thing a visitor sees when they open my website. I wanted to decorate it with a fun image, and some memorable font.
-
-Additionally, I wanted this component to work on smaller screens as well. The design is a little different for smaller screens; I wanted the text to be centered rather than the dramatic offset alignment. On smaller screens, the offset looks unintentional and unsettling rather than dynamic and fun.
-
-To enable this, I used CSS media queries to modify the layout of the background image and text.
-
-The burger image is absolutely positioned, which means I'm in charge of where it should go relative to the parent container defined with `position: relative`. This creates a new stacking context, which means the css properties `top`, `bottom`, `left`, and `right` are relative to the element rather than the entire document. So, `top: 0` and `right:0` means "move this element's top and right sides to the upper right corner of this parent container."
-
-I did this instead of creating a background in the hero component, because it was easier for me to position and rotate the burger exactly where I wanted.
-
-[Hero component image]()
-
-### The `Card` component
-
-_This can be a section where I talk about design rules, and designs that work on both desktop and mobile devices, and handling focus styles._
-
-These card components were designed to show off some cool stuff in a blog post. However, if I don't supply an image, then the Card breaks.
-
-[Image of card with image and without image]()
-
-To make writing blogs easier for me, I don't want to require myself to have an image in my blog post. Also, I want the title of the blog, and some of its content to draw more attention. To satisfy these requirements, a horizontal layout works better for me.
-
-Here's what I did...
-
-[Image of the new card components]()
-
-### Improved `meta` tags
-
-This makes the blog **easy to share**. Users know what they're getting into when they see a link to my site on their platform of choice.
-
-Astro's starter blog template was great for showing me the basics.
-
-[Image of the old social container]()
-
-I dove deeper into the different tags to see how I could improve the appearance with new pages. I made these code changes:
-
-```astro
-the code changes
-```
-
-The BaseHead component accepts properties that change the title and description of the site, as well as the image meta tags.
-
-Here's a link for the home page:
-
-[Image of the new container home page]()
-
-Here's the new social media link for the previous blog post.
-
-[Image of the new container after the changes]()
-
-I created different ones for blog posts, the home page, and my resume, for additional context.
-
-# That's it for now!
-
-Although the default theme was a good starting point, I made some modifications to improve my site's functionality and design. I didn't cover everything in exhaustive detail, but I talked about making mobile-friendly layouts, and improving its accessibility.
-
-I think the changes make the site easier to read, but what do you think? Do these layouts make it easy to find and read my posts on your browser of choice? I'm happy to hear your thoughts!
+Next, I'll continue talking about building this site, but I'll focus on some design changes I
