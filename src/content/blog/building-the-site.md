@@ -139,7 +139,7 @@ I added some buttons in the nav bar to navigate the user to the content. You see
 
 Astro supports both remark and rehype plugins. They modify the contents of the page when the markdown for content pages is converted to HTML elements.
 
-You can add different plugins to support different things. To allow these links
+You can add different plugins to support different things. To let these links
 
 There's also a table of contents plugin, but I didn't like how it turned out, so I created my own component. I'll talk about that in a future blog post.
 
