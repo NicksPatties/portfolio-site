@@ -10,9 +10,7 @@ tags:
   - "astro"
   - "automation"
   - "accessibility"
-  # - "web design"
-  # - "typescript"
-  # - "css"
+  - "css"
 ---
 
 Hello again! This is a continuation of my previous article about picking the technology to power my site. [If you'd like to catch up, read it here.](/blog/welcome-to-the-new-site)
@@ -139,9 +137,43 @@ I added some buttons in the nav bar to navigate the user to the content. You see
 
 Astro supports both remark and rehype plugins. They modify the contents of the page when the markdown for content pages is converted to HTML elements.
 
-You can add different plugins to support different things. To let these links
+You can add different plugins to support different things. I used the `rehype-autolink-headings` plugin to help me out.
 
-There's also a table of contents plugin, but I didn't like how it turned out, so I created my own component. I'll talk about that in a future blog post.
+First, I installed the `rehype-autolink-headings` plugin. [You can read more details about it here.](https://github.com/rehypejs/rehype-autolink-headings?tab=readme-ov-file#rehype-autolink-headings)
+
+```sh
+pnpm install rehype-autolink-headings
+```
+
+Then I added the plugin to my Astro configuration file. The documentation says that if a plugin needs to define some configuration as input, the plugin and the configuration object should be grouped in an array, and then placed in the `rehypePlugins` array.
+
+```js
+export default defineConfig({
+  // ...
+  markdown: {
+    // ...
+    rehypePlugins: [
+      // ...
+      [rehypeAutolinkHeadings, autolinkOptions],
+    ],
+  },
+});
+```
+
+The `autolinkOptions` object is my configuration object, but what's in it? [The documentation for _that_ object can be found here.](https://github.com/rehypejs/rehype-autolink-headings?tab=readme-ov-file#options)
+
+```js
+const autolinkOptions = {
+  behavior: "append",
+  // ...
+  properties: {
+    ariaHidden: true,
+    className: "link-icon-container",
+  },
+};
+```
+
+At the end of this process, each header in my blog posts now have a link that is automatically appended to it. This makes it easier to link specific parts to blog posts if needed. Additionally, it enables simple keyboard navigation to each header with the `Tab` key.
 
 ### Better screen reader support
 
@@ -153,44 +185,86 @@ The biggest catch was my navigation link to the <span aria-hidden="true">Resume<
 
 Although "<span aria-hidden="true">Resume</span><span class="sr-only">résumé</span>" is a valid spelling of the word to describe my list of professional experience and education, screen readers would pronounce the link "resume," as in "begin" or "start again."
 
-To fix this,
+I assigned the `aira-label` property of the link to résumé by doing the following:
+
+```jsx
+<HeaderLink aria-label="Résumé" href="/resume">
+  Resume
+</HeaderLink>
+```
+
+Although this is a JSX component, and not a typical HTML `<a>` tag, this works because the `HeaderLink` passes the properties of the component to the link and assign it to its link.
+
+```jsx
+<a /* ... */ {...props}>
+  <slot />
+</a>
+```
+
+After Astro builds this component, the result looks like this:
+
+```html
+<a href="/resume" aria-label="Résumé" <!-- ... -->> Resume </a>
+```
+
+With these attributes assigned to these elements, screen readers will now read the link correctly, while keeping the appearance of the link that I like.
 
 ### Dark mode support
 
-There's also no **dark mode support** in the old theme, so I should add that into my site! Even though I don't have any JavaScript enabled to trigger a change in the theme through a button:
+There's also no **dark mode support** in the old theme. Without a dark color scheme, readers (including me) may wince due to eye strain when reading my site in low light conditions. This is unacceptable.
 
-This was handled primarily with the CSS. I assigned variables to the colors that were present on the page. Once that was finished, I could modify the colors of the site quickly and easily.
+I handled this primarily with CSS, and it gave me an opportunity to show off some of my personality. I had to pick the colors I would use to theme this site, and I went with the gruvbox color theme. It matches my color scheme for my development environment, which I enjoyed!
 
-The `prefers light-color-scheme` media query helped with this. I just assigned new values to the variables inside this block. If a user preferred a light theme, then the site would show the colors. If not, then a darker theme would show.
+First, I assigned a series of variables that matched the colors according to the palate. By default, the theme would be dark.
 
-[Image for dark mode]()
+```css
+:root {
+  --bg: #282828;
+  --fg0: #fbf1c7;
+  /* ... */
+}
+```
 
-It also includes a light mode, which I also like.
+By assigning these variables to the `:root` pseudo-class, I can access them in any other stylesheets and components I create.
 
-[Image for light mode]()
+Once assigned, I could easily assign these colors to the elements that need them.
 
-I have two great color themes right now, but in its current state, my site cannot show both of them. To enable this,
+```css
+body {
+  background: var(--bg);
+  color: var(--fg0);
+  /* ... */
+}
+```
 
-#### Code sample colors
+I didn't want to ignore users who preferred a light theme. Sometimes when reading in a brightly lit room, having a light theme is easier to read than a darker theme.
 
-Code samples on the default site were, for some reason, the inverse of what I expect. Take a look.
+Supporting a light mode after assigning my color variables was trivial, thanks to the `prefers light-color-scheme` CSS media query. Depending on the settings defined in the user's browser, a dark or light theme will be used.
 
-[Image of the old version of the code sample]()
+Light mode support was added like this:
 
-When I'm reading a page with a light theme, I don't want the code samples to disappear in the background. Likewise, if I change themes to dark, I don't want to be flash-banged by a code block.
+```css
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #fbf1c7;
+    --fg0: #282828;
+    /* ... */
+  }
+}
+```
 
-I swapped to using the Prism plugin for this, so I have more control of what kind of text I'm rendering.
+And that's it! The page now has a dark and a light theme, with some fancy colors as a bonus! Here's what the new colors look like in my previous blog:
 
-Because I assigned my colors to variables that change based on the theme, assigning the variables was really easy. I copied a Prism css file and assigned the variables to the ones I defined earlier.
+![The home page with a dark color theme](/src/assets/blog/building-the-site/blog-page-dark.png)
 
-Assigning my colors to variables made it very easy to make changes that were reflected on the site. Also, adding new components can use these colors to theme these pieces really easy. Doing so also paved the way for new features, such as different color themes.
+And the same page with the light theme looks like this.
 
-New tasks become less daunting for me when I make things easy for me.
+![The home page with a light color theme](/src/assets/blog/building-the-site/blog-page-light.png)
 
-With these changes, I aimed to make the reading experience as comfortable and easy as possible for readers with different needs. There was more to improve, though.
+You can even compare the previous theme screenshot with the screenshots above. Which screenshot is the most pleasant to look at? Do any of them hurt your eyes? I'd like to know!
 
 # Conclusion
 
 In short, I used Astro's CLI to create a simple blog template, and enhanced it with some accessible changes to make it **easy to read**. I also automated my project to update my live site on changes, making the page **easy to write** and **easy to share** with readers.
 
-Next, I'll continue talking about building this site, but I'll focus on some design changes I
+Next, I'll continue talking about building this site, but I'll focus on some design changes I made compared to the original blog template. See you then!

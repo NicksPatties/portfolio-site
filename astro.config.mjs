@@ -33,7 +33,7 @@ const autolinkOptions = {
   behavior: 'append',
   content: icon,
   properties: {
-    ariaHidden: true,
+    ariaHidden: "true",
     className: 'link-icon-container'
   }
 }
@@ -48,5 +48,8 @@ export default defineConfig({
       rehypeHeadingIds,
       [rehypeAutolinkHeadings, autolinkOptions]
     ]
+  },
+  devToolbar: {
+    enabled: false
   }
 });
