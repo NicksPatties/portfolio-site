@@ -11,7 +11,7 @@ const recentPosts = (
   await getCollection("blog", (p) => isDev || (!isDev && p.data.published))
 )
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 2);
+  .slice(0, 3);
 ---
 
 <!doctype html>
