@@ -48,5 +48,6 @@ auto-format = true
 
 # This contains words that I know are spelled correctly,
 # so ltex-ls doesn't give me a warning
+# TODO this doesn't actually work, so I need to see what's wrong
 [language-server.ltex-ls.config.ltex.dictionary]
 "en-US" = ["pnpm"] 
