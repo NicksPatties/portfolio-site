@@ -4,7 +4,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Cards from "@components/Cards.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import getPosts from "../utils/posts";
+import getPosts from "@utils/posts";
 
 const recentPosts = (await getPosts()).slice(0, 3);
 ---
