@@ -15,11 +15,13 @@ tags:
 
 Hello again! This is a continuation of my previous article about picking the technology to power my site. [If you'd like to catch up, read it here.](/blog/welcome-to-the-new-site)
 
+Today, I'll share what I did to quickly get this site off the ground.
+
 # A quick review
 
-To review, the goals I had on my website were **to share my knowledge**, and **to share my projects**. To do so, I need to make sure my site is **easy to write**, **easy to read**, and **easy to share**.
+The goals I had on my website were **to share my knowledge**, and **to share my projects**. To do so, I need to make sure my site is **easy to write**, **easy to read**, and **easy to share**.
 
-[I found that Astro was a good tool for the building my site](https://astro.build/), so today, I'll share some technical and design consideration I picked it to help me build my site and manage my content.
+[I found that Astro was a good tool for the building my site and managing my content.](https://astro.build/)
 
 # Building a template
 
@@ -29,7 +31,9 @@ There's no need to re-do work that has already been done, so to speed up develop
 
 Using this tool, I was able to configure a project with little trouble. [I followed the instructions here.](https://docs.astro.build/en/install/auto/)
 
-Since I use pnpm as my package manager, I used the following command in my terminal to start the setup.
+Since I use pnpm[^1] as my package manager, I used the following command in my terminal to start the setup.
+
+[^1]: pnpm is the Performant Node Package Manager.
 
 ```sh
 pnpm create astro@latest
@@ -65,23 +69,23 @@ And what I got was this:
 
 ![The initial blog template's home page](/src/assets/blog/building-the-site/initial-blog-template.png)
 
-For a starting template, this is pretty good! It contains a home page, some sample blog posts, and some images. It was a good collection of files that would likely be in a website.
+For a starting template, this is pretty good. It contains a home page, some sample blog posts, and some images. It was a good collection of files that would likely be in a website.
 
 Although I haven't written any content yet, this is enough to get started on the next step: building and deploying the website.
 
 # Automating deployments
 
-I wanted to automatically build and deploy my site whenever I make changes to the codebase. Configuring this as soon as possible saves me time, making it **easy to share** my updates. To make this very simple, I'm deploying my website to GitHub Pages.
+I wanted to automatically build and deploy my site whenever I make changes to the codebase. Configuring this as soon as possible saves me time, making it **easy to share** my updates. To make this very simple, [I'm deploying my website using GitHub Pages](https://pages.github.com/).
 
-[Again, Astro's documentation made this process very straightforward.](https://docs.astro.build/en/guides/deploy/github/) The code to enable this feature can be copied and pasted from this page, but I'll explain the basics of this file. [The file's included here for reference.](https://github.com/NicksPatties/portfolio-site/blob/9b6c43f345ca6f24ccbe00118a1519ae69e74adb/.github/workflows/deploy.yml)
+[Again, Astro's documentation made this process very straightforward.](https://docs.astro.build/en/guides/deploy/github/) The code to enable this feature was copied and pasted into my project, but I'll explain the basics. [The file's included here for reference.](https://github.com/NicksPatties/portfolio-site/blob/9b6c43f345ca6f24ccbe00118a1519ae69e74adb/.github/workflows/deploy.yml)
 
-The `deploy.yml` file defines the configuration for automated deployments to GitHub Pages. The `name` defined in this file makes this clear:
+The `deploy.yml` file defines the configuration for automated deployments to GitHub Pages. The `name` defined in this file labels it as such:
 
 ```yml
 name: Deploy to GitHub Pages
 ```
 
-Changes will be made every time I push code to the `main` branch. This usually happens when I push code to my repository, and verify my changes are made through a merge request:
+Changes will be made every time I push code to the `main` branch. This usually happens when I push code in another branch in my repository, and verify they look good in a merge request:
 
 ```yml
 on:
@@ -123,27 +127,35 @@ Although, as you can see in the image above, the original blog template is not b
 
 # More accessibility
 
-The Google Lighthouse rating for the base blog is 100. However, there are things Lighthouse cannot detect. There are still a few accessibility improvements I wanted to make with the site.
+Although the blog template boasts a 100/100 Google Lighthouse[^2] score, it cannot detect all accessibility needs. Manual intervention is required to make sure everything is just right.
+
+[^2]: Google Lighthouse measures the accessibility of a web page in Chrome based web browsers.
 
 ## Keyboard navigation
 
-For one, I want to allow me to **navigate with my keyboard**. This will make it easier for those with limited vision, and anyone who doesn't want to use a mouse (including me) to navigate through the website easier.
+For one, I want to allow me to navigate pages with my keyboard. This will make it easier for anyone who doesn't want to use a mouse to move through the website.
 
-I added some buttons in the nav bar to navigate the user to the content. You see these "Skip to content" buttons on different sites, like GitHub, or other blog sites.
+I added a "Skip to content" button in the navigation bar, and a "Return to top" button in the footer, but I also wanted to navigate along different sections of a blog post easier.
+
+Inspired by Astro's documentation and in a few developer blogs, I wanted to add some links to the end of the headers. This provides a double benefit of allowing navigation with the `Tab` button, but also making sections of any blog post **easier to share**.
+
+This is where the `rehype-autolink-headings` package comes in.
 
 ### Rehype Autolink Headings
 
-Astro supports both remark and rehype plugins. They modify the contents of the page when the markdown for content pages is converted to HTML elements.
+Remember that my blog posts are Markdown files. Astro converts Markdown files into HTML elements when it builds a site. Astro also supports plugins, which can modify the generated HTML even further.
 
-You can add different plugins to support different things. I used the `rehype-autolink-headings` plugin to help me out.
+I used the `rehype-autolink-headings` plugin to help me out. [You can read more details about it here.](https://github.com/rehypejs/rehype-autolink-headings?tab=readme-ov-file#rehype-autolink-headings)
 
-First, I installed the `rehype-autolink-headings` plugin. [You can read more details about it here.](https://github.com/rehypejs/rehype-autolink-headings?tab=readme-ov-file#rehype-autolink-headings)
+First, I installed the `rehype-autolink-headings` plugin.
 
 ```sh
 pnpm install rehype-autolink-headings
 ```
 
-Then I added the plugin to my Astro configuration file. The documentation says that if a plugin needs to define some configuration as input, the plugin and the configuration object should be grouped in an array, and then placed in the `rehypePlugins` array.
+Then I added the plugin to my Astro configuration file.
+
+The Astro documentation says that if a plugin needs to define some configuration as input, the plugin and the configuration object should be grouped in an array, and then placed in the `rehypePlugins` array.
 
 ```js
 export default defineConfig({
@@ -152,6 +164,7 @@ export default defineConfig({
     // ...
     rehypePlugins: [
       // ...
+      // vv the plugin         vv the configuration
       [rehypeAutolinkHeadings, autolinkOptions],
     ],
   },
@@ -171,11 +184,11 @@ const autolinkOptions = {
 };
 ```
 
-At the end of this process, each header in my blog posts now have a link that is automatically appended to it. This makes it easier to link specific parts to blog posts if needed. Additionally, it enables simple keyboard navigation to each header with the `Tab` key.
+At the end of this process, each header in my blog posts now have a link that is automatically appended to it. Now you can `Tab` to different parts of the article, and copy links to specific sections of the article. Give it a try right now, if you'd like!
 
 ## Better screen reader support
 
-I needed to verify that **screen readers worked effectively**. While working on the application, I double-checked my pages by using a screen reader to navigate through the pages.
+I needed to manually verify that **screen readers worked effectively**. This is one of the things that Google Lighthouse cannot verify by itself.
 
 The biggest catch was my navigation link to the <span aria-hidden="true">Resume</span><span class="sr-only">résumé</span> page. Here it is highlighted below:
 
@@ -183,15 +196,15 @@ The biggest catch was my navigation link to the <span aria-hidden="true">Resume<
 
 Although "<span aria-hidden="true">Resume</span><span class="sr-only">résumé</span>" is a valid spelling of the word to describe my list of professional experience and education, screen readers would pronounce the link "resume," as in "begin" or "start again."
 
-I assigned the `aira-label` property of the link to résumé by doing the following:
+I assigned the `aira-label` property of the link to "résumé" by doing the following:
 
 ```jsx
-<HeaderLink aria-label="Résumé" href="/resume">
+<HeaderLink aria-label="résumé" href="/resume">
   Resume
 </HeaderLink>
 ```
 
-Although this is a JSX component, and not a typical HTML `<a>` tag, this works because the `HeaderLink` passes the properties of the component to the link and assign it to its link.
+Although this is a JSX component, and not a typical HTML `<a>` tag, this works because the `HeaderLink` passes the properties of the component directly to the link.
 
 ```jsx
 <a /* ... */ {...props}>
@@ -202,16 +215,18 @@ Although this is a JSX component, and not a typical HTML `<a>` tag, this works b
 After Astro builds this component, the result looks like this:
 
 ```html
-<a href="/resume" aria-label="Résumé" <!-- ... -->> Resume </a>
+<a href="/resume" aria-label="résumé" <!-- ... -->> Resume </a>
 ```
 
 With these attributes assigned to these elements, screen readers will now read the link correctly, while keeping the appearance of the link that I like.
 
+Changes like this remove any confusion from users who use screen readers to read my site.
+
 ## Dark mode support
 
-There's also no **dark mode support** in the old theme. Without a dark color scheme, readers (including me) may wince due to eye strain when reading my site in low light conditions. This is unacceptable.
+There's no **dark mode support** in the initial Astro blog theme. Without a dark color scheme, readers (including me) may wince due to eye strain when reading my site in low light conditions. This is not a good experience.
 
-I handled this primarily with CSS, and it gave me an opportunity to show off some of my personality. I had to pick the colors I would use to theme this site, and I went with the gruvbox color theme. It matches my color scheme for my development environment, which I enjoyed!
+I handled this primarily with CSS, and it gave me an opportunity to show off some of my personality. I had to pick the colors I would use to theme this site. I went with [the gruvbox color theme](https://github.com/morhetz/gruvbox), which matches the color scheme for my development environment!
 
 First, I assigned a series of variables that matched the colors according to the palate. By default, the theme would be dark.
 
@@ -235,9 +250,9 @@ body {
 }
 ```
 
-I didn't want to ignore users who preferred a light theme. Sometimes when reading in a brightly lit room, having a light theme is easier to read than a darker theme.
+I didn't want to ignore users who preferred a light theme. Sometimes when reading in a brightly lit room, it's easier to read a brighter page than a darker page.
 
-Supporting a light mode after assigning my color variables was trivial, thanks to the `prefers light-color-scheme` CSS media query. Depending on the settings defined in the user's browser, a dark or light theme will be used.
+Supporting a light mode after assigning my color variables was trivial, thanks to the `prefers-color-shceme` CSS media query. Depending on the settings defined in the user's browser, a dark or light theme will be used.
 
 Light mode support was added like this:
 
@@ -265,4 +280,4 @@ You can even compare the previous theme screenshot with the screenshots above. W
 
 In short, I used Astro's CLI to create a simple blog template, and enhanced it with some accessible changes to make it **easy to read**. I also automated my project to update my live site on changes, making the page **easy to write** and **easy to share** with readers.
 
-Next, I'll continue talking about building this site, but I'll focus on some design changes I made compared to the original blog template. See you then!
+Next, I'll continue talking about building this site, but I'll focus on some design changes I made compared to the original blog template. I'll share how I think about the purpose of a product, and assess whether the design is aligned with its purpose. See you then!
