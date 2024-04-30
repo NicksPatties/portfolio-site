@@ -3,8 +3,6 @@ import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import remarkToc from "remark-toc";
-
 
 const icon = {
   type: 'element',
@@ -35,7 +33,7 @@ const autolinkOptions = {
   behavior: 'append',
   content: icon,
   properties: {
-    ariaHidden: true,
+    ariaHidden: "true",
     className: 'link-icon-container'
   }
 }
@@ -46,10 +44,12 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   markdown: {
     syntaxHighlight: "prism",
-    remarkPlugins: [remarkToc],
     rehypePlugins: [
       rehypeHeadingIds,
       [rehypeAutolinkHeadings, autolinkOptions]
     ]
+  },
+  devToolbar: {
+    enabled: false
   }
 });
