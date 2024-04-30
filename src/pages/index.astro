@@ -1,8 +1,12 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseHead from "@components/BaseHead.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Cards from "@components/Cards.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import getPosts from "@utils/posts";
+
+const recentPosts = (await getPosts()).slice(0, 3);
 ---
 
 <!doctype html>
@@ -76,7 +80,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
     <Header />
     <main>
       <div id="content-start" class="hero">
-        <img src="burger.svg" alt="A cartoon cheeseburger with a flag sticking out" class="burger" />
+        <img
+          src="burger.svg"
+          alt="A cartoon cheeseburger with a flag sticking out"
+          class="burger"
+        />
         <h1>
           <span class="serving">Serving up</span>
           <span class="tasty">TASTY BYTES</span>
@@ -89,6 +97,9 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
         My name's Nick Patti. I'm a software engineer with an appetite for
         learning and making cool stuff. Thanks for visiting!
       </p>
+      <h2>Recent blog posts</h2>
+      <i>Here's what I've been thinking about!</i>
+      <Cards posts={recentPosts} />
     </main>
     <Footer />
   </body>
