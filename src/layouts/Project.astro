@@ -5,13 +5,17 @@ import { type CollectionEntry, getEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Cards from "@components/Cards.astro";
+import getPosts from '@utils/posts';
 
 type Project = CollectionEntry<"projects">;
 type Tag = CollectionEntry<"tags">;
+type Post = CollectionEntry<"blog">;
 
 const props: Project = Astro.props.project as Project;
 const {name, heroImage, tags} = props.data;
 // TODO get the collection and filter out the tags that are required
+const posts = (await getPosts()).filter((post: Post) => post.data.project && post.data.project.slug === props.slug)
 ---
 
 <html lang="en">
@@ -86,6 +90,10 @@ const {name, heroImage, tags} = props.data;
           <slot />
         </div>
       </article>
+      { posts.length > 0 && (
+        <h2>Related posts</h2>
+        <Cards {posts}/>
+      )}
     </main>
     <Footer />
   </body>

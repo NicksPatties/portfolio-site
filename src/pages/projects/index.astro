@@ -7,7 +7,10 @@ import { type CollectionEntry, getCollection } from "astro:content";
 
 type Project = CollectionEntry<"projects">;
 
-const projects = await getCollection("projects");
+const projects = await getCollection(
+  "projects",
+  (p: Project) => p.data.published,
+);
 ---
 
 <!doctype html>

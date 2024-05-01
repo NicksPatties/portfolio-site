@@ -22,6 +22,7 @@ const projects = defineCollection({
     name: z.string(),
     heroImage: z.string().optional(),
     tags: z.array(reference('tags')).optional(),
+    published: z.boolean().default(false)
   })
 })
 

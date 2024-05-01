@@ -4,14 +4,4 @@ description: "A cooperative in which two people control a single eyeball in a pe
 heroImage: "/thetwoeyesinteam-cover.jpg"
 ---
 
-# Description
-
-This is the description
-
-# Motivation
-
-Hello this is the motivation
-
-# Goals
-
-Hello
+This page is currently under construction

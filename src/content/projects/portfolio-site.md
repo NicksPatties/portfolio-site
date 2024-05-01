@@ -2,19 +2,10 @@
 name: "Portfolio Site"
 description: "My portfolio and blog site written with Astro!"
 heroImage: "/src/assets/blog/building-the-site/new-home-page-light.png"
+published: true
 tags:
   - "astro"
   - "javascript"
 ---
 
-# Description
-
-This is the description
-
-# Motivation
-
-Hello this is the motivation
-
-# Goals
-
-Hello
+This is currently under construction.
