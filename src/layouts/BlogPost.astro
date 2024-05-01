@@ -86,7 +86,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
             <ul class="tag-list">
               {
                 tags &&
-                  tags.map(async (t) => {
+                  tags.map(async (t: Tag) => {
                     const tag: Tag = await getEntry("tags", t.id);
                     return <li><a href=`/tags/${t.id}`>#{tag.data.name}</a></li>;
                   })
