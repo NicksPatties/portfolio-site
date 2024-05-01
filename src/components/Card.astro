@@ -1,0 +1,110 @@
+---
+import "../styles/tags.css";
+
+import FormattedDate from "./FormattedDate.astro";
+import { type CollectionEntry, getEntry } from "astro:content";
+
+type Blog = CollectionEntry<"blog">;
+type Tag = CollectionEntry<"tags">;
+
+const post: Blog = Astro.props.post;
+/*
+options on how to do this:
+- extract card out, have card only accept specific parameters
+  - I can keep most of the code the same as before
+  - The card component only can have specific props
+- I can have this component take in either an array of Blogs or an array of Projects[]
+  - Need to write even less code, perhaps
+  - Blogs have a publishDate, while projects do not. THIS WILL NOT WORK
+- Have the card be have slots for their content?
+  - This allows me to change 
+*/
+---
+
+<style>
+  a {
+    --animation: 0.2s ease;
+    list-style-type: none;
+    display: block;
+    padding: 2em 1em;
+    margin: 1em 0;
+    border-radius: 12px;
+    background: no-repeat center;
+    background-color: var(--bg2);
+    background-size: 100%;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 0 3px var(--bg0_h);
+    transition: background-size var(--animation);
+  }
+
+  .title,
+  .date,
+  .tag-list li {
+    color: var(--orange2);
+    position: relative;
+    z-index: 10;
+    transition: color var(--animation);
+    margin: 0;
+  }
+
+  .title {
+    line-height: 1;
+  }
+
+  a:hover .title,
+  a:hover .date,
+  a:hover .tag-list li {
+    color: var(--green2);
+  }
+
+  a:focus .title,
+  a:focus .date,
+  a:focus .tag-list li {
+    color: var(--green2);
+  }
+
+  a:focus,
+  a:hover {
+    background-size: 105%;
+  }
+
+  .mask {
+    border-radius: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--bg0);
+    opacity: 0.75;
+    height: 100%;
+    width: 100%;
+    transition: opacity var(--animation);
+  }
+
+  a:focus .mask,
+  a:hover .mask {
+    opacity: 0.5;
+  }
+</style>
+
+<a
+  style={post.data.heroImage && {
+    "background-image": `url(${post.data.heroImage})`,
+  }}
+  href={`/blog/${post.slug}/`}
+>
+  <h3 class="title">{post.data.title}</h3>
+  <p class="date">
+    <FormattedDate date={post.data.pubDate} />
+  </p>
+  <ul class="tag-list">
+    {
+      post.data.tags &&
+        post.data.tags.map(async (g) => {
+          const tag: Tag = await getEntry("tags", g.id);
+          return <li>#{tag.data.name}</li>;
+        })
+    }
+  </ul>
+  <div class="mask"></div>
+</a>
