@@ -3,4 +3,4 @@ description: "A resume building application that lets you filter your experience
 tags:
   - "typescript"
   - "javascript"
-motivation: "I hated creating resumes specifically for a job description by editing a master text editor with all my experience on it. I wanted something that could automatically filter out irrelevant stuff based on the job description that I'm submitting the resume for."
+motivation: "I _hated_ creating resumes specifically for a job description by editing a master text editor with all my experience on it. I wanted something that could automatically filter out irrelevant stuff based on the job description that I'm submitting the resume for."

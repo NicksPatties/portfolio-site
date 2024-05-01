@@ -18,13 +18,13 @@ export async function getStaticPaths() {
 }
 
 const { id } = Astro.params;
-const { data } = Astro.props.project as Project;
+const project = Astro.props.project as Project;
 ---
 
-<Project {data}>
-  {data.description}
+<Project {project}>
+  {project.data.description}
   <h1>Motivation</h1>
-  <p>I like this project</p>
+  <p>{project.data.motivation}</p>
   <h1>Goals</h1>
   <p>These are the goals</p>
   <h2>Metrics</h2>
