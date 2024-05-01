@@ -1,7 +1,7 @@
 ---
 name: "TimeClock"
 description: "A time management application for Android written in Kotlin with Jetpack Compose"
-heroImage: "timeclock-cover.jpg"
+heroImage: "/timeclock-cover.jpg"
 ---
 
 # Description

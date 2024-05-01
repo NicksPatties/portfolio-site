@@ -1,7 +1,7 @@
 ---
 name: "Sweet"
 description: "A touch typing game written in Go"
-heroImage: "sweet-cover.jpg"
+heroImage: "/sweet-cover.jpg"
 ---
 
 # Description

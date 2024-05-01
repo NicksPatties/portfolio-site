@@ -36,3 +36,17 @@ published: true
 1. Create a new YAML file (this filename is pretty much the slug of the tag)
 2. Add a `name` property to the file
 3. Add the tag filename to your blog posts in the `tags` array.
+
+## Adding new projects
+
+```yml
+---
+name: "Project title"
+description: "A description of the project"
+heroImage: "/path/to/hero/image"
+published: false
+tags:
+  - "astro"
+  - "javascript"
+---
+```
