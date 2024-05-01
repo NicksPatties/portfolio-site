@@ -2,6 +2,7 @@
 import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import Card from "@components/Card.astro";
 import { type CollectionEntry, getCollection } from "astro:content";
 
 type Project = CollectionEntry<"projects">;
@@ -14,16 +15,32 @@ const projects = await getCollection("projects");
   <head>
     <BaseHead
       title={"Projects"}
-      description={`Nick has 5 projects that he would like to share.`}
+      description={`Nick has ${projects.length} projects that he would like to share.`}
     />
+    <style>
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
   </head>
   <body>
     <Header />
     <main id="content-start">
       <ul>
-      {projects.map((p: Project) => (
-        <li><a href=`/projects/${p.slug}`>{p.data.name}</a></li>
-      ))}
+        {
+          projects.map((project: Project) => (
+            <li>
+              <Card
+                heroImage={project.data.heroImage}
+                href={`projects/${project.slug}`}
+                title={project.data.name}
+                tags={project.data.tags}
+              />
+            </li>
+          ))
+        }
       </ul>
     </main>
     <Footer />

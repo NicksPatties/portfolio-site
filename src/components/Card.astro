@@ -4,21 +4,14 @@ import "../styles/tags.css";
 import FormattedDate from "./FormattedDate.astro";
 import { type CollectionEntry, getEntry } from "astro:content";
 
-type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
 
-const post: Blog = Astro.props.post;
-/*
-options on how to do this:
-- extract card out, have card only accept specific parameters
-  - I can keep most of the code the same as before
-  - The card component only can have specific props
-- I can have this component take in either an array of Blogs or an array of Projects[]
-  - Need to write even less code, perhaps
-  - Blogs have a publishDate, while projects do not. THIS WILL NOT WORK
-- Have the card be have slots for their content?
-  - This allows me to change 
-*/
+const heroImage: string = Astro.props.heroImage;
+const href: string = Astro.props.href;
+const slug: string = Astro.props.slug;
+const title: string = Astro.props.title;
+const date: Date = Astro.props.date;
+const tags: Tag[] = Astro.props.tags;
 ---
 
 <style>
@@ -88,19 +81,23 @@ options on how to do this:
 </style>
 
 <a
-  style={post.data.heroImage && {
-    "background-image": `url(${post.data.heroImage})`,
+  style={heroImage && {
+    "background-image": `url(${heroImage})`,
   }}
-  href={`/blog/${post.slug}/`}
+  {href}
 >
-  <h3 class="title">{post.data.title}</h3>
-  <p class="date">
-    <FormattedDate date={post.data.pubDate} />
-  </p>
+  <h3 class="title">{title}</h3>
+  {
+    date && (
+      <p class="date">
+        <FormattedDate {date} />
+      </p>
+    )
+  }
   <ul class="tag-list">
     {
-      post.data.tags &&
-        post.data.tags.map(async (g) => {
+      tags &&
+        tags.map(async (g) => {
           const tag: Tag = await getEntry("tags", g.id);
           return <li>#{tag.data.name}</li>;
         })

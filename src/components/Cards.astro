@@ -33,7 +33,13 @@ options on how to do this:
     {
       posts.map(async (post: Blog) => (
         <li>
-          <Card {post} />
+          <Card
+            heroImage={post.data.heroImage}
+            href={`/blog/${post.slug}`}
+            title={post.data.title}
+            date={post.data.pubDate}
+            tags={post.data.tags}
+          />
         </li>
       ))
     }
