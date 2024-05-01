@@ -5,12 +5,13 @@ import FormattedDate from "./FormattedDate.astro";
 import { type CollectionEntry, getEntry } from "astro:content";
 
 type Tag = CollectionEntry<"tags">;
+type Project = CollectionEntry<"projects">;
 
 const heroImage: string = Astro.props.heroImage;
 const href: string = Astro.props.href;
-const slug: string = Astro.props.slug;
 const title: string = Astro.props.title;
 const date: Date = Astro.props.date;
+const project: Project = Astro.props.project;
 const tags: Tag[] = Astro.props.tags;
 ---
 
@@ -95,9 +96,10 @@ const tags: Tag[] = Astro.props.tags;
     )
   }
   <ul class="tag-list">
+    {project && <li>{project.data.name}</li>}
     {
       tags &&
-        tags.map(async (g) => {
+        tags.map(async (g: Tag) => {
           const tag: Tag = await getEntry("tags", g.id);
           return <li>#{tag.data.name}</li>;
         })

@@ -1,5 +1,5 @@
 ---
-name: "Nick's portfolio site"
+name: "Portfolio Site"
 description: "My portfolio and blog site written with Astro!"
 tags:
   - "astro"

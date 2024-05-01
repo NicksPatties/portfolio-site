@@ -75,7 +75,7 @@ const {name, heroImage, tags} = props.data;
             <ul class="tag-list">
               {
                 tags &&
-                  tags.map(async (t: Tag) => {
+                  tags.map(async (t) => {
                     const tag: Tag = await getEntry("tags", t.id);
                     return <li><a href=`/tags/${t.id}`>#{tag.data.name}</a></li>;
                   })

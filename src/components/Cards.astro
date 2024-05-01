@@ -2,23 +2,11 @@
 import "../styles/tags.css";
 import Card from "@components/Card.astro";
 import { type CollectionEntry, getEntry } from "astro:content";
-import FormattedDate from "@components/FormattedDate.astro";
 
+type Project = CollectionEntry<"projects">;
 type Blog = CollectionEntry<"blog">;
-type Tag = CollectionEntry<"tags">;
 
 const posts: Blog[] = Astro.props.posts;
-/*
-options on how to do this:
-- extract card out, have card only accept specific parameters
-  - I can keep most of the code the same as before
-  - The card component only can have specific props
-- I can have this component take in either an array of Blogs or an array of Projects[]
-  - Need to write even less code, perhaps
-  - Blogs have a publishDate, while projects do not. THIS WILL NOT WORK
-- Have the card be have slots for their content?
-  - This allows me to change 
-*/
 ---
 
 <style>
@@ -31,17 +19,23 @@ options on how to do this:
 <section>
   <ul>
     {
-      posts.map(async (post: Blog) => (
-        <li>
-          <Card
-            heroImage={post.data.heroImage}
-            href={`/blog/${post.slug}`}
-            title={post.data.title}
-            date={post.data.pubDate}
-            tags={post.data.tags}
-          />
-        </li>
-      ))
+      posts.map(async (post: Blog) => {
+        const project: Project | undefined = post.data.project
+          ? await getEntry("projects", post.data.project.slug)
+          : undefined;
+        return (
+          <li>
+            <Card
+              heroImage={post.data.heroImage}
+              href={`/blog/${post.slug}`}
+              title={post.data.title}
+              date={post.data.pubDate}
+              {project}
+              tags={post.data.tags}
+            />
+          </li>
+        );
+      })
     }
   </ul>
 </section>
