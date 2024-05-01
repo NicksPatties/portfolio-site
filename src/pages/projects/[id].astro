@@ -7,7 +7,7 @@ type Tag = CollectionEntry<"tags">;
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-  return projects.map((p: project) => {
+  return projects.map((p: Project) => {
     return {
       params: { id: p.id },
       props: {
@@ -18,12 +18,15 @@ export async function getStaticPaths() {
 }
 
 const { id } = Astro.params;
-const project = Astro.props.project as Project;
-console.log("inside [id]");
-console.log("project", project);
+const { data } = Astro.props.project as Project;
 ---
 
-<Project {project}>
+<Project {data}>
+  {data.description}
   <h1>Motivation</h1>
-  {project.data.motivation}
+  <p>I like this project</p>
+  <h1>Goals</h1>
+  <p>These are the goals</p>
+  <h2>Metrics</h2>
+  <p>For this to be successful, I need</p>
 </Project>

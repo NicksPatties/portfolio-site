@@ -22,11 +22,7 @@ console.log(projects);
   <body>
     <Header />
     <main id="content-start">
-      <h1>Projects</h1>
       <ul>
-      {/*
-        TODO add cards into this section here
-      */}
       {projects.map((p: Project) => (
         <li><a href=`projects/${p.id}`>{p.data.name}</a></li>
       ))}
