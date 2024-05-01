@@ -1,7 +1,6 @@
 ---
 name: "Nick's portfolio site"
 description: "My portfolio and blog site written with Astro!"
-heroImage: "portfolio-site.png"
 tags:
   - "astro"
   - "javascript"

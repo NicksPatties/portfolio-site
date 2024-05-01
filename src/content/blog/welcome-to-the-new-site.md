@@ -6,6 +6,7 @@ pubDate: "2024-04-18PDT"
 # optional, assumes image is in the `public` folder
 heroImage: "/welcome-to-the-new-site-cover-pexels-pixabay.jpg"
 published: true
+project: "portfolio-site"
 tags:
   - "astro"
 ---

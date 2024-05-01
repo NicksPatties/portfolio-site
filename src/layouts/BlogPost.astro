@@ -11,7 +11,7 @@ type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
 
 const props: Blog = Astro.props as Blog;
-const { title, description, pubDate, updatedDate, heroImage, tags } =
+const { title, description, pubDate, updatedDate, heroImage, tags, project } =
   props.data;
 ---
 
@@ -84,6 +84,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags } =
             </div>
             <h1>{title}</h1>
             <ul class="tag-list">
+              { project && <a href=`/projects/${project.slug}`>{project.slug}</a> }
               {
                 tags &&
                   tags.map(async (t: Tag) => {

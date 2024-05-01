@@ -6,6 +6,7 @@ pubDate: "2024-04-29PDT"
 # optional, assumes image is in the `public` folder
 heroImage: ""
 published: true
+project: "portfolio-site"
 tags:
   - "astro"
   - "automation"
