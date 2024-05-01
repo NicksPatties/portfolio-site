@@ -7,8 +7,6 @@ import { type CollectionEntry, getCollection } from "astro:content";
 type Project = CollectionEntry<"projects">;
 
 const projects = await getCollection("projects");
-
-console.log(projects);
 ---
 
 <!doctype html>
@@ -24,7 +22,7 @@ console.log(projects);
     <main id="content-start">
       <ul>
       {projects.map((p: Project) => (
-        <li><a href=`projects/${p.id}`>{p.data.name}</a></li>
+        <li><a href=`/projects/${p.slug}`>{p.data.name}</a></li>
       ))}
       </ul>
     </main>

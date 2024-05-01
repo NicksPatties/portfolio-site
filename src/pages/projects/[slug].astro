@@ -9,7 +9,7 @@ export async function getStaticPaths() {
   const projects = await getCollection("projects");
   return projects.map((p: Project) => {
     return {
-      params: { id: p.id },
+      params: { slug: p.slug },
       props: {
         project: p,
       },
@@ -17,16 +17,10 @@ export async function getStaticPaths() {
   });
 }
 
-const { id } = Astro.params;
-const project = Astro.props.project as Project;
+const project: Astro.props = Astro.props.project;
+const { Content } = await project.render();
 ---
 
 <Project {project}>
-  {project.data.description}
-  <h1>Motivation</h1>
-  <p>{project.data.motivation}</p>
-  <h1>Goals</h1>
-  <p>These are the goals</p>
-  <h2>Metrics</h2>
-  <p>For this to be successful, I need</p>
+  <Content />
 </Project>
