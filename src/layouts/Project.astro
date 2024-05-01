@@ -11,6 +11,7 @@ type Tag = CollectionEntry<"tags">;
 
 const props: Project = Astro.props.project as Project;
 const {name, heroImage, tags} = props.data;
+// TODO get the collection and filter out the tags that are required
 ---
 
 <html lang="en">
@@ -64,7 +65,7 @@ const {name, heroImage, tags} = props.data;
         <div class="hero-image">
           {
             heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
+              <img width={1020} height={510} src={`/${heroImage}`} alt="" />
             )
           }
         </div>
