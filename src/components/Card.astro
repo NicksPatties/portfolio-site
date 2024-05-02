@@ -1,0 +1,133 @@
+---
+import "../styles/tags.css";
+
+import FormattedDate from "./FormattedDate.astro";
+import { type CollectionEntry, getEntry } from "astro:content";
+
+type Tag = CollectionEntry<"tags">;
+type Project = CollectionEntry<"projects">;
+
+const heroImage: string = Astro.props.heroImage;
+const href: string = Astro.props.href;
+const title: string = Astro.props.title;
+const date: Date | undefined = Astro.props.date;
+const project: Project | undefined = Astro.props.project;
+const tags: Tag[] | undefined = Astro.props.tags;
+---
+
+<style>
+  a {
+    --animation: 0.2s ease;
+    list-style-type: none;
+    display: block;
+    padding: 2em 1em;
+    margin: 1em 0;
+    border-radius: 12px;
+    background: no-repeat center;
+    background-color: var(--bg2);
+    background-size: 100%;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 0 3px var(--bg0_h);
+    transition: background-size var(--animation);
+  }
+
+  .title,
+  .date,
+  .tag-list li {
+    color: var(--orange2);
+    position: relative;
+    z-index: 10;
+    transition: color var(--animation);
+    margin: 0;
+  }
+
+  .tag-list li.project-name {
+    display: inline-block;
+    background-color: var(--orange2);
+    color: var(--bg);
+    padding: 0 0.5rem;
+    border-radius: 12px;
+    text-shadow: initial;
+    transition: background-color var(--animation);
+  }
+
+  .title {
+    line-height: 1;
+  }
+
+  a:hover .title,
+  a:hover .date,
+  a:hover .tag-list li {
+    color: var(--green2);
+  }
+
+  a:hover .tag-list li.project-name,
+  a:focus .tag-list li.project-name {
+    background-color: var(--green2);
+    color: initial;
+  }
+
+  a:focus .title,
+  a:focus .date,
+  a:focus .tag-list li {
+    color: var(--green2);
+  }
+
+  a:focus,
+  a:hover {
+    background-size: 105%;
+  }
+
+  .mask {
+    border-radius: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--bg0);
+    opacity: 0.75;
+    height: 100%;
+    width: 100%;
+    transition: opacity var(--animation);
+  }
+
+  a:focus .mask,
+  a:hover .mask {
+    opacity: 0.5;
+  }
+</style>
+
+<a
+  style={heroImage && {
+    "background-image": `url(${heroImage})`,
+  }}
+  {href}
+>
+  <h3 class="title">{title}</h3>
+  {
+    date && (
+      <p class="date">
+        <FormattedDate {date} />
+      </p>
+    )
+  }
+  <ul class="tag-list">
+    {
+      project && (
+        <>
+          <span class="sr-only">Part of the project</span>
+          <li class="project-name">{project.data.name}</li>
+        </>
+      )
+    }
+    {tags && <span class="sr-only">Contains the tags</span>}
+    {
+      tags &&
+        tags.map(async (g: Tag) => {
+          const tag: Tag = await getEntry("tags", g.id);
+          return <li aria-label={tag.data.name}>#{tag.data.name}</li>;
+        })
+    }
+  </ul>
+  <div class="mask"></div>
+</a>

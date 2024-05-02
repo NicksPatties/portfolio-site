@@ -5,21 +5,23 @@ import { type CollectionEntry, getEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import FormattedDate from "../components/FormattedDate.astro";
+import Cards from "@components/Cards.astro";
+import getPosts from "@utils/posts";
 
-type Blog = CollectionEntry<"blog">;
+type Project = CollectionEntry<"projects">;
 type Tag = CollectionEntry<"tags">;
+type Post = CollectionEntry<"blog">;
 
-const props: Blog = Astro.props as Blog;
-const { title, description, pubDate, updatedDate, heroImage, project, tags } =
-  props.data;
-
-const projectDetails = project && (await getEntry("projects", project.slug));
+const props: Project = Astro.props.project as Project;
+const { name, description, heroImage, tags } = props.data;
+const posts = (await getPosts()).filter(
+  (post: Post) => post.data.project && post.data.project.slug === props.slug,
+);
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} image={heroImage} />
+    <BaseHead title={name} {description} image={heroImage} />
     <style>
       main {
         width: calc(100% - 2em);
@@ -58,21 +60,6 @@ const projectDetails = project && (await getEntry("projects", project.slug));
       .last-updated-on {
         font-style: italic;
       }
-      li.project-name a {
-        display: inline-block;
-        background-color: var(--orange2);
-        color: var(--bg);
-        padding: 0 0.5rem;
-        border-radius: 12px;
-        transition: background-color var(--animation);
-        line-height: 1.7;
-        color: var(--bg);
-        text-decoration: none;
-      }
-      li.project-name a:hover,
-      li.project-name a:focus {
-        background-color: var(--green2);
-      }
     </style>
   </head>
 
@@ -83,38 +70,14 @@ const projectDetails = project && (await getEntry("projects", project.slug));
         <div class="hero-image">
           {
             heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
+              <img width={1020} height={510} src={`${heroImage}`} alt="" />
             )
           }
         </div>
         <div class="prose">
           <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {
-                updatedDate && (
-                  <div class="last-updated-on">
-                    Last updated on <FormattedDate date={updatedDate} />
-                  </div>
-                )
-              }
-            </div>
-            <h1>{title}</h1>
+            <h1>{name}</h1>
             <ul class="tag-list">
-              {
-                projectDetails && (
-                  <>
-                    <li class="project-name">
-                      <a
-                        aria-label={`Go to ${projectDetails.data.name} project`}
-                        href={`/projects/${project.slug}`}
-                      >
-                        {projectDetails.data.name}
-                      </a>
-                    </li>
-                  </>
-                )
-              }
               {
                 tags &&
                   tags.map(async (t) => {
@@ -134,6 +97,14 @@ const projectDetails = project && (await getEntry("projects", project.slug));
           <slot />
         </div>
       </article>
+      {
+        posts.length > 0 && (
+          <>
+            <h2>Related posts</h2>
+            <Cards {posts} />
+          </>
+        )
+      }
     </main>
     <Footer />
   </body>

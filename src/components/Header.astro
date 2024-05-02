@@ -5,13 +5,15 @@ import { SITE_TITLE } from "../consts";
 
 <header>
   <nav>
-    <a id="nav-start" class="sr-only focusable-nav" href="#content-start">Skip navigation</a>
-    <h2>
-      <a class="home" aria-label={SITE_TITLE} href="/">🍔 {SITE_TITLE}</a>
-      <a class="home-small" aria-label={SITE_TITLE} href="/">🍔</a>
-    </h2>
-    <div>
+    <a id="nav-start" class="sr-only focusable-nav" href="#content-start"
+      >Skip navigation</a
+    >
+    <a class="home" aria-label=`${SITE_TITLE} home page` href="/"
+      >🍔 {SITE_TITLE}</a
+    >
+    <div class="links">
       <HeaderLink href="/blog">Blog</HeaderLink>
+      <HeaderLink href="/projects">Projects</HeaderLink>
       <HeaderLink aria-label="Résumé" href="/resume">Resume</HeaderLink>
     </div>
   </nav>
@@ -23,16 +25,8 @@ import { SITE_TITLE } from "../consts";
     background: var(--bg1);
     background: linear-gradient(var(--bg1), var(--bg));
   }
-  h2 {
-    margin: 0;
-    font-size: 1em;
-  }
-  .home-small {
-    display: none;
-  }
-  h2 a,
-  h2 a.active {
-    text-decoration: none;
+  .home {
+    font-weight: bold;
   }
   nav {
     display: flex;
@@ -49,26 +43,8 @@ import { SITE_TITLE } from "../consts";
     text-decoration: none;
     border-bottom-color: var(--orange1);
   }
-  /* Only display the burger */
-  @media (max-width: 340px) {
-    .home-small {
-      display: inline;
-    }
-
-    .home {
-      display: none;
-    }
-  }
   /* Stack home link and other nav links vertically */
-  @media (max-width: 227px) {
-    .home-small {
-      display: none;
-    }
-
-    .home {
-      display: inline;
-    }
-
+  @media (max-width: 420px) {
     nav {
       flex-direction: column;
     }

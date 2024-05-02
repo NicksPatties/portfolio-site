@@ -1,115 +1,38 @@
 ---
 import "../styles/tags.css";
-
+import Card from "@components/Card.astro";
 import { type CollectionEntry, getEntry } from "astro:content";
-import FormattedDate from "./FormattedDate.astro";
 
+type Project = CollectionEntry<"projects">;
 type Blog = CollectionEntry<"blog">;
-type Tag = CollectionEntry<"tags">;
 
 const posts: Blog[] = Astro.props.posts;
 ---
 
 <style>
-  ul {
-    --animation: 0.2s ease;
+  ul.card-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
-
-  ul a {
-    display: block;
-    padding: 2em 1em;
-    margin: 1em 0;
-    border-radius: 12px;
-    background: no-repeat center;
-    background-color: var(--bg2);
-    background-size: 100%;
-    position: relative;
-    text-decoration: none;
-    text-shadow: 0 0 3px var(--bg0_h);
-    transition: background-size var(--animation);
-  }
-
-  .title,
-  .date,
-  .tag-list li {
-    color: var(--orange2);
-    position: relative;
-    z-index: 10;
-    transition: color var(--animation);
-    margin: 0;
-  }
-
-  .title {
-    line-height: 1;
-  }
-
-  a:hover .title,
-  a:hover .date,
-  a:hover .tag-list li {
-    color: var(--green2);
-  }
-
-  a:focus .title,
-  a:focus .date,
-  a:focus .tag-list li {
-    color: var(--green2);
-  }
-
-  ul a:focus {
-    background-size: 105%;
-  }
-
-  ul a:hover {
-    background-size: 105%;
-  }
-
-  .mask {
-    border-radius: 12px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: var(--bg0);
-    opacity: 0.75;
-    height: 100%;
-    width: 100%;
-    transition: opacity var(--animation);
-  }
-
-  a:focus .mask,
-  a:hover .mask {
-    opacity: 0.5;
-  }
 </style>
 <section>
-  <ul>
+  <ul class="card-list">
     {
       posts.map(async (post: Blog) => {
+        const project: Project | undefined = post.data.project
+          ? await getEntry("projects", post.data.project.slug)
+          : undefined;
         return (
           <li>
-            <a
-              style={
-                post.data.heroImage && {
-                  "background-image": `url(${post.data.heroImage})`,
-                }
-              }
-              href={`/blog/${post.slug}/`}
-            >
-              <h3 class="title">{post.data.title}</h3>
-              <p class="date">
-                <FormattedDate date={post.data.pubDate} />
-              </p>
-              <ul class="tag-list">
-                {post.data.tags &&
-                  post.data.tags.map(async (g) => {
-                    const tag: Tag = await getEntry("tags", g.id);
-                    return <li>#{tag.data.name}</li>;
-                  })}
-              </ul>
-              <div class="mask" />
-            </a>
+            <Card
+              heroImage={post.data.heroImage}
+              href={`/blog/${post.slug}`}
+              title={post.data.title}
+              date={post.data.pubDate}
+              {project}
+              tags={post.data.tags}
+            />
           </li>
         );
       })

@@ -3,9 +3,8 @@ title: "Building the site"
 description: "I share how I enhanced my site from a template to the site you see now!"
 # watch out date is in standard time shows up wrong fix it
 pubDate: "2024-04-29PDT"
-# optional, assumes image is in the `public` folder
-heroImage: ""
 published: true
+project: "portfolio-site"
 tags:
   - "astro"
   - "automation"

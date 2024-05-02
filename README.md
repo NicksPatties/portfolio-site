@@ -25,6 +25,7 @@ title: "Blog title"
 description: "A description of the blog I'm writing."
 pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
 # optional, assumes image is in the `public` folder
+# if you don't need it, just remove this property
 heroImage: "/blog-hero-image.jpg"
 # optional, set this to true if you want it on the site
 published: true
@@ -36,3 +37,19 @@ published: true
 1. Create a new YAML file (this filename is pretty much the slug of the tag)
 2. Add a `name` property to the file
 3. Add the tag filename to your blog posts in the `tags` array.
+
+## Adding new projects
+
+```yml
+---
+name: "Project title"
+description: "A description of the project"
+# optional
+heroImage: "/path/to/hero/image"
+# published: true
+# optional
+tags:
+  - "astro"
+  - "javascript"
+---
+```

@@ -9,6 +9,12 @@
       ],
       "@utils/*": [
         "src/utils/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
       ]
     }
   }

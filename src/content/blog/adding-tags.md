@@ -2,14 +2,11 @@
 title: "Adding tags"
 description: "The description for me adding tags"
 pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
-# optional, assumes image is in the `public` folder
-heroImage: ""
-# optional, set this to true if you want it on the site
 published: false
+project: "portfolio-site"
 tags:
   - "javascript"
   - "typescript"
-  - "portfolio-site"
   - "astro"
 ---
 

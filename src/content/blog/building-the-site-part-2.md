@@ -1,11 +1,9 @@
 ---
 title: "Building the site: Part 2"
 description: "I share my thoughts on good blog design, and how I modified the default Astro blog template to improve my reading experience."
-# watch out date is in standard time shows up wrong fix it
-pubDate: "2024-04-26PDT"
-# optional, assumes image is in the `public` folder
-heroImage: ""
+pubDate: "2024-04-30PDT"
 published: false
+project: "portfolio-site"
 tags:
   - "astro"
   # - "accessibility"

@@ -3,10 +3,18 @@ import BaseHead from "@components/BaseHead.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Cards from "@components/Cards.astro";
+import Card from "@components/Card.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { type CollectionEntry, getCollection } from "astro:content";
 import getPosts from "@utils/posts";
 
-const recentPosts = (await getPosts()).slice(0, 3);
+type Project = CollectionEntry<"projects">;
+
+const recentPosts = (await getPosts()).slice(0, 2);
+
+const projects: Project = (
+  await getCollection("projects", (p: Project) => p.data.published)
+).slice(0, 2);
 ---
 
 <!doctype html>
@@ -57,6 +65,11 @@ const recentPosts = (await getPosts()).slice(0, 3);
         transform: rotate(5deg);
       }
 
+      ul.card-list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
       @media (max-width: 760px) {
         .hero .burger {
           transform: translate(-50%, -50%) rotate(5deg);
@@ -98,8 +111,30 @@ const recentPosts = (await getPosts()).slice(0, 3);
         learning and making cool stuff. Thanks for visiting!
       </p>
       <h2>Recent blog posts</h2>
-      <i>Here's what I've been thinking about!</i>
+      <i><a href="/blog">Here's what I've been thinking about!</a></i>
       <Cards posts={recentPosts} />
+      {
+        projects && (
+          <>
+            <h2>Recent projects</h2>
+            <i>
+              <a href="/projects">Wanna see what I've been working on?</a>
+            </i>
+            <ul class="card-list">
+              {projects.map((project) => (
+                <li>
+                  <Card
+                    heroImage={project.data.heroImage}
+                    href={`/blog/${projects.slug}`}
+                    title={project.data.name}
+                    tags={project.data.tags}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
+        )
+      }
     </main>
     <Footer />
   </body>
