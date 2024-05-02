@@ -53,7 +53,7 @@ The next steps asked if I wanted to install my project's dependencies and initia
 
 After some waiting, everything was built and ready to go. I even got a fun message from Houston, Astro's mascot, wishing me luck in my development!
 
-![Astro's mascot, Houston, wishing me luck on my project](/src/assets/blog/building-the-site/houston.png)
+![Astro's mascot, Houston, wishing me luck on my project](@assets/blog/building-the-site/houston.png)
 
 ## The initial site
 
@@ -66,7 +66,7 @@ pnpm run dev
 
 And what I got was this:
 
-![The initial blog template's home page](/src/assets/blog/building-the-site/initial-blog-template.png)
+![The initial blog template's home page](@assets/blog/building-the-site/initial-blog-template.png)
 
 For a starting template, this is pretty good. It contains a home page, some sample blog posts, and some images. It was a good collection of files that would likely be in a website.
 
@@ -116,7 +116,7 @@ I decided to re-name this file at one point, but accidentally forgot to remove a
 
 [Consider this commit I made here.](https://github.com/NicksPatties/portfolio-site/commit/acb2c5ac21d1e026b6383e234ffd52ea82ad8338) If you click on the build status icon next to the commit message, you'll see that there were more build steps that were executed than expected. They're highlighted in red in the image below.
 
-![Accidental duplicate deployment steps highlighted in red](/src/assets/blog/building-the-site/confusing-deployments.png)
+![Accidental duplicate deployment steps highlighted in red](@assets/blog/building-the-site/confusing-deployments.png)
 
 Which jobs are the ones I actually care about? It's difficult to say, but removing the duplicate files made things easier to manage.
 
@@ -191,7 +191,7 @@ I needed to manually verify that **screen readers worked effectively**. This is 
 
 The biggest catch was my navigation link to the <span aria-hidden="true">Resume</span><span class="sr-only">résumé</span> page. Here it is highlighted below:
 
-![Picture of my navigation link to the résumé page](/src/assets/blog/building-the-site/resume-nav-link.png)
+![Picture of my navigation link to the résumé page](@assets/blog/building-the-site/resume-nav-link.png)
 
 Although "<span aria-hidden="true">Resume</span><span class="sr-only">résumé</span>" is a valid spelling of the word to describe my list of professional experience and education, screen readers would pronounce the link "resume," as in "begin" or "start again."
 
@@ -267,11 +267,11 @@ Light mode support was added like this:
 
 And that's it! The page now has a dark and a light theme, with some fancy colors as a bonus! Here's what the new colors look like in my previous blog:
 
-![The home page with a dark color theme](/src/assets/blog/building-the-site/blog-page-dark.png)
+![The home page with a dark color theme](@assets/blog/building-the-site/blog-page-dark.png)
 
 And the same page with the light theme looks like this.
 
-![The home page with a light color theme](/src/assets/blog/building-the-site/blog-page-light.png)
+![The home page with a light color theme](@assets/blog/building-the-site/blog-page-light.png)
 
 You can even compare the previous theme screenshot with the screenshots above. Which screenshot is the most pleasant to look at? Do any of them hurt your eyes? I'd like to know!
 
