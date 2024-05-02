@@ -84,7 +84,7 @@ const posts = (await getPosts()).filter(
                     const tag: Tag = await getEntry("tags", t.id);
                     return (
                       <li>
-                        <a aria-label=`See posts tagged ${tag.data.name}` href=`/tags/${t.id}`>
+                        <a aria-label={`See posts tagged ${tag.data.name}`} href=`/tags/${t.id}`>
                           <span aria-hidden="true">#{tag.data.name}</span>
                         </a>
                       </li>

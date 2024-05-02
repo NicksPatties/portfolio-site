@@ -1,5 +1,5 @@
 ---
-import '../styles/tags.css'
+import "../styles/tags.css";
 
 import { type CollectionEntry, getEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
@@ -11,8 +11,10 @@ type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
 
 const props: Blog = Astro.props as Blog;
-const { title, description, pubDate, updatedDate, heroImage,  project, tags } =
+const { title, description, pubDate, updatedDate, heroImage, project, tags } =
   props.data;
+
+const projectDetails = project && (await getEntry("projects", project.slug));
 ---
 
 <html lang="en">
@@ -56,6 +58,21 @@ const { title, description, pubDate, updatedDate, heroImage,  project, tags } =
       .last-updated-on {
         font-style: italic;
       }
+      li.project-name a {
+        display: inline-block;
+        background-color: var(--orange2);
+        color: var(--bg);
+        padding: 0 0.5rem;
+        border-radius: 12px;
+        transition: background-color var(--animation);
+        line-height: 1.7;
+        color: var(--bg);
+        text-decoration: none;
+      }
+      li.project-name a:hover,
+      li.project-name a:focus {
+        background-color: var(--green2);
+      }
     </style>
   </head>
 
@@ -84,12 +101,31 @@ const { title, description, pubDate, updatedDate, heroImage,  project, tags } =
             </div>
             <h1>{title}</h1>
             <ul class="tag-list">
-              { project && <a href=`/projects/${project.slug}`>{project.slug}</a> }
+              {
+                projectDetails && (
+                  <>
+                    <li class="project-name">
+                      <a
+                        aria-label={`Go to ${projectDetails.data.name} project`}
+                        href={`/projects/${project.slug}`}
+                      >
+                        {projectDetails.data.name}
+                      </a>
+                    </li>
+                  </>
+                )
+              }
               {
                 tags &&
                   tags.map(async (t) => {
                     const tag: Tag = await getEntry("tags", t.id);
-                    return <li><a href=`/tags/${t.id}`>#{tag.data.name}</a></li>;
+                    return (
+                      <li>
+                        <a aria-label={`See posts tagged ${tag.data.name}`} href=`/tags/${t.id}`>
+                          <span aria-hidden="true">#{tag.data.name}</span>
+                        </a>
+                      </li>
+                    );
                   })
               }
             </ul>
