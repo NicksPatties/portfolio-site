@@ -12,7 +12,7 @@ type Project = CollectionEntry<"projects">;
 
 const recentPosts = (await getPosts()).slice(0, 2);
 
-const projects: Project = (
+const projects: Project[] = (
   await getCollection("projects", (p: Project) => p.data.published)
 ).slice(0, 2);
 ---
@@ -125,7 +125,7 @@ const projects: Project = (
                 <li>
                   <Card
                     heroImage={project.data.heroImage}
-                    href={`/blog/${projects.slug}`}
+                    href={`/blog/${project.slug}`}
                     title={project.data.name}
                     tags={project.data.tags}
                   />
