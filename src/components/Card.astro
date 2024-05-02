@@ -10,9 +10,9 @@ type Project = CollectionEntry<"projects">;
 const heroImage: string = Astro.props.heroImage;
 const href: string = Astro.props.href;
 const title: string = Astro.props.title;
-const date: Date = Astro.props.date;
-const project: Project = Astro.props.project;
-const tags: Tag[] = Astro.props.tags;
+const date: Date | undefined = Astro.props.date;
+const project: Project | undefined = Astro.props.project;
+const tags: Tag[] | undefined = Astro.props.tags;
 ---
 
 <style>

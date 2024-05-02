@@ -14,7 +14,6 @@ type Post = CollectionEntry<"blog">;
 
 const props: Project = Astro.props.project as Project;
 const { name, description, heroImage, tags } = props.data;
-// TODO get the collection and filter out the tags that are required
 const posts = (await getPosts()).filter(
   (post: Post) => post.data.project && post.data.project.slug === props.slug,
 );

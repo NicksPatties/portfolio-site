@@ -11,9 +11,8 @@ type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
 
 const props: Blog = Astro.props as Blog;
-const { title, description, pubDate, updatedDate, heroImage,  project } =
+const { title, description, pubDate, updatedDate, heroImage,  project, tags } =
   props.data;
-const tags = props.data.tags;
 ---
 
 <html lang="en">

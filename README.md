@@ -44,8 +44,10 @@ published: true
 ---
 name: "Project title"
 description: "A description of the project"
+# optional
 heroImage: "/path/to/hero/image"
-published: false
+# published: true
+# optional
 tags:
   - "astro"
   - "javascript"
