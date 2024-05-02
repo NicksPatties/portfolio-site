@@ -42,6 +42,16 @@ const tags: Tag[] = Astro.props.tags;
     margin: 0;
   }
 
+  .tag-list li.project-name {
+    display: inline-block;
+    background-color: var(--orange2);
+    color: var(--bg);
+    padding: 0 0.5rem;
+    border-radius: 12px;
+    text-shadow: initial;
+    transition: background-color var(--animation);
+  }
+
   .title {
     line-height: 1;
   }
@@ -50,6 +60,12 @@ const tags: Tag[] = Astro.props.tags;
   a:hover .date,
   a:hover .tag-list li {
     color: var(--green2);
+  }
+
+  a:hover .tag-list li.project-name,
+  a:focus .tag-list li.project-name {
+    background-color: var(--green2);
+    color: initial;
   }
 
   a:focus .title,
@@ -100,7 +116,7 @@ const tags: Tag[] = Astro.props.tags;
       project && (
         <>
           <span class="sr-only">Part of the project</span>
-          <li>{project.data.name}</li>
+          <li class="project-name">{project.data.name}</li>
         </>
       )
     }
