@@ -96,12 +96,20 @@ const tags: Tag[] = Astro.props.tags;
     )
   }
   <ul class="tag-list">
-    {project && <li>{project.data.name}</li>}
+    {
+      project && (
+        <>
+          <span class="sr-only">Part of the project</span>
+          <li>{project.data.name}</li>
+        </>
+      )
+    }
+    {tags && <span class="sr-only">Contains the tags</span>}
     {
       tags &&
         tags.map(async (g: Tag) => {
           const tag: Tag = await getEntry("tags", g.id);
-          return <li>#{tag.data.name}</li>;
+          return <li aria-label={tag.data.name}>#{tag.data.name}</li>;
         })
     }
   </ul>
