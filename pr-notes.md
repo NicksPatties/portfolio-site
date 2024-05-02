@@ -1,14 +1,14 @@
 - [ ] Projects index page
-  - [ ] Displays projects that have been published
-  - [ ] The name and description of the page are correct
-  - [ ] Screen readers read stuff that makes sense
-  - [ ] Can navigate and interact with items using the keyboard
-  - [ ] Links to the project correctly
-- [ ] Individual project page
-  - [ ] The name and description of the page are correct
-  - [ ] Displays the details of a project
-  - [ ] Screen readers read stuff that makes sense
-  - [ ] Can navigate and interact with items using the keyboard
-  - [ ] Contains related blog posts
+  - [x] Displays projects that have been published
+  - [x] The name and description of the page are correct
+  - [x] Screen readers read stuff that makes sense
+  - [x] Can navigate and interact with items using the keyboard
+  - [x] Links to the project correctly
+- [x] Individual project page
+  - [x] The name and description of the page are correct
+  - [x] Displays the details of a project
+  - [x] Screen readers read stuff that makes sense
+  - [x] Can navigate and interact with items using the keyboard
+  - [x] Contains related blog posts
 - [ ] Card component
   - [ ] Can easily distinguish the project from the tags

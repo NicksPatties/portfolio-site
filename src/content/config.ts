@@ -20,6 +20,7 @@ const projects = defineCollection({
   type: "content",
   schema: z.object({
     name: z.string(),
+    description: z.string(),
     heroImage: z.string().optional(),
     tags: z.array(reference('tags')).optional(),
     published: z.boolean().default(false)

@@ -2,7 +2,6 @@
 title: "Markdown Syntax Highlighting"
 description: "This is a test of the syntax highlighting system"
 pubDate: "Mar 28 2024"
-heroImage: ""
 published: false
 ---
 

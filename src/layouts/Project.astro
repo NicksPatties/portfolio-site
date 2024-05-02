@@ -1,26 +1,28 @@
 ---
-import '../styles/tags.css'
+import "../styles/tags.css";
 
 import { type CollectionEntry, getEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Cards from "@components/Cards.astro";
-import getPosts from '@utils/posts';
+import getPosts from "@utils/posts";
 
 type Project = CollectionEntry<"projects">;
 type Tag = CollectionEntry<"tags">;
 type Post = CollectionEntry<"blog">;
 
 const props: Project = Astro.props.project as Project;
-const {name, heroImage, tags} = props.data;
+const { name, description, heroImage, tags } = props.data;
 // TODO get the collection and filter out the tags that are required
-const posts = (await getPosts()).filter((post: Post) => post.data.project && post.data.project.slug === props.slug)
+const posts = (await getPosts()).filter(
+  (post: Post) => post.data.project && post.data.project.slug === props.slug,
+);
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={name} description={"A project description"} image={heroImage} />
+    <BaseHead title={name} {description} image={heroImage} />
     <style>
       main {
         width: calc(100% - 2em);
@@ -81,7 +83,13 @@ const posts = (await getPosts()).filter((post: Post) => post.data.project && pos
                 tags &&
                   tags.map(async (t) => {
                     const tag: Tag = await getEntry("tags", t.id);
-                    return <li><a href=`/tags/${t.id}`>#{tag.data.name}</a></li>;
+                    return (
+                      <li>
+                        <a aria-label=`See posts tagged ${tag.data.name}` href=`/tags/${t.id}`>
+                          <span aria-hidden="true">#{tag.data.name}</span>
+                        </a>
+                      </li>
+                    );
                   })
               }
             </ul>
@@ -90,10 +98,14 @@ const posts = (await getPosts()).filter((post: Post) => post.data.project && pos
           <slot />
         </div>
       </article>
-      { posts.length > 0 && (
-        <h2>Related posts</h2>
-        <Cards {posts}/>
-      )}
+      {
+        posts.length > 0 && (
+          <>
+            <h2>Related posts</h2>
+            <Cards {posts} />
+          </>
+        )
+      }
     </main>
     <Footer />
   </body>
