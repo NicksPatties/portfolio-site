@@ -25,6 +25,7 @@ title: "Blog title"
 description: "A description of the blog I'm writing."
 pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
 # optional, assumes image is in the `public` folder
+# if you don't need it, just remove this property
 heroImage: "/blog-hero-image.jpg"
 # optional, set this to true if you want it on the site
 published: true

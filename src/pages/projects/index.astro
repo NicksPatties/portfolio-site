@@ -11,15 +11,17 @@ const projects = await getCollection(
   "projects",
   (p: Project) => p.data.published,
 );
+
+const description =
+  projects.length === 1
+    ? `Nick has ${projects.length} project that he would like to share.`
+    : `Nick has ${projects.length} projects that he would like to share.`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead
-      title={"Projects"}
-      description={`Nick has ${projects.length} projects that he would like to share.`}
-    />
+    <BaseHead title={"Projects"} {description} />
     <style>
       ul {
         list-style-type: none;
