@@ -10,14 +10,14 @@ const posts: Blog[] = Astro.props.posts;
 ---
 
 <style>
-  ul {
+  ul.card-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
 </style>
 <section>
-  <ul>
+  <ul class="card-list">
     {
       posts.map(async (post: Blog) => {
         const project: Project | undefined = post.data.project
