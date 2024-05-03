@@ -95,16 +95,16 @@ const posts = (await getPosts()).filter(
             <hr />
           </div>
           <slot />
+          {
+            posts.length > 0 && (
+              <>
+                <h2>Related posts</h2>
+                <Cards {posts} />
+              </>
+            )
+          }
         </div>
       </article>
-      {
-        posts.length > 0 && (
-          <>
-            <h2>Related posts</h2>
-            <Cards {posts} />
-          </>
-        )
-      }
     </main>
     <Footer />
   </body>
