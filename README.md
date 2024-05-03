@@ -32,6 +32,10 @@ published: true
 ---
 ```
 
+### Cover size
+
+1080 x 510
+
 ## Adding new tags
 
 1. Create a new YAML file (this filename is pretty much the slug of the tag)
