@@ -60,6 +60,10 @@ const posts = (await getPosts()).filter(
       .last-updated-on {
         font-style: italic;
       }
+      hr.more-space {
+        margin-top: 45.2px;
+        margin-bottom: 50px;
+      }
     </style>
   </head>
 
@@ -95,6 +99,7 @@ const posts = (await getPosts()).filter(
             <hr />
           </div>
           <slot />
+          <hr class="more-space"/>
           {
             posts.length > 0 && (
               <>
