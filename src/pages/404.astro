@@ -1,7 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
-const path = new URL(Astro.request.url).pathname;
 ---
 
 <!doctype html>
@@ -9,7 +8,7 @@ const path = new URL(Astro.request.url).pathname;
   <head>
     <BaseHead
       title={"404 error"}
-      description={`404 error - couldn't find page ${path}`}
+      description={`404 error - couldn't find the page`}
     />
     <style>
       main {
@@ -29,7 +28,7 @@ const path = new URL(Astro.request.url).pathname;
     <main>
       <h3>Whoops!</h3>
       <code>404 Not Found</code>
-      <p>Couldn't find page: <code>{path}</code></p>
+      <p>The page you're looking for is not here ┐(´ー｀)┌</p>
     </main>
   </body>
 </html>
