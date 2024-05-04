@@ -2,8 +2,8 @@
 title: "Building the site: Part 2"
 description: "I share my thoughts on good blog design, and how I modified the default Astro blog template to improve my reading experience."
 pubDate: "2024-04-30PDT"
-published: false
-heroImage: "/building-the-site-part-2-cover.jpg"
+published: true
+heroImage: "@assets/blog/building-the-site/new-home-page-dark.png"
 project: "portfolio-site"
 tags:
   - "astro"
@@ -12,6 +12,8 @@ tags:
   # - "typescript"
   # - "css"
 ---
+
+![image](@assets/blog/building-the-site/new-home-page-dark.png)
 
 ## Improved design
 
