@@ -2,82 +2,200 @@
 title: "Building the site: Part 2"
 description: "I share my thoughts on good blog design, and how I modified the default Astro blog template to improve my reading experience."
 pubDate: "2024-04-30PDT"
-published: false
+published: true
+heroImage: "/blog/building-the-site-part-2/cover.jpg"
 project: "portfolio-site"
 tags:
   - "astro"
-  # - "accessibility"
-  # - "web design"
-  # - "typescript"
-  # - "css"
+  - "web-design"
+  - "css"
 ---
 
-## Improved design
+[In my last article, I shared how I made my site more accessible to use.](/blog/building-the-site) Today, I'll talk about how I customized Astro's original blog template to include some more personality and enhance the reading experience.
 
-Some of the components in the original blog template were pretty good, but I wanted to improve their design. The blog should focus on prose first, and then with visuals. Some of the starter components were ill-suited to satisfy that goal.
+First, we'll look at what Astro's template has to offer. [For reference, you can find the code for the template here.](https://github.com/withastro/astro/tree/main/examples/blog)
 
-### The `Hero` component
+# Astro's blog template
 
-Here's what the original blog page looks like.
+Here's what the template's home page looks like:
 
-[Image of original blog theme]()
+![Image of original blog theme](@assets/blog/building-the-site-part-2/initial-blog-template.png)
 
-The first thing you see is this? Nah, let's make this more fun.
+Some parts of the template were good. The layout of the header, main content, and footer worked well for my needs. Additionally, the font used is the highly readable [Atkinson Hyperlegible Font](https://brailleinstitute.org/freefont).
 
-This is the first thing a visitor sees when they open my website. I wanted to decorate it with a fun image, and some memorable font.
+The blog page was also nice. It included a place for a large image on the top of the page, and the layout was nice to view on all screen sizes.
 
-Additionally, I wanted this component to work on smaller screens as well. The design is a little different for smaller screens; I wanted the text to be centered rather than the dramatic offset alignment. On smaller screens, the offset looks unintentional and unsettling rather than dynamic and fun.
+![Image of the original blog post](@assets/blog/building-the-site-part-2/initial-blog-template-blog-post.png)
 
-To enable this, I used CSS media queries to modify the layout of the background image and text.
+Blog posts also looked good without a hero image.
 
-The burger image is absolutely positioned, which means I'm in charge of where it should go relative to the parent container defined with `position: relative`. This creates a new stacking context, which means the css properties `top`, `bottom`, `left`, and `right` are relative to the element rather than the entire document. So, `top: 0` and `right:0` means "move this element's top and right sides to the upper right corner of this parent container."
+![Image of original blog post without hero image](@assets/blog/building-the-site-part-2/initial-blog-template-blog-post-no-hero.png)
 
-I did this instead of creating a background in the hero component, because it was easier for me to position and rotate the burger exactly where I wanted.
+I kept the blog page the same for the most part. However, there were still some parts I wanted to change.
 
-[Hero component image]()
+# I need a (new) hero
 
-### The `Card` component
+Hero elements are the first thing a user sees when visiting a site. They contribute to whether a user will stick around after arriving. I initially attempted to work with the original template, as you can see below.
 
-_This can be a section where I talk about design rules, and designs that work on both desktop and mobile devices, and handling focus styles._
+![The original template, but with some custom text](@assets/blog/building-the-site-part-2/initial-home-page-with-modified-text.png)
 
-These card components were designed to show off some cool stuff in a blog post. However, if I don't supply an image, then the Card breaks.
+I was not impressed with the results.
 
-[Image of card with image and without image]()
+To fix my distaste for my home page, I created a new header section with some HTML and CSS. My design needed to do these things:
 
-To make writing blogs easier for me, I don't want to require myself to have an image in my blog post. Also, I want the title of the blog, and some of its content to draw more attention. To satisfy these requirements, a horizontal layout works better for me.
+- Feature a fun image of a cheeseburger behind some text
+- Support variable screen sizes, from desktop monitors to cell phones
 
-Here's what I did...
+[The HTML is pretty straightforward](https://github.com/NicksPatties/portfolio-site/blob/56d9de3cf08f4c35cf3fb94634c4b4e8f0d795df/src/pages/index.astro#L78); I created a container for the heading and the image to reside.
 
-[Image of the new card components]()
-
-### Improved `meta` tags
-
-This makes the blog **easy to share**. Users know what they're getting into when they see a link to my site on their platform of choice.
-
-Astro's starter blog template was great for showing me the basics.
-
-[Image of the old social container]()
-
-I dove deeper into the different tags to see how I could improve the appearance with new pages. I made these code changes:
-
-```astro
-the code changes
+```html
+<div id="content-start" class="hero">
+  <img
+    src="burger.svg"
+    alt="A cartoon cheeseburger with a flag sticking out"
+    class="burger"
+  />
+  <h1>
+    <span class="serving">Serving up</span>
+    <span class="tasty">TASTY BYTES</span>
+    <span class="since">since 2014</span>
+  </h1>
+</div>
 ```
 
-The BaseHead component accepts properties that change the title and description of the site, as well as the image meta tags.
+You may be wondering why I'm explicitly including an image in the HTML. After all, if I want an image to appear behind the text inside this `<div>` container, then couldn't I make the `<div>`'s background the burger image with CSS?
 
-Here's a link for the home page:
+Although that's true, I wanted to have more control of the burger's position and rotation. The `background-position` CSS property only positions an image based on an X an Y coordinate relative to an element's container. I could move an image around, but I couldn't rotate it.
 
-[Image of the new container home page]()
+Having the image as its own element allowed me to move and rotate the burger freely. [The CSS that styles the burger image looks like this:](https://github.com/NicksPatties/portfolio-site/blob/56d9de3cf08f4c35cf3fb94634c4b4e8f0d795df/src/pages/index.astro#L19)
 
-Here's the new social media link for the previous blog post.
+```css
+.hero {
+  position: relative;
+}
 
-[Image of the new container after the changes]()
+/* ... */
 
-I created different ones for blog posts, the home page, and my resume, for additional context.
+.hero .burger {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  right: 0;
+  opacity: 0.66;
+  z-index: -1;
+  transform: rotate(5deg);
+}
+```
+
+With the burger in proper alignment, I addressed the text next. I wanted "TASTY BYTES" to stand out from the rest of the heading. The font should look fun and chunky, like the cartoon burger. [Rodrigo Fuenzalida's Titan One font worked great.](https://www.dafont.com/titan-one.font?text=TASTY+BYTES)
+
+With these changes put together, the new hero for my site looks like this:
+
+![Hero component image](@assets/blog/building-the-site-part-2/new-home-page-dark.png)
+
+Overall, I like the changes! The hero now has some fun elements that are more eye catching than the previous iteration. Is the hero element more fun to you? I'm happy to hear what you all think!
+
+# The card component
+
+Let's talk about the cards next. These are the links that take readers to each individual post.
+
+![Image of the original cards](@assets/blog/building-the-site-part-2/old-cards.png)
+
+Cards present a way to show the reader what an article is about in a quick glance. Like video thumbnails, cards are also designed to draw in a user's attention.
+
+There are a couple of things I don't like about these cards, though:
+
+1. I may not _want_ to provide an image to make it easier to write my blog entries.
+2. The prose of the blog should be the center of attention, not its image.
+
+Since blog posts may not have an image assigned to them, let's first see what happens when I remove an image from a blog post. How does the card look, then?
+
+![Image of card with image and without image](@assets/blog/building-the-site-part-2/old-broken-card.png)
+
+As you can see, the card for the post "First Post" renders a missing image icon. This is not good at all; the blog card looks incomplete and broken! To remedy this, [I added a CSS fallback to show a background color:](https://github.com/NicksPatties/portfolio-site/blob/1b17bd6725ddfeb6632b925cf5472405d2c48697/src/components/Card.astro#L27)
+
+```css
+a {
+  /* ... */
+  background-color: var(--bg2);
+  /* ... */
+}
+```
+
+I don't want to completely ignore hero images, however. They can supplement an article by visually describing its content. Images shouldn't be front and center, but they shouldn't be completely forgotten.
+
+The `Card` component adds the hero image in the background of the card using the logical AND (`&&`) operator. If there's a hero image, passed into this `Card`, then it will appear! [Here's the code.](https://github.com/NicksPatties/portfolio-site/blob/1b17bd6725ddfeb6632b925cf5472405d2c48697/src/components/Card.astro#L101)
+
+```astro
+<a
+  style={heroImage && {
+    "background-image": `url(${heroImage})`,
+  }}
+  {href}><!-- ... --></a
+>
+```
+
+I always appreciated blogs that had links to posts that were primarily horizontal. They're comfortable to read, and clearly display the information I care about in an article. So, I applied that design to my card components.
+
+Here's the final result (for now).
+
+![Image of the new card components](@assets/blog/building-the-site-part-2/new-card.png)
+
+Notice that the "Markdown Syntax Highlighting" article does not have a hero image, but it no longer has a garish broken image icon in the corner of the page.
+
+As an added bonus, when users interact with the card, I use subtle animations to invite users to interact with the link. [I invite you to try this out on the blog list page!](http://localhost:4321/blog)
+
+# `<meta>` tags
+
+I appreciated that the blog template introduced me to `<meta>` tags. They can assign additional data to a webpage, which can effect how they're displayed on social media sites.
+
+Within the template's meta tags are sections that cover common tags used for the Open Graph protocol. Sites use these tags to obtain information about this site when its URL is posted on their platform. [Here's Meta's documentation about these tags,](https://developers.facebook.com/docs/sharing/webmasters/#markup) and here are the tags in my site below:
+
+```html
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{Astro.url}" />
+<meta property="og:site_name" content="{SITE_TITLE}" />
+<meta property="og:title" content="{title}" />
+<meta property="og:description" content="{description}" />
+<meta property="og:image" content="{new" URL(image, Astro.url)} />
+```
+
+Twitter (now X) [also defines a series of tags that it uses for its own card components.](https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup) Here are Twitter's tags.
+
+```html
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="{Astro.url}" />
+<meta property="twitter:title" content="{title}" />
+<meta property="twitter:description" content="{description}" />
+<meta property="twitter:image" content="{new" URL(image, Astro.url)} />
+<meta
+  property="twitter:image:alt"
+  content="Serving up tasty bytes since 2014"
+/>
+```
+
+[You can see all the meta tags I use for my site in this file here.](https://github.com/NicksPatties/portfolio-site/blob/56d9de3cf08f4c35cf3fb94634c4b4e8f0d795df/src/components/BaseHead.astro)
+
+These tags may seem abstract, but you can see the results once the site is published, and the link is posted in different places. Here's an example of what card was rendered in Discord only with changes to the title and description.
+
+![Image of the old social card](@assets/blog/building-the-site-part-2/social-card-before.png)
+
+I created a new default image which simulates my home page. Once published, my cards look like this:
+
+![Image of the new social card for the home page](@assets/blog/building-the-site-part-2/social-card-after.png)
+
+This card matches my branding and personality much better, while including the fun hero tag from the home page. It's like a mini hero that can be featured on other sites!
+
+Since blog posts already supported hero images, I also used that image, if there was a hero image already present. Here's an example below:
+
+![Image of the new social card for blog posts](@assets/blog/building-the-site-part-2/social-card-after-blog.png)
+
+By adding this information to a webpage, it's possible to introduce users to my content before they even visit. I wanted to make sure that my site makes a good first impression to new readers. Carefully created `<meta>` tags makes my site easy to share with others.
 
 # That's it for now!
 
-Although the default theme was a good starting point, I made some modifications to improve my site's functionality and design. I didn't cover everything in exhaustive detail, but I talked about making mobile-friendly layouts, and improving its accessibility.
+Although the default theme was a good starting point, I made some modifications to improve my site's functionality and design. I hope these changes make the site easier and more fun to read and share.
 
-I think the changes make the site easier to read, but what do you think? Do these layouts make it easy to find and read my posts on your browser of choice? I'm happy to hear your thoughts!
+Thanks again for reading, and see you next time!

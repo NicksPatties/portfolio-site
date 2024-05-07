@@ -26,11 +26,23 @@ description: "A description of the blog I'm writing."
 pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
 # optional, assumes image is in the `public` folder
 # if you don't need it, just remove this property
-heroImage: "/blog-hero-image.jpg"
+heroImage: "/blog/blog-title/cover.png"
 # optional, set this to true if you want it on the site
 published: true
 ---
 ```
+
+### Images
+
+Cover photos
+
+- place them in the `public/blog/<blog-name>` directory
+- size: 1080 x 510
+
+Blog images
+
+- place them in the `src/assets/blog/<blog-name>` directory
+- Images here will be processed by Astro
 
 ## Adding new tags
 
@@ -45,7 +57,7 @@ published: true
 name: "Project title"
 description: "A description of the project"
 # optional
-heroImage: "/path/to/hero/image"
+heroImage: "/projects/project-title/cover.png"
 # published: true
 # optional
 tags:
@@ -53,3 +65,15 @@ tags:
   - "javascript"
 ---
 ```
+
+### Images
+
+Cover photos
+
+- place them in the `public/projects/<project-name>` directory
+- size: 1080 x 510
+
+Blog images
+
+- place them in the `src/assets/projects/<project-name>` directory
+- Images here will be processed by Astro
