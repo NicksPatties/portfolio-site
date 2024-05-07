@@ -14,8 +14,6 @@ const props: Blog = Astro.props as Blog;
 const { title, description, pubDate, updatedDate, heroImage, project, tags } =
   props.data;
 
-console.log("heroImage", heroImage)
-
 const projectDetails = project && (await getEntry("projects", project.slug));
 ---
 
