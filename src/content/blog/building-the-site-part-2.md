@@ -1,7 +1,7 @@
 ---
 title: "Building the site: Part 2"
 description: "I share my thoughts on good blog design, and how I modified the default Astro blog template to improve my reading experience."
-pubDate: "2024-04-30PDT"
+pubDate: "2024-05-07PDT"
 published: true
 heroImage: "/blog/building-the-site-part-2/cover.jpg"
 project: "portfolio-site"
