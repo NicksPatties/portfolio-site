@@ -18,18 +18,19 @@ const tags: Tag[] | undefined = Astro.props.tags;
 <style>
   a {
     --animation: 0.2s ease;
+    --mask-opacity: 0.75;
+    --mask-opacity-hover: 0.6;
     list-style-type: none;
     display: block;
     padding: 2em 1em;
     margin: 1em 0;
     border-radius: 12px;
-    background: no-repeat center;
+    background-position: center;
     background-color: var(--bg2);
-    background-size: 100%;
+    background-size: cover;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 0 3px var(--bg0_h);
-    transition: background-size var(--animation);
+    text-shadow: 0 0 12px var(--bg0_h);
   }
 
   .title,
@@ -65,7 +66,7 @@ const tags: Tag[] | undefined = Astro.props.tags;
   a:hover .tag-list li.project-name,
   a:focus .tag-list li.project-name {
     background-color: var(--green2);
-    color: initial;
+    color: var(--bg);
   }
 
   a:focus .title,
@@ -74,18 +75,13 @@ const tags: Tag[] | undefined = Astro.props.tags;
     color: var(--green2);
   }
 
-  a:focus,
-  a:hover {
-    background-size: 105%;
-  }
-
   .mask {
     border-radius: 12px;
     position: absolute;
     top: 0;
     left: 0;
     background-color: var(--bg0);
-    opacity: 0.75;
+    opacity: var(--mask-opacity);
     height: 100%;
     width: 100%;
     transition: opacity var(--animation);
@@ -93,7 +89,11 @@ const tags: Tag[] | undefined = Astro.props.tags;
 
   a:focus .mask,
   a:hover .mask {
-    opacity: 0.5;
+    opacity: var(--mask-opacity-hover);
+  }
+
+  a:active .mask {
+    opacity: var(--mask-opacity);
   }
 </style>
 
