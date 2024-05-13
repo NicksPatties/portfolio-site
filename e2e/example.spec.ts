@@ -1,18 +1,26 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+let shouldScreenshot = false
+
+test.beforeEach(async ({ page }) => {
+  const colorScheme = process.env.COLOR_SCHEME as "light" | "dark" | undefined
+  shouldScreenshot = colorScheme === "light" || colorScheme === "dark" 
+  await page.emulateMedia({ colorScheme });
+})
+
+test('home page, go to projects', async ({ page }) => {
+
+  await page.goto('http://localhost:4321');
 
   // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  await page.getByRole('link', { name: 'Projects' }).click();
+
+  // Hover over an element
+  await page.getByRole('link', { name: 'Portfolio Site Contains the' }).hover();
+
+  expect(page.url()).toContain('projects');
+
+  // get a screenshot
+  shouldScreenshot && await page.screenshot({ path: 'project-page.png', fullPage: true })
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
