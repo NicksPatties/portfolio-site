@@ -3,18 +3,13 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "astro dev --port=4321",
     "check": "astro check",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
+    "build": "astro build",
+    "preview": "astro preview --port=4322",
     "astro": "astro",
-    "post:new": "./bin/newpost",
-    "cy:open": "cypress open",
-    "cy:run": "cypress run",
     "pw:test": "playwright test",
-    "pw:test:light": "COLOR_SCHEME=light pnpm pw:test",
-    "pw:test:dark": "COLOR_SCHEME=dark pnpm pw:test"
+    "pw:screenshots": "playwright test --update-snapshots e2e/screenshots.spec.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.6",
@@ -30,7 +25,6 @@
     "@biomejs/biome": "1.6.3",
     "@playwright/test": "^1.44.0",
     "@types/node": "^20.12.11",
-    "cypress": "^13.9.0",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "sharp": "^0.33.3"

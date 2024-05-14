@@ -22,6 +22,9 @@ pnpm-debug.log*
 # notes
 tasks.md
 pr-images/
+screenshots/
+
+# test output
 /test-results/
 /playwright-report/
 /blob-report/
