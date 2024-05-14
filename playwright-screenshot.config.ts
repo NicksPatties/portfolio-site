@@ -7,7 +7,7 @@ const baseURL = `http://127.0.0.1:${port}`
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './e2e',
+  testDir: './screenshots',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -21,6 +21,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  snapshotPathTemplate: 'screenshots/{arg}-{projectName}{ext}',
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL,
@@ -33,25 +34,37 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
+      name: 'desktop',
       use: { ...devices['Desktop Firefox'] },
     },
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'desktop-light',
+      use: {
+        ...devices['Desktop Firefox'],
+        colorScheme: 'light'
+      },
     },
-    /* Test against mobile viewports. */
     {
-      name: 'mobile-chrome',
+      name: 'tablet',
+      use: { ...devices['Nexus 10'] },
+    },
+    {
+      name: 'tablet-light',
+      use: {
+        ...devices['Nexus 10'],
+        colorScheme: 'light'
+      },
+    },
+    {
+      name: 'mobile',
       use: { ...devices['Pixel 5'] },
     },
     {
-      name: 'mobile-safari',
-      use: { ...devices['iPhone 12'] },
+      name: 'mobile-light',
+      use: {
+        ...devices['Pixel 5'],
+        colorScheme: 'light'
+      },
     },
   ],
 

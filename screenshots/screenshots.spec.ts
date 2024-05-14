@@ -5,6 +5,7 @@ const pagePaths = [
   {path: '/blog', name: "blog"}, 
   {path: '/projects', name: "projects"}, 
   {path: '/resume', name: "resume"}, 
+  {path: '/projects/portfolio-site', name: 'portfolio'}
 ]
 
 test.describe('Screenshots', async () => {
