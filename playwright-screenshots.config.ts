@@ -35,12 +35,12 @@ export default defineConfig({
   projects: [
     {
       name: 'desktop',
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Chrome'] },
     },
     {
       name: 'desktop-light',
       use: {
-        ...devices['Desktop Firefox'],
+        ...devices['Desktop Chrome'],
         colorScheme: 'light'
       },
     },
