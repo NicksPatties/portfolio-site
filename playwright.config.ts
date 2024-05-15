@@ -2,7 +2,7 @@ import { defineConfig, devices } from '@playwright/test';
 
 // Check preview script in package.json file for correct port number
 const port = 4322;
-const baseURL = `http://127.0.0.1:${port}`
+const baseURL = `http://localhost:${port}`
 /**
  * See https://playwright.dev/docs/test-configuration.
  */

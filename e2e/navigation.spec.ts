@@ -22,6 +22,8 @@ test.describe('Navigation', async () => {
   test("Going to home page", async ({ page }) => {
     await page.goto('/blog');
     await page.getByRole('link', { name: "NicksPatties home page"}).click()
-    expect(page.url()).toBe('http://127.0.0.1:4322/')
+    // Check the playwright.config.ts baseUrl variable to figure out what
+    // to put in here.
+    expect(page.url()).toBe('http://localhost:4322/')
   })
 })
