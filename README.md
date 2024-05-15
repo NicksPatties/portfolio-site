@@ -77,3 +77,13 @@ Blog images
 
 - place them in the `src/assets/projects/<project-name>` directory
 - Images here will be processed by Astro
+
+## Screenshots
+
+You can automate screenshots for pages you want to check by using this command:
+
+```sh
+pnpm pw:screenshots
+```
+
+Check the `screenshots` directory for the screenshots and do your visual testing.
