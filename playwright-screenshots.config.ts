@@ -46,7 +46,7 @@ export default defineConfig({
     // with "--headed" flag to render correctly
     {
       name: 'tablet',
-      use: { ...devices['iPad Pro 11'] },
+      use: { ...devices['Nexus 10'] },
     },
     {
       name: 'tablet-light',
