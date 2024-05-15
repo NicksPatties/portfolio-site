@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "^5.0.0",
-    "@biomejs/biome": "1.6.3",
     "@playwright/test": "^1.44.0",
     "@types/node": "^20.12.11",
     "prettier": "^3.2.5",
