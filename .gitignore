@@ -22,4 +22,10 @@ pnpm-debug.log*
 # notes
 tasks.md
 pr-images/
+screenshots/*.png
 
+# test output
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
