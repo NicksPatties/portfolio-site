@@ -70,6 +70,27 @@ import resume from "../../../resume.json";
         })
       }
 
+      <h2>Projects</h2>
+      {
+        resume.projects.map((project) => {
+          return (
+            <>
+              <h3>{project.name}</h3>
+              <p>{project.role}</p>
+              <i>
+                {project.startYear} -{" "}
+                {project.current ? "Present" : project.endYear}
+              </i>
+              <ul>
+                {project.highlights.map((h) => (
+                  <li>{h.content}</li>
+                ))}
+              </ul>
+            </>
+          );
+        })
+      }
+
       <h2>Education</h2>
       {
         resume.education.map((edu) => {
