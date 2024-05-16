@@ -10,111 +10,7 @@
   },
   "work": [
     {
-      "visible": true,
-      "name": "MegaResume",
-      "position": "Software Engineer",
-      "url": "",
-      "summary": "",
-      "highlights": [
-        {
-          "visible": true,
-          "content": "Created a resume building web application, which was used to build this document! Fine-tuning a resume to match job application requirements is about 10 times faster than editing a word document by hand.",
-          "tagNames": [
-            "JavaScript",
-            "TypeScript",
-            "SvelteKit",
-            "CSS",
-            "HTML",
-            "git",
-            "Web Development",
-            "Node.js",
-            "Vite"
-          ]
-        },
-        {
-          "visible": true,
-          "content": "Automated deployments using GitHub CI/CD pipelines. Changes are tested, built, and deployed in under two minutes.",
-          "tagNames": [
-            "CI/CD",
-            "Automation"
-          ]
-        }
-      ],
-      "startYear": "2022",
-      "endYear": "2023",
-      "current": true,
-      "startMonth": "08"
-    },
-    {
-      "visible": true,
-      "name": "Sweet",
-      "position": "Software Engineer (Go)",
-      "url": "",
-      "summary": "",
-      "highlights": [
-        {
-          "visible": true,
-          "content": "Designed, built, and released Sweet, a command line touch typing game for software engineers written in Go. Since using it, my coding typing speed has increased by 10 words per minute.",
-          "tagNames": [
-            "Golang (Go)",
-            "Software Development",
-            "CLIs"
-          ]
-        },
-        {
-          "visible": false,
-          "content": "Sweet has a start up time that is at least 100 times faster than popular web based touch-typing games. (monkeytype.com: 2.0s, speedtyper.net: 1.7s, Sweet: 17ms)",
-          "tagNames": []
-        }
-      ],
-      "startYear": "2023",
-      "endYear": "2023",
-      "startMonth": "06",
-      "endMonth": "07",
-      "current": false
-    },
-    {
-      "visible": false,
-      "name": "Time Clock",
-      "position": "Android Engineer",
-      "url": "",
-      "summary": "",
-      "highlights": [
-        {
-          "visible": true,
-          "content": "Created Android Jetpack Compose application that helps users manage their time. Using this application, I've managed about 360 hours of my time to help improve my focus.",
-          "tagNames": [
-            "Android",
-            "Kotlin",
-            "Mobile Development",
-            "User Experience",
-            "SQL"
-          ]
-        },
-        {
-          "visible": false,
-          "content": "Created issue templates to simplify issue and bug reporting. Used GitHub Projects and Issues to manage user stories and sprints. Improved communication with users, and documentation for developers.",
-          "tagNames": [
-            "Communication",
-            "Project management",
-            "Customer Obsession"
-          ]
-        },
-        {
-          "visible": true,
-          "content": "Released the Time Clock application to both Google Play and F-Droid marketplaces, and used Fastlane to quickly deploy updates to both marketplaces.",
-          "tagNames": [
-            "Android",
-            "CI/CD"
-          ]
-        }
-      ],
-      "startYear": "2021",
-      "startMonth": "09",
-      "endYear": "2022",
-      "endMonth": "09"
-    },
-    {
+      "current": false,
       "visible": true,
       "name": "The Walt Disney Company",
       "position": "Software Engineer",
@@ -151,28 +47,7 @@
       "endMonth": "02"
     },
     {
-      "visible": true,
-      "name": "Climb Tournament Systems",
-      "position": "Android Engineer",
-      "url": "",
-      "summary": "",
-      "highlights": [
-        {
-          "visible": true,
-          "content": "Built a custom, interactive tournament bracket view, allowing tournament organizers to quickly identify and navigate to matches on their mobile devices.",
-          "tagNames": [
-            "Android",
-            "Kotlin",
-            "Mobile Development"
-          ]
-        }
-      ],
-      "startYear": "2021",
-      "startMonth": "04",
-      "endYear": "2021",
-      "endMonth": "08"
-    },
-    {
+      "current": false,
       "visible": true,
       "name": "Amazon Fulfillment Technologies",
       "position": "Web Development Engineer",
@@ -243,6 +118,7 @@
       "endMonth": "08"
     },
     {
+      "current": false,
       "visible": true,
       "name": "Oomba, Inc.",
       "position": "Software Engineer and Founder",
@@ -289,11 +165,141 @@
       "endYear": "2016",
       "startMonth": "11",
       "endMonth": "03"
+    }
+  ],
+  "projects": [
+    {
+      "visible": true,
+      "name": "MegaResume",
+      "role": "Software Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Created a resume building web application, which was used to build this document! Fine-tuning a resume to match job application requirements is about 10 times faster than editing a word document by hand.",
+          "tagNames": [
+            "JavaScript",
+            "TypeScript",
+            "SvelteKit",
+            "CSS",
+            "HTML",
+            "git",
+            "Web Development",
+            "Node.js",
+            "Vite",
+            "barf"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Automated deployments using GitHub CI/CD pipelines. Changes are tested, built, and deployed in under two minutes.",
+          "tagNames": [
+            "CI/CD",
+            "Automation"
+          ]
+        }
+      ],
+      "startYear": "2022",
+      "endYear": "2023",
+      "current": true,
+      "startMonth": "08"
+    },
+    {
+      "visible": true,
+      "name": "Sweet",
+      "role": "Software Engineer (Go)",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Designed, built, and released Sweet, a command line touch typing game for software engineers written in Go. Since using it, my coding typing speed has increased by 10 words per minute.",
+          "tagNames": [
+            "Golang (Go)",
+            "Software Development",
+            "CLIs"
+          ]
+        },
+        {
+          "visible": false,
+          "content": "Sweet has a start up time that is at least 100 times faster than popular web based touch-typing games. (monkeytype.com: 2.0s, speedtyper.net: 1.7s, Sweet: 17ms)",
+          "tagNames": []
+        }
+      ],
+      "startYear": "2023",
+      "endYear": "2023",
+      "startMonth": "06",
+      "endMonth": "07",
+      "current": false
+    },
+    {
+      "visible": false,
+      "name": "Time Clock",
+      "role": "Android Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Created Android Jetpack Compose application that helps users manage their time. Using this application, I've managed about 360 hours of my time to help improve my focus.",
+          "tagNames": [
+            "Android",
+            "Kotlin",
+            "Mobile Development",
+            "User Experience",
+            "SQL"
+          ]
+        },
+        {
+          "visible": false,
+          "content": "Created issue templates to simplify issue and bug reporting. Used GitHub Projects and Issues to manage user stories and sprints. Improved communication with users, and documentation for developers.",
+          "tagNames": [
+            "Communication",
+            "Project management",
+            "Customer Obsession"
+          ]
+        },
+        {
+          "visible": true,
+          "content": "Released the Time Clock application to both Google Play and F-Droid marketplaces, and used Fastlane to quickly deploy updates to both marketplaces.",
+          "tagNames": [
+            "Android",
+            "CI/CD"
+          ]
+        }
+      ],
+      "startYear": "2021",
+      "startMonth": "09",
+      "endYear": "2022",
+      "endMonth": "09"
+    },
+    {
+      "visible": true,
+      "name": "Climb Tournament Systems",
+      "role": "Android Engineer",
+      "url": "",
+      "summary": "",
+      "highlights": [
+        {
+          "visible": true,
+          "content": "Built a custom, interactive tournament bracket view, allowing tournament organizers to quickly identify and navigate to matches on their mobile devices.",
+          "tagNames": [
+            "Android",
+            "Kotlin",
+            "Mobile Development"
+          ]
+        }
+      ],
+      "startYear": "2021",
+      "startMonth": "04",
+      "endYear": "2021",
+      "endMonth": "08"
     },
     {
       "visible": false,
       "name": "The Two Eyes in Team",
-      "position": "Game Director",
+      "role": "Game Director",
       "url": "",
       "startMonth": "",
       "startYear": "2013",
