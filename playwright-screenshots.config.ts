@@ -30,20 +30,20 @@ export default defineConfig({
     trace: 'on-first-retry',
     colorScheme: 'dark'
   },
-
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'desktop',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Firefox'] },
     },
     {
       name: 'desktop-light',
       use: {
-        ...devices['Desktop Chrome'],
+        ...devices['Desktop Firefox'],
         colorScheme: 'light'
       },
     },
+    // tablet projects require running playwright
+    // with "--headed" flag to render correctly
     {
       name: 'tablet',
       use: { ...devices['Nexus 10'] },
@@ -67,8 +67,6 @@ export default defineConfig({
       },
     },
   ],
-
-  /* Run your local dev server before starting the tests */
   webServer: {
     command: `pnpm build && pnpm preview`,
     url: baseURL,
