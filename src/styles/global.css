@@ -61,6 +61,36 @@ main {
   padding: 3em 1em;
 }
 
+.info {
+  --background-color: var(--blue2);
+  --text-color: var(--blue1);
+}
+
+.warning {
+  --background-color: var(--yellow2);
+  --text-color: var(--yellow1);
+}
+
+.danger {
+  --background-color: var(--red2);
+  --text-color: var(--red1);
+}
+
+.info,
+.warning,
+.danger {
+  margin: 1.5em 0;
+  padding: 0 1em;
+  border-radius: 8px;
+  border: solid 3px var(--text-color);
+  background: var(--background-color);
+  color: var(--bg0);
+
+  p:last-child {
+    margin-bottom: 1em;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -72,9 +102,8 @@ h6 {
   line-height: 1.2;
 }
 
-
 h1 {
-  font-size: 3em;  
+  font-size: 3em;
 }
 
 h1 a {
@@ -94,14 +123,14 @@ h3 {
 }
 
 h3 a {
-  --link-icon-size: 1.6rem; 
+  --link-icon-size: 1.6rem;
 }
 
 h4 {
   font-size: 1.563em;
 }
 
-h4 a {  
+h4 a {
   --link-icon-size: 1.4rem;
 }
 
@@ -234,12 +263,12 @@ h3:hover path,
 h4:hover path,
 h5:hover path,
 h6:hover path {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 a.link-icon-container:hover path,
 a.link-icon-container:focus path {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 .sr-only {
@@ -277,4 +306,3 @@ a.link-icon-container:focus path {
   color: var(--fg0);
   text-decoration: none;
 }
-
