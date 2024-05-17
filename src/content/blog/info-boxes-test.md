@@ -6,19 +6,23 @@ heroImage: ""
 published: false
 ---
 
-This is a box with some stuff in it.
+Here are some boxes that I think would be useful for my site.
 
 <div class="info">
 
-Now, this is an informational thingy. Pro tip! This makes the information section look pretty good! This will be rendered as just a span inside this div.
+Pro-tip!
 
-Take a look at this and DONT MESS THIS UP
+You can make these boxes with text look pretty good by just using the page, but perhaps I want to just do something simpler?
 
 </div>
 
+I've been busy making these boxes look real good, but are they good enough?
+
 <div class="warning">
 
-This right here is a warning.
+This right here is a warning. You should be careful when dealing with this stuff.
+
+**Does this work**
 
 </div>
 
@@ -27,3 +31,5 @@ This right here is a warning.
 Look out! There's a problem here!
 
 </div>
+
+This concludes the test. Thanks for reading!

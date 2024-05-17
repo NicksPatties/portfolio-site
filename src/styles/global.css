@@ -62,18 +62,18 @@ main {
 }
 
 .info {
-  --background-color: var(--blue2);
-  --text-color: var(--blue1);
+  --blue1rgb: 69, 133, 136;
+  --background-color: var(--blue1rgb);
 }
 
 .warning {
-  --background-color: var(--yellow2);
-  --text-color: var(--yellow1);
+  --yellow1rgb: 215, 153, 33;
+  --background-color: var(--yellow1rgb);
 }
 
 .danger {
-  --background-color: var(--red2);
-  --text-color: var(--red1);
+  --red1rgb: 204, 36, 29;
+  --background-color: var(--red1rgb);
 }
 
 .info,
@@ -82,9 +82,8 @@ main {
   margin: 1.5em 0;
   padding: 0 1em;
   border-radius: 8px;
-  border: solid 3px var(--text-color);
-  background: var(--background-color);
-  color: var(--bg0);
+  border: 2px solid rgb(var(--background-color));
+  background: rgba(var(--background-color), 0.33);
 
   p:last-child {
     margin-bottom: 1em;
