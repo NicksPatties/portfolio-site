@@ -62,18 +62,18 @@ main {
 }
 
 .info {
-  --blue1rgb: 69, 133, 136;
-  --background-color: var(--blue1rgb);
+  /* blue1 in rgb */
+  --background-color: 69, 133, 136;
 }
 
 .warning {
-  --yellow1rgb: 215, 153, 33;
-  --background-color: var(--yellow1rgb);
+  /* yellow1 in rgb */
+  --background-color: 215, 153, 33;
 }
 
 .danger {
-  --red1rgb: 204, 36, 29;
-  --background-color: var(--red1rgb);
+  /* red1 in rgb */
+  --background-color: 204, 36, 29;
 }
 
 .info,
