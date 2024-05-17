@@ -44,6 +44,18 @@ Blog images
 - place them in the `src/assets/blog/<blog-name>` directory
 - Images here will be processed by Astro
 
+### Info, Warning, and Danger sections
+
+```md
+<div class="[info|warning|danger]">
+
+Here's your text
+
+Don't forget the spaces in the front and back. **Formatting works, too!**
+
+</div>
+```
+
 ## Adding new tags
 
 1. Create a new YAML file (this filename is pretty much the slug of the tag)

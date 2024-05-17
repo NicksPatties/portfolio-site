@@ -61,6 +61,35 @@ main {
   padding: 3em 1em;
 }
 
+.info {
+  /* blue1 in rgb */
+  --background-color: 69, 133, 136;
+}
+
+.warning {
+  /* yellow1 in rgb */
+  --background-color: 215, 153, 33;
+}
+
+.danger {
+  /* red1 in rgb */
+  --background-color: 204, 36, 29;
+}
+
+.info,
+.warning,
+.danger {
+  margin: 1.5em 0;
+  padding: 0 1em;
+  border-radius: 8px;
+  border: 2px solid rgb(var(--background-color));
+  background: rgba(var(--background-color), 0.33);
+
+  p:last-child {
+    margin-bottom: 1em;
+  }
+}
+
 h1,
 h2,
 h3,
@@ -72,9 +101,8 @@ h6 {
   line-height: 1.2;
 }
 
-
 h1 {
-  font-size: 3em;  
+  font-size: 3em;
 }
 
 h1 a {
@@ -94,14 +122,14 @@ h3 {
 }
 
 h3 a {
-  --link-icon-size: 1.6rem; 
+  --link-icon-size: 1.6rem;
 }
 
 h4 {
   font-size: 1.563em;
 }
 
-h4 a {  
+h4 a {
   --link-icon-size: 1.4rem;
 }
 
@@ -234,12 +262,12 @@ h3:hover path,
 h4:hover path,
 h5:hover path,
 h6:hover path {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 a.link-icon-container:hover path,
 a.link-icon-container:focus path {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 .sr-only {
@@ -277,4 +305,3 @@ a.link-icon-container:focus path {
   color: var(--fg0);
   text-decoration: none;
 }
-
