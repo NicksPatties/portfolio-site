@@ -245,6 +245,10 @@ a.link-icon-container {
   width: var(--link-icon-size);
 }
 
+article.project-article a.link-icon-container {
+  display: none;
+}
+
 .link-icon {
   position: absolute;
   top: 0;
