@@ -23,7 +23,8 @@ const projects = defineCollection({
     description: z.string(),
     heroImage: z.string().optional(),
     tags: z.array(reference('tags')).optional(),
-    published: z.boolean().default(false)
+    published: z.boolean().default(false),
+    order: z.number().default(1000)
   })
 })
 
