@@ -4,6 +4,10 @@ description: "A cooperative in which two people control a single eyeball in a pe
 heroImage: "/thetwoeyesinteam-cover.jpg"
 published: true
 order: 10
+tags:
+  - "game-development"
+  - "unity"
+  - "cs"
 ---
 
 This page is currently under construction

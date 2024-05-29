@@ -5,6 +5,7 @@ heroImage: "/portfolio-site-cover.png"
 published: true
 order: 0
 tags:
+  - "web-development"
   - "astro"
   - "javascript"
 ---

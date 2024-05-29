@@ -5,8 +5,10 @@ heroImage: "/megaresume-cover.jpg"
 published: true
 order: 0
 tags:
+  - "web-development"
   - "typescript"
   - "javascript"
+  - "sveltekit"
 ---
 
 # Description

@@ -4,6 +4,10 @@ description: "A time management application for Android written in Kotlin with J
 heroImage: "/timeclock-cover.jpg"
 published: true
 order: 8
+tags:
+  - "mobile-development"
+  - "android"
+  - "kotlin"
 ---
 
 # Description
