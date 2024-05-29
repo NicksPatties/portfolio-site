@@ -5,7 +5,11 @@ const pagePaths = [
   {path: '/blog', name: "blog"}, 
   {path: '/projects', name: "projects"}, 
   {path: '/resume', name: "resume"}, 
-  {path: '/projects/portfolio-site', name: 'portfolio'}
+  {path: '/projects/portfolio-site', name: 'portfolio'},
+  {path: '/projects/megaresume', name: 'megaresume'},
+  {path: '/projects/sweet', name: 'sweet'},
+  {path: '/projects/thetwoeyesinteam', name: 'thetwoeyesinteam'},
+  {path: '/projects/timeclock', name: 'timeclock'}
 ]
 
 test.describe('Screenshots', async () => {

@@ -7,10 +7,9 @@ import { type CollectionEntry, getCollection } from "astro:content";
 
 type Project = CollectionEntry<"projects">;
 
-const projects = await getCollection(
-  "projects",
-  (p: Project) => p.data.published,
-);
+const projects = (
+  await getCollection("projects", (p: Project) => p.data.published)
+).sort((a: Project, b: Project) => a.data.order - b.data.order);
 
 const description =
   projects.length === 1
