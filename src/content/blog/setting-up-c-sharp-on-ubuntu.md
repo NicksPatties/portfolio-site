@@ -1,9 +1,9 @@
 ---
 title: "Minimal C# Setup on Ubuntu"
 description: "I find the easiest way to set up .NET for writing C# code in Helix on Ubuntu"
-pubDate: "2024-05-31PDT" # Don't forget the timezone code at the end!
+pubDate: "2024-06-03PDT"
 heroImage: "/blog/setting-up-c-sharp-on-ubuntu/cover.png"
-published: false
+published: true
 tags:
   - "cs"
   - "hx"
