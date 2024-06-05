@@ -192,6 +192,8 @@ img {
 code {
   padding: 2px 5px;
   border-radius: 2px;
+  background: var(--bg0_h);
+  border-radius: 0.3em; /* same as in syntax.css */
 }
 
 pre {
