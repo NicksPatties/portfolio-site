@@ -14,7 +14,9 @@ const recentPosts = (await getPosts()).slice(0, 2);
 
 const projects: Project[] = (
   await getCollection("projects", (p: Project) => p.data.published)
-).slice(0, 2);
+)
+  .sort((a: Project, b: Project) => a.data.order - b.data.order)
+  .slice(0, 2);
 ---
 
 <!doctype html>
