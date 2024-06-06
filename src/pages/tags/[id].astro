@@ -49,6 +49,10 @@ const description =
     <Header />
     <main id="content-start">
       <h1>Posts tagged <code>{tagName}</code></h1>
+      <i
+        >I wrote {posts.length}
+        {posts.length === 1 ? "post" : "posts"} about this topic.</i
+      >
       {posts.length > 0 ? <Cards {posts} /> : <p>{description}</p>}
     </main>
     <Footer />

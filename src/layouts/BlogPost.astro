@@ -122,7 +122,7 @@ const projectDetails = project && (await getEntry("projects", project.slug));
                     return (
                       <li>
                         <a aria-label={`See posts tagged ${tag.data.name}`} href=`/tags/${t.id}`>
-                          <span aria-hidden="true">#{tag.data.name}</span>
+                          <span aria-hidden="true">{tag.data.name}</span>
                         </a>
                       </li>
                     );

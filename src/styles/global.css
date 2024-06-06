@@ -99,50 +99,39 @@ h6 {
   margin: 0 0 0.5rem 0;
   color: var(--fg0);
   line-height: 1.2;
+
+  & a {
+    text-decoration: none;
+    color: var(--fg0);
+  }
+
+  & a:hover::after,
+  & a:active::after,
+  & a:focus::after {
+    content: "#";
+    opacity: 50%;
+    margin-left: 0.5rem;
+  }
 }
 
 h1 {
-  font-size: 3em;
-}
-
-h1 a {
-  --link-icon-size: 2rem;
+  font-size: 3rem;
 }
 
 h2 {
-  font-size: 2.441em;
-}
-
-h2 a {
-  --link-icon-size: 1.8rem;
+  font-size: 2.441rem;
 }
 
 h3 {
-  font-size: 1.953em;
-}
-
-h3 a {
-  --link-icon-size: 1.6rem;
+  font-size: 1.953rem;
 }
 
 h4 {
-  font-size: 1.563em;
-}
-
-h4 a {
-  --link-icon-size: 1.4rem;
+  font-size: 1.563rem;
 }
 
 h5 {
-  font-size: 1.25em;
-}
-
-h5 a {
-  --link-icon-size: 1.2rem;
-}
-
-h6 a {
-  --link-icon-size: 1rem;
+  font-size: 1.25rem;
 }
 
 strong,
@@ -192,6 +181,8 @@ img {
 code {
   padding: 2px 5px;
   border-radius: 2px;
+  background: var(--bg0_h);
+  border-radius: 0.3em; /* same as in syntax.css */
 }
 
 pre {
