@@ -21,7 +21,7 @@ const description = `Nick has written about ${tags.length} topics. Check them ou
       <h1>Tags</h1>
       <ul class="tag-list">
       {tags.map(t => (
-         <li><a href=`/tags/${t.id}`>#{t.data.name}</a></li>
+         <li><a href=`/tags/${t.id}`>{t.data.name}</a></li>
       ))}
       </ul>
     </main>
