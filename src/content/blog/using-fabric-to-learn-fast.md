@@ -2,9 +2,9 @@
 title: "Using Fabric to Learn Fast"
 description: "How much time can I save using fabric, a CLI powered by AI, to gather info from YouTube videos?"
 startDate: "2024-06-04PDT" # No option for this yet
-pubDate: "2024-06-04PDT"
+pubDate: "2024-06-14PDT"
 heroImage: "/blog/using-fabric-to-learn-fast/guillaume-meurice-cover.png"
-published: false
+published: true
 ---
 
 I spend a lot of time diving deep into YouTube when I want to learn something new. The videos I watch can range from 15 to 30 minutes in length, or perhaps even more. If time was an issue, then I can listen to videos like a podcast while doing other tasks. But remembering information is also an issue. Scrubbing through to a YouTube video is more difficult than referring to written notes.
@@ -74,7 +74,19 @@ claude-3-haiku-20240307
 claude-2.1
 ```
 
-Here we can see that Anthropic's Claude models are available. Great! To assign a default model to use with `fabric`, use the `--setDefaultModel` option when running fabric with the name of the model you want to use. I want to use `claude-3-haiku-20240307` by default.
+Here we can see that Anthropic's Claude models are available. Great!
+
+### Default models
+
+We can now run `fabric` with a specific model with the `-m` command.
+
+```sh
+➜ fabric -m claude-3-haiku-20240307 # ...
+```
+
+However, specifying which model to use with each command gets annoying pretty quickly. Let's assign a default model that `fabric` will use.
+
+To assign a default model, use the `--setDefaultModel` option with the name of the model you want to use. I want to use `claude-3-haiku-20240307` by default.
 
 ```sh
 ➜ fabric --setDefaultModel claude-3-haiku-20240307
@@ -82,7 +94,9 @@ Here we can see that Anthropic's Claude models are available. Great! To assign a
 
 Now we won't have to specify the model each time we use the application!
 
-Everything should be configured now, so let's give both scripts a test drive and see how they do. Here's the `yt` command extracting metadata from a [vine boom sound effect video](https://www.youtube.com/watch?v=Oc7Cin_87H4).
+## Verifying the configuration
+
+Everything should be configured now, so let's give both commands a test drive and see how they do. Here's the `yt` command extracting metadata from a [vine boom sound effect video](https://www.youtube.com/watch?v=Oc7Cin_87H4).
 
 ```sh
 ➜ yt --metadata https://www.youtube.com/watch?v=Oc7Cin_87H4
@@ -103,7 +117,7 @@ Here's a small test for `fabric`. Our input needs to be piped into the `fabric` 
 
 The commands are working! We're now ready to speed up our learning process.
 
-## Extracting wisdom
+# Extracting wisdom
 
 We can combine the `yt` and `fabric` commands together to extract digestible information from YouTube. Let's see how this works.
 
@@ -159,6 +173,8 @@ Did you see that? These video notes were generated in **_11.6 seconds!!_** That'
 | Watching the video            | 23:33              |
 | 1.5 times speed, taking notes | 21:21              |
 | `fabric`                      | **00:12**          |
+
+## Verifying the output
 
 This looks extremely impressive, but is the output even usable? Let's verify the generated notes are accurate to what I wrote down above.
 
@@ -249,9 +265,9 @@ Once again, this is summarized below.
 | `fabric` alone                | 00:12              |
 | `fabric` with manual review   | **09:59**          |
 
-## API Costs
+# API Costs
 
-### Anthropic
+## Anthropic
 
 Using Anthropic's AI models through the API comes at a cost, so I'll share my findings.
 
@@ -264,7 +280,7 @@ For the video above, I processed 7537 input tokens, and 937 output tokens.
 
 This leads to a total cost of **$0.0030555**. Put another way, **it cost me less than a third of a cent** to extract the wisdom from this video.
 
-### YouTube API
+## YouTube API
 
 [The default quota limit for YouTube's Data API is 10,000 "points" per day.](https://developers.google.com/youtube/v3/guides/quota_and_compliance_audits) Below are [estimated costs](https://developers.google.com/youtube/v3/determine_quota_cost) for listing video captions and metadata.
 
@@ -273,7 +289,7 @@ This leads to a total cost of **$0.0030555**. Put another way, **it cost me less
 
 It's clear that downloading one video's will not have me reach my quota. The cost to me is $0.00.
 
-<details>
+<details class="info">
 <summary>Checking quota limits for YouTube Data API</summary>
 
 If you plan on using this a lot, then you may want to know **how much of your remaining data quota is left**. Here's a quick way to do this:
@@ -288,7 +304,7 @@ You can look at your "Current usage percentage" if you're working on this today,
 
 </details>
 
-## Savings
+# Time savings
 
 As the old adage goes, "Time is money." The amount of time spent doing a task has a cost associated with it. Using a previous job as a reference, I'll pick a wage of $60 per hour. If I was working for a company, this would be the amount of money they'd have to pay me to learn from our sample video.
 
