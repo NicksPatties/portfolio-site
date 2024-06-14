@@ -7,39 +7,35 @@ heroImage: "/blog/using-fabric-to-learn-fast/guillaume-meurice-cover.png"
 published: false
 ---
 
-I spend a lot of time diving deep into YouTube when I want to learn something new. These videos can range from 15 to 30 minutes in length, or perhaps even more. Sure, I can watch videos at 1.5 times speed to listen to information faster if time was an issue. However, remembering information is also an issue. Referring to a YouTube video is way more difficult for me than referring to some notes that I wrote.
+I spend a lot of time diving deep into YouTube when I want to learn something new. The videos I watch can range from 15 to 30 minutes in length, or perhaps even more. If time was an issue, then I can listen to videos like a podcast while doing other tasks. But remembering information is also an issue. Scrubbing through to a YouTube video is more difficult than referring to written notes.
 
-So, YouTube videos contain helpful information, but it's time-consuming to learn from them, and it's difficult to recall information from them. Is there something I can use to help this issue?
+So, YouTube videos contain helpful information, but it's time-consuming to learn and recall information from them. Is there something I can use to solve this problem?
 
-Fortunately, there is! I learned about a tool called [Fabric](https://github.com/danielmiessler/fabric) (through a [YouTube video, of course!](https://www.youtube.com/watch?v=UbDyjIIGaxQ)). It's an open-source command line tool that prompts a language model of your choice though community-driven patterns. Its interface makes it easy to pipe its output into files that I can read and reference at a later time.
+Fortunately, there is! I discovered a tool called [`fabric`](https://github.com/danielmiessler/fabric) (through a [YouTube video, of course!](https://www.youtube.com/watch?v=UbDyjIIGaxQ)). It's an open-source command line tool that queries a large language model of your choice with community-written prompts called patterns.
 
-Let's see how this tool works, and if I can put it to good use!
+Let's see how `fabric` works, and if I can put it to good use!
 
 # Goal
 
 I would like to take a bunch of YouTube videos about a topic, summarize them, and save that output to files I can reference at a later time. My hypothesis is that this will save me time and make it easier for me to solidify information about that topic.
 
-To do this, we'll use fabric to gather video details, and some Bash scripting to help automate the process for multiple videos. It'll be a great opportunity to learn things that'll be beneficial to other projects!
+Before getting ahead of ourselves, **we'll explore `fabric`'s potential with one video first**. This will let us really dig into its benefits. We'll also use some command line applications to assess `fabric`'s performance.
 
-I'll break down this process into steps:
-
-1. Install `fabric` and familiarize myself with it
-2. Familiarize myself with other tools to manipulate some of its output
-3. Write the script to tie everything all together
-
-Let's go!
+Let's get started!
 
 # Getting familiar with `fabric`
 
-[Fabric's quick-start guide is pretty straightforward](https://github.com/danielmiessler/fabric?tab=readme-ov-file#quickstart), and after following the instructions, `fabric` was ready to go.
+[Fabric's quick-start guide is pretty straightforward](https://github.com/danielmiessler/fabric?tab=readme-ov-file#quickstart), and after following the instructions, I installed `fabric` and was ready to go. Most of the steps in this list are cross-platform, so if you want to follow along, the steps from the link above should have you covered.
 
-## The `yt` command
+`fabric` is not the only tool that's included in the installation! `yt` is a script that gathers YouTube video metadata, including a video's transcript. The transcript is essential to unlocking `fabric`'s potential; it will be the input that is sent to `fabric` for processing.
 
-I noticed in the README above that the `yt` command was used in a few examples, and it also appeared in the video about fabric linked above. Heads up! **This script is included when you install fabric!** It's not another script that's downloaded separately, so if you try to find them in your distribution's package repository, then you will not find it.
+## Configuring `fabric` and `yt`
 
-## Configuring fabric and yt
+There are some prerequisites to using `fabric` and `yt` together that will not be covered in this post. I'll provide some links in case you want to follow along:
 
-Use `fabric --setup` to assign API keys to give fabric permission to connect to AI and YouTube services.
+- You need a way to connect to an LLM. In this case, [I'll use an API key from Anthropic to connect to Claude AI models](https://docs.anthropic.com/en/docs/getting-access-to-claude).
+  - `fabric` can also connect to ChatGPT and Google Gemini out of the box, so if you'd like to use those models, find their corresponding API keys instead.
+- You also need access to YouTube's Data API v3. [Follow steps 1 through 3 in the "Before you start section" of these docs](https://developers.google.com/youtube/v3/getting-started), and you'll have your YouTube API key ready to go.
 
 <details class="info">
 <summary>Is it possible to use local models?</summary>
@@ -48,21 +44,24 @@ Yes it is!
 
 In fact, I prefer to run AI servers on my own hardware, and to do that, I'd use `ollama`. Fabric can connect to a locally running `ollama` server instead of a third party model, which incurs a cost.
 
-However, my poor little laptop is unable to handle the workload. When running `ollama` with the `llama3:8B` model for instance, my server ran at a blazing (as in hot, not fast) two tokens per minute. Waiting for the output is the software development equivalent to watching paint dry.
+However, my poor little laptop is unable to handle the workload. When running `ollama` with the `llama3:8B` model for instance, my server ran at a blazing (as in hot, not fast) **two tokens per minute**. Waiting for the output is the software development equivalent to watching paint dry.
 
 </details>
 
-I created an API key with Anthropic to access their Claude models with fabric. `fabric --setup` allowed me to input the key, and everything was configured. I double-checked if I could access the models by running `fabric --listmodels` command.
+### `fabric --setup`
 
-### Getting an Anthropic API key
+Now that we have our API keys ready, we can call `fabric --setup` connect the `fabric` and `yt` to our LLMs and YouTube's APIs respectively. `fabric` will prompt you for your API keys, so paste them in and press `Enter` when asked to do so.
 
-- Create an Antrhopic account
-- Go to the Anthropic console
-- Click on "Get API keys"
-- Click "Create Key"
-- Name the key and click "Create Key"
+```sh
+➜ fabric --setup
 
-You now have an API key to give to fabric when you're prompted! Let's take care of the YouTube API key next
+# ...
+
+Please enter your claude API key. If you do not have one, or if you have already entered it, press enter.
+
+```
+
+Once the setup is complete, we can verify if `fabric` is connected by listing the available models to use.
 
 ```sh
 ➜ fabric --listmodels
@@ -75,49 +74,15 @@ claude-3-haiku-20240307
 claude-2.1
 ```
 
-To assign a default model to use with fabric, use the `--setDefaultModel` option when running fabric with the name of the model you want to use. I want to use `claude-3-haiku-20240307` by default.
+Here we can see that Anthropic's Claude models are available. Great! To assign a default model to use with `fabric`, use the `--setDefaultModel` option when running fabric with the name of the model you want to use. I want to use `claude-3-haiku-20240307` by default.
 
 ```sh
 ➜ fabric --setDefaultModel claude-3-haiku-20240307
 ```
 
-Now I won't have to specify the model each time I use the application!
+Now we won't have to specify the model each time we use the application!
 
-### Getting a YouTube API key
-
-During the setup process, I was asked for my YouTube API key. This is required for the `yt` command to work correctly
-
-To get an API key, you'll need the following things:
-
-- A Google account
-- Go to the Google Developers Console
-  - Create a new project
-  - Wait for the project to be ready, then navigate to it
-  - Solutions > APIs & Services > Enable APIs and Services
-  - Find YouTube Data API v3
-  - Click enable
-  - Click `Create Credentials`
-  - _What data will you be accessing?_ Click `public data`
-  - Copy your API and record it in a safe place
-
-You now have your API key to use the `yt` script
-
-### `fabric --setup`
-
-Now that we have the keys ready, we can call `fabric --setup` connect the application to Anthropic and YouTube's APIs. `fabric` will ask you for your API keys, so paste them in and press `Enter` when asked to do so.
-
-```sh
-➜ fabric --setup
-
-# ...
-
-Please enter your claude API key. If you do not have one, or if you have already entered it, press enter.
-
-```
-
-Everything should be configured now, so let's give both scripts a test drive and see how they do.
-
-Here's the `yt` command extracting metadata from a [vine boom sound effect video](https://www.youtube.com/watch?v=Oc7Cin_87H4).
+Everything should be configured now, so let's give both scripts a test drive and see how they do. Here's the `yt` command extracting metadata from a [vine boom sound effect video](https://www.youtube.com/watch?v=Oc7Cin_87H4).
 
 ```sh
 ➜ yt --metadata https://www.youtube.com/watch?v=Oc7Cin_87H4
@@ -129,14 +94,14 @@ Here's the `yt` command extracting metadata from a [vine boom sound effect video
 }
 ```
 
-Here's a small test for `fabric`. Our input needs to be piped into the `fabric` command. The `tweet` pattern will provide small output.
+Here's a small test for `fabric`. Our input needs to be piped into the `fabric` command. The `tweet` pattern will provide some brief output.
 
 ```sh
 ➜ echo "I had deep dish pizza today." | fabric -p tweet
 🍕 Indulged in some delicious deep dish pizza today! 🤤 #FoodieLife #ChicagoStyle
 ```
 
-Great! The commands are working! We now have the building blocks ready to speed up our learning process.
+The commands are working! We're now ready to speed up our learning process.
 
 ## Extracting wisdom
 
@@ -144,10 +109,10 @@ We can combine the `yt` and `fabric` commands together to extract digestible inf
 
 Suppose I would like to watch [this video about 11 LinkedIn Profile tips](https://www.youtube.com/watch?v=8SdbTpOcwd8). This video is **23 minutes and 33 seconds long**. I'll call these tools successful if I can gather what these 11 tips are in this video.
 
-To compare the tool's effectiveness, I'll gather the details that I can about the video first. I'll give myself some advangates, including playing the video at 1.5 times speed and writing notes down. How fast can I gather the 11 tips from the above video?
+To compare the tool's effectiveness, I'll gather the details that I can about the video first. I'll give myself some advantages, including playing the video at 1.5 times speed and writing notes down. How fast can I gather the 11 tips from the above video?
 
 <details class="info">
-<summary>Shane Hummus's 11 BEST LinkedIn Tips</summary>
+<summary>My notes for Shane Hummus's 11 BEST LinkedIn Tips</summary>
 
 1. Start now, start adding people, 500 connections asap, like a blue checkmark
 
@@ -169,10 +134,15 @@ To compare the tool's effectiveness, I'll gather the details that I can about th
 
 Gathering these details took me **21 minutes and 21 seconds**. That's about **9.3% faster** than just watching the video. Plus, now that I've written my notes down, I have them to reference at a later time.
 
+| Task                          | Time spent (mm:ss) |
+| ----------------------------- | ------------------ |
+| Watching the video            | 23:33              |
+| 1.5 times speed, taking notes | 21:21              |
+
 That's pretty good, but let's see how well fabric performs in comparison. We'll put the video link from above into our command:
 
 ```sh
-➜ time yt --transcript https://www.youtube.com/watch?v=8SdbTpOcwd8 | fabric -p extract_wisdom -o shane-hummus-11-best-linkedin-profile-tips.md
+➜ time yt --transcript https://www.youtube.com/watch?v=8SdbTpOcwd8 | fabric -p extract_wisdom -o fabrics-notes.md
 
 # fabric output ...
 
@@ -182,9 +152,17 @@ sys     0m0.209s
 
 ```
 
-Did you see that? These video notes were generated in **_11.6 seconds!!_** That's **less than one hunderedth of the time** it took to write notes myself. This sounds extremely impressive, but is the output even usable? Let's verify the generated notes are accurate to what I wrote down above.
+Did you see that? These video notes were generated in **_11.6 seconds!!_** That's **less than one hundredth of the time** it took to write notes myself. This is summarized in the table below:
 
-To do this, I'll use `grep` to search for terms within my notes and see if they appear in `fabric`'s generated output. Here's the breakdown of the 11 tips from the video above.
+| Task                          | Time spent (mm:ss) |
+| ----------------------------- | ------------------ |
+| Watching the video            | 23:33              |
+| 1.5 times speed, taking notes | 21:21              |
+| `fabric`                      | **00:12**          |
+
+This looks extremely impressive, but is the output even usable? Let's verify the generated notes are accurate to what I wrote down above.
+
+To do this, I'll use `grep` to search for terms within my notes and see if they appear in `fabric`'s generated output. Here's the breakdown of some of the tips from the video above.
 
 <details>
 <summary>Tip 1: Start adding connections</summary>
@@ -193,12 +171,20 @@ Let's try searching for "connections."
 
 ```sh
 ➜ grep "connections" my-notes.md fabrics-notes.md
-my-notes.md:1. Start now, start adding people, 500 connections asap, like a blue checkmark
-fabrics-notes.md:- Get to 500+ connections ASAP to unlock profile views and messaging
-fabrics-notes.md:- Use LinkedIn open networkers ("Lions") to quickly build connections
-fabrics-notes.md:- Consistently build LinkedIn connections, aiming for 500+
-fabrics-notes.md:- Start building your LinkedIn network immediately, aiming for 500+ connections
 ```
+
+My notes look like this:
+
+- Start now, start adding people, 500 _connections_ asap, like a blue checkmark
+
+`fabric`'s notes look like this
+
+- Get to 500+ **connections** ASAP to unlock profile views and messaging
+- Use LinkedIn open networkers ("Lions") to quickly build **connections**
+- Consistently build LinkedIn **connections**, aiming for 500+
+- Start building your LinkedIn network immediately, aiming for 500+ **connections**
+
+Looks pretty similar to my notes, but adds additional information about LIONs, which I missed.
 
 </details>
 
@@ -208,10 +194,16 @@ fabrics-notes.md:- Start building your LinkedIn network immediately, aiming for 
 Let's try searching for "demand" this time.
 
 ```sh
-grep "demand" my-notes.md fabrics-notes.md
-my-notes.md:2. Determine demand, especially in the entry level. Is your career a good choice? Use the search feature for this.
-fabrics-notes.md:- Use LinkedIn to determine demand for different career paths
+➜ grep "demand" my-notes.md fabrics-notes.md
 ```
+
+My notes:
+
+- Determine **demand**, especially in the entry level. Is your career a good choice? Use the search feature for this.
+
+And `fabric`'s notes:
+
+- Use LinkedIn to determine **demand** for different career paths
 
 Although it mentioned demand in the notes, it's not clear _how_ to actually do so in the generated notes.
 
@@ -220,29 +212,42 @@ Although it mentioned demand in the notes, it's not clear _how_ to actually do s
 <details>
 <summary>Tip 3: Use networking tools to find connections</summary>
 
-You can use LinkedIn's people search feature to find potential connections that have things in common. Let's search for "network." I've removed some repeat output from the previous steps.
+Let's search for "network." I've removed some repeat output from the previous steps.
 
 ```sh
-grep -i "network" my-notes.md fabrics-notes.md
-my-notes.md:- Use LinkedIn Open Networks (LiONs), connection multiplier
-my-notes.md:3. Networking - Use people search filters to find people that you connect with that have something in common. It's like a cheat code to find a job
-# ...
-fabrics-notes.md:- Leverage LinkedIn for powerful networking opportunities
-fabrics-notes.md:- Networking and connecting with industry professionals is key to landing opportunities
-fabrics-notes.md:- Proactively network with industry professionals and recruiters
-fabrics-notes.md:Leveraging strategic LinkedIn optimization, networking, and personal branding can dramatically improve your chances of landing your dream job.
-# ...
-fabrics-notes.md:- Leverage LinkedIn's powerful networking capabilities to uncover new opportunities
+➜ grep -i "network" my-notes.md fabrics-notes.md
 ```
+
+My notes:
+
+- 3. **Networking** - Use people search filters to find people that you connect with that have something in common. It's like a cheat code to find a job
+
+And `fabric`'s
+
+- Leverage LinkedIn for powerful **network**ing opportunities
+- **Network**ing and connecting with industry professionals is key to landing opportunities
+- Proactively **network** with industry professionals and recruiters
+- Leveraging strategic LinkedIn optimization, **network**ing, and personal branding can dramatically improve your chances of landing your dream job.
+- Leverage LinkedIn's powerful **network**ing capabilities to uncover new opportunities
 
 Again, the _how_ of this step is missing from `fabric`'s generated notes.
 
+We'll stop the comparison there for now, since I can tell how `fabric` is behaving.
+
 </details>
 
-Overall, I'm pretty happy with the notes that were generated. Although the generated notes don't always go into specifics, there's no reason why I can't add them later. To me, the time savings massively outweigh the loss in detail.
-There's a concern that referring back to the video will take just as long as if I just went through the video myself. Let's see if that's true.
+Overall, I'm pretty happy with the notes that were generated. Although the generated notes don't always go into specifics, there's no reason why I can't add them later. To me, the time savings massively outweigh the loss in detail. But, how long will it take to find those specifics if I need them?
 
-I spent **9 minutes 47 seconds** skimming through the video until I felt comfortable with the details. Combined with the time it took to run `fabric` and get the notes (11.6 seconds), I spent **9 minutes and 59 seconds** getting comprehensive notes from a video that is 23 minutes and 33 seconds long. In other words, **it was 57.6% faster for me to use `fabric` and skim through the video than it was to just watch it**.
+It depends on a number of factors, but for this video, I spent **9 minutes 47 seconds** skimming through it until I felt comfortable with the details. Combined with the time it took to run `fabric` and get the notes (11.6 seconds), I spent **9 minutes and 59 seconds** getting comprehensive notes from a video that is 23 minutes and 33 seconds long. In other words, **it was 57.6% faster for me to use `fabric` and skim through the video than it was to just watch it**.
+
+Once again, this is summarized below.
+
+| Task                          | Time spent (mm:ss) |
+| ----------------------------- | ------------------ |
+| Watching the video            | 23:33              |
+| 1.5 times speed, taking notes | 21:21              |
+| `fabric` alone                | 00:12              |
+| `fabric` with manual review   | **09:59**          |
 
 ## API Costs
 
@@ -250,48 +255,62 @@ I spent **9 minutes 47 seconds** skimming through the video until I felt comfort
 
 Using Anthropic's AI models through the API comes at a cost, so I'll share my findings.
 
-During testing today, for one video 7537 input tokens, 937 output tokens. The cost for the model I was using
+For the video above, I processed 7537 input tokens, and 937 output tokens.
 
-- Input $0.25/million tokens
-  - 7537 tokens = 0.007537 millions of tokens \* $0.25 = $0.00188425
-- Output $1.25/million tokens
-  - tokens = 0.000937 millions of tokens \* $1.25 = $0.00117125
-- Total cost for gathering wisdom for this video = $0.0030555
+| Service       | Millions of tokens | Price (per million tokens) | Cost (USD)  |
+| ------------- | ------------------ | -------------------------- | ----------- |
+| Input tokens  | 0.007537           | $0.25                      | $0.00188425 |
+| Output tokens | 0.000937           | $1.25                      | $0.00117125 |
 
-It cost me less than a cent to use this.
+This leads to a total cost of **$0.0030555**. Put another way, **it cost me less than a third of a cent** to extract the wisdom from this video.
 
 ### YouTube API
 
-Default quota limit of 10,000 "points" per day.
+[The default quota limit for YouTube's Data API is 10,000 "points" per day.](https://developers.google.com/youtube/v3/guides/quota_and_compliance_audits) Below are [estimated costs](https://developers.google.com/youtube/v3/determine_quota_cost) for listing video captions and metadata.
 
-- List captions: 50 points
-- List anything else: 1 point
+- `captions` resource, `list` method: 50 points
+- `list` method for all other resources: 1 point
 
-It's clear that dowloading one video will not have me reach my quota. The cost to me is $0.00.
+It's clear that downloading one video's will not have me reach my quota. The cost to me is $0.00.
+
+<details>
+<summary>Checking quota limits for YouTube Data API</summary>
+
+If you plan on using this a lot, then you may want to know **how much of your remaining data quota is left**. Here's a quick way to do this:
+
+- Log into your Google Cloud account
+- Change the project to your Google Cloud project you used to obtain your YouTube Data API key
+- Go to the "Quotas & System Limits" page in the "IAM & Admin" section
+- In the filter search bar below, search for "YouTube Data API v3", and click the options labelled **SERVICE**.
+- Find the "Queries per day" row
+
+You can look at your "Current usage percentage" if you're working on this today, or click the "Show usage chart" icon at the end of the row to view historical data. For example, for the past couple weeks I've been trying `fabric`, I spent **31 quota points**, which is well below the 10,000 point quota limit.
+
+</details>
 
 ## Savings
 
 As the old adage goes, "Time is money." The amount of time spent doing a task has a cost associated with it. Using a previous job as a reference, I'll pick a wage of $60 per hour. If I was working for a company, this would be the amount of money they'd have to pay me to learn from our sample video.
 
-| Activity                           | Time spent (hrs) | Cost ($USD) |
-| ---------------------------------- | ---------------- | ----------- |
-| Watching the video                 | 0.39             | $23.40      |
-| Watching at 1.5x and writing notes | 0.36             | $21.60      |
-| `fabric` with skimming             | 0.10             | $6.00       |
-| `fabric` by itself                 | 0.003            | $0.18       |
+| Activity                           | Time spent (hrs) | Cost (USD) |
+| ---------------------------------- | ---------------- | ---------- |
+| Watching the video                 | 0.39             | $23.40     |
+| Watching at 1.5x and writing notes | 0.36             | $21.60     |
+| `fabric` with skimming             | 0.10             | $6.00      |
+| `fabric` by itself                 | 0.003            | $0.18      |
 
 In other words, by using `fabric` to generate my notes instead of watching the video, **I saved $23.22 worth of time**. Skimming through the video to get cleaner notes **cost me an additional $5.82**.
 
 # Conclusion
 
-In this example alone, `fabric` has already proven to be an excellent tool. I've used this tool to **speed up note taking from YouTube videos by 130 times!** That sounds wildly impressive because it is! With this tool, it's trivial to gather important insight from a series of videos about a given topic.
+In this example alone, `fabric` has already proven to be an excellent tool. I've used this tool to **speed up note-taking from YouTube videos by 130 times!** That sounds wildly impressive because it is! With this tool, it's trivial to gather important insight from a series of videos about a given topic.
 
-Currently, I'm using the Claude 3 Haiku model, which seems to do well enough. However, if I were to use more powerful models, could I save time by reducing the time needed to watch videos. It's clear from the table above that watching video and writing notes is an expensive operation compared to using `fabric`.
+Currently, I'm using the Claude 3 Haiku model, which seems to do well enough. However, if I were to use more powerful models, could I save money by reducing the time needed to double-check the generated notes. My guess is "yes," because watching video and writing notes is an expensive operation compared to using `fabric` alone.
 
 ## Next steps
 
-Why stop at one video, when I can create a script that will convert a series of YouTube videos into notes for me?! This only increases the impressiveness of the savings. I can gather information from a variety of sources, and then review the information to figure out some main points.
+Why stop at one video, when I can create a script that will convert a series of YouTube videos into notes for me?! This only increases the impressiveness of the savings. I can gather information from a variety of sources, and then review the information to figure out some main points. Perhaps I'll share my process of creating a bash script, a topic which I'm only moderately familiar.
 
-As I try to include larger and larger videos, the tokens per second becomes a bottleneck. Perhaps there are other services (such as Groq) that can help increase the speed of analysis.
+As I try to process larger and larger videos, running `fabric` with Claude becomes a bottleneck. Perhaps there are other services that offer faster performance ([such as Groq](https://wow.groq.com/why-groq/)) that can help increase the speed of analysis.
 
-This is very exciting, so I'll follow up with another post about a script with helps automate this process given a series of YouTube videos.
+We'll see what happens next! This is very exciting, so stay tuned for more updates!
