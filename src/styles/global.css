@@ -172,6 +172,18 @@ table {
   width: 100%;
 }
 
+.prose table {
+  margin-bottom: 2em;
+}
+
+.prose details {
+  margin-bottom: 2em;
+}
+
+.prose details summary {
+  cursor: pointer;
+}
+
 img {
   max-width: 100%;
   height: auto;
