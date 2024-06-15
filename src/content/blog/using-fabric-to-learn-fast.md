@@ -5,6 +5,9 @@ startDate: "2024-06-04PDT" # No option for this yet
 pubDate: "2024-06-14PDT"
 heroImage: "/blog/using-fabric-to-learn-fast/guillaume-meurice-cover.png"
 published: true
+tags:
+  - "ai"
+  - "cli"
 ---
 
 I spend a lot of time diving deep into YouTube when I want to learn something new. The videos I watch can range from 15 to 30 minutes in length, or perhaps even more. If time was an issue, then I can listen to videos like a podcast while doing other tasks. But remembering information is also an issue. Scrubbing through to a YouTube video is more difficult than referring to written notes.
