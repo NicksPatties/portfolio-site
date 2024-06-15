@@ -1,7 +1,8 @@
 ---
-import "../styles/tags.css";
+import "@styles/card.css";
 
-import FormattedDate from "./FormattedDate.astro";
+import TagsList from "@components/TagsList.astro";
+import FormattedDate from "@components/FormattedDate.astro";
 import { type CollectionEntry, getEntry } from "astro:content";
 
 type Tag = CollectionEntry<"tags">;
@@ -15,93 +16,12 @@ const project: Project | undefined = Astro.props.project;
 const tags: Tag[] | undefined = Astro.props.tags;
 ---
 
-<style>
-  a {
-    --animation: 0.2s ease;
-    --mask-opacity: 0.75;
-    --mask-opacity-hover: 0.6;
-    list-style-type: none;
-    display: block;
-    padding: 2em 1em;
-    margin: 1em 0;
-    border-radius: 12px;
-    background-position: center;
-    background-color: var(--bg2);
-    background-size: cover;
-    position: relative;
-    text-decoration: none;
-    text-shadow: 0 0 12px var(--bg0_h);
-  }
-
-  .title,
-  .date,
-  .tag-list li {
-    color: var(--orange2);
-    position: relative;
-    z-index: 10;
-    transition: color var(--animation);
-    margin: 0;
-  }
-
-  .tag-list li.project-name {
-    display: inline-block;
-    background-color: var(--orange2);
-    color: var(--bg);
-    padding: 0 0.5rem;
-    border-radius: 12px;
-    text-shadow: initial;
-    transition: background-color var(--animation);
-  }
-
-  .title {
-    line-height: 1;
-  }
-
-  a:hover .title,
-  a:hover .date,
-  a:hover .tag-list li {
-    color: var(--green2);
-  }
-
-  a:hover .tag-list li.project-name,
-  a:focus .tag-list li.project-name {
-    background-color: var(--green2);
-    color: var(--bg);
-  }
-
-  a:focus .title,
-  a:focus .date,
-  a:focus .tag-list li {
-    color: var(--green2);
-  }
-
-  .mask {
-    border-radius: 12px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: var(--bg0);
-    opacity: var(--mask-opacity);
-    height: 100%;
-    width: 100%;
-    transition: opacity var(--animation);
-  }
-
-  a:focus .mask,
-  a:hover .mask {
-    opacity: var(--mask-opacity-hover);
-  }
-
-  a:active .mask {
-    opacity: var(--mask-opacity);
-  }
-</style>
-
 <a
   style={heroImage && {
     "background-image": `url(${heroImage})`,
   }}
   {href}
+  class="card"
 >
   <h3 class="title">{title}</h3>
   {
@@ -111,23 +31,6 @@ const tags: Tag[] | undefined = Astro.props.tags;
       </p>
     )
   }
-  <ul class="tag-list">
-    {
-      project && (
-        <>
-          <span class="sr-only">Part of the project</span>
-          <li class="project-name">{project.data.name}</li>
-        </>
-      )
-    }
-    {tags && <span class="sr-only">Contains the tags</span>}
-    {
-      tags &&
-        tags.map(async (g: Tag) => {
-          const tag: Tag = await getEntry("tags", g.id);
-          return <li aria-label={tag.data.name}>{tag.data.name}</li>;
-        })
-    }
-  </ul>
+  <TagsList {project} {tags} />
   <div class="mask"></div>
 </a>
