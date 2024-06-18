@@ -1,0 +1,75 @@
+.card {
+  --animation: 0.2s ease;
+  --mask-opacity: 0.75;
+  --mask-opacity-hover: 0.6;
+  list-style-type: none;
+  display: block;
+  padding: 2em 1em;
+  margin: 1em 0;
+  border-radius: 12px;
+  background-position: center;
+  background-color: var(--bg2);
+  background-size: cover;
+  position: relative;
+  text-decoration: none;
+  text-shadow: 0 0 12px var(--bg0_h);
+}
+
+.card .title,
+.card .date {
+  color: var(--orange2);
+  position: relative;
+  z-index: 10;
+  transition: color var(--animation);
+  margin: 0;
+}
+
+.card .tags-list li {
+  transition: all var(--animation);
+}
+
+.card .title {
+  line-height: 1;
+}
+
+.card:hover .title,
+.card:hover .date,
+.card:hover .tags-list li {
+  color: var(--green2);
+  border-color: var(--green2);
+}
+
+.card:hover .tags-list li.tag-pill.project,
+.card:focus .tags-list li.tag-pill.project {
+  background-color: var(--green2);
+  border-color: var(--green2);
+  color: var(--bg);
+}
+
+.card:focus .title,
+.card:focus .date,
+.card:focus .tags-list li {
+  border-color: var(--green2);
+  color: var(--green2);
+}
+
+.card .mask {
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--bg0);
+  opacity: var(--mask-opacity);
+  height: 100%;
+  width: 100%;
+  transition: opacity var(--animation);
+}
+
+.card:focus .mask,
+.card:hover .mask {
+  opacity: var(--mask-opacity-hover);
+}
+
+.card:active .mask {
+  opacity: var(--mask-opacity);
+}

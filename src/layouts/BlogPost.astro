@@ -1,11 +1,10 @@
 ---
-import "../styles/tags.css";
-
 import { type CollectionEntry, getEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
+import TagsList from "@components/TagsList.astro";
 
 type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
@@ -58,21 +57,6 @@ const projectDetails = project && (await getEntry("projects", project.slug));
       .last-updated-on {
         font-style: italic;
       }
-      li.project-name a {
-        display: inline-block;
-        background-color: var(--orange2);
-        color: var(--bg);
-        padding: 0 0.5rem;
-        border-radius: 12px;
-        transition: background-color var(--animation);
-        line-height: 1.7;
-        color: var(--bg);
-        text-decoration: none;
-      }
-      li.project-name a:hover,
-      li.project-name a:focus {
-        background-color: var(--green2);
-      }
     </style>
   </head>
 
@@ -100,35 +84,12 @@ const projectDetails = project && (await getEntry("projects", project.slug));
               }
             </div>
             <h1>{title}</h1>
-            <ul class="tag-list">
-              {
-                projectDetails && (
-                  <>
-                    <li class="project-name">
-                      <a
-                        aria-label={`Go to ${projectDetails.data.name} project`}
-                        href={`/projects/${project.slug}`}
-                      >
-                        {projectDetails.data.name}
-                      </a>
-                    </li>
-                  </>
-                )
-              }
-              {
-                tags &&
-                  tags.map(async (t) => {
-                    const tag: Tag = await getEntry("tags", t.id);
-                    return (
-                      <li>
-                        <a aria-label={`See posts tagged ${tag.data.name}`} href=`/tags/${t.id}`>
-                          <span aria-hidden="true">{tag.data.name}</span>
-                        </a>
-                      </li>
-                    );
-                  })
-              }
-            </ul>
+            <TagsList
+              project={projectDetails}
+              {tags}
+              links={true}
+              center={true}
+            />
             <hr />
           </div>
           <slot />

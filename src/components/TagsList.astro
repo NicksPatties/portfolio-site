@@ -1,0 +1,56 @@
+---
+import "@styles/tags.css";
+
+import { type CollectionEntry, getEntry } from "astro:content";
+
+type Tag = CollectionEntry<"tags">;
+type Project = CollectionEntry<"projects">;
+
+const project: Project | undefined = Astro.props.project;
+const tags: Tag[] | undefined = Astro.props.tags;
+/**
+  Determines whether to wrap the list items in `<a>` tags.
+  Useful when choosing to render tags within a card or by themselves
+  @default false
+*/
+const links: boolean = Astro.props.links || false;
+/**
+  Centers the tags with `justify-content: center` CSS property.
+  Otherwise, it's `justify-content: start`.
+*/
+const center: boolean = Astro.props.links || false;
+---
+
+<style></style>
+<ul class={center ? "tags-list center" : "tags-list"}>
+  {
+    project && (
+      <>
+        <span class="sr-only">Part of the project</span>
+        {links ? (
+          <a class="tag-pill project" href={"/projects/" + project.slug}>
+            <li>{project.data.name}</li>
+          </a>
+        ) : (
+          <li class="tag-pill project">{project.data.name}</li>
+        )}
+      </>
+    )
+  }
+  {tags && <span class="sr-only">Contains the tags</span>}
+  {
+    tags &&
+      tags.map(async (g: Tag) => {
+        const tag: Tag = await getEntry("tags", g.id);
+        return links ? (
+          <a class="tag-pill" href={"/tags/" + tag.id}>
+            <li aria-label={tag.data.name}>{tag.data.name}</li>
+          </a>
+        ) : (
+          <li class="tag-pill" aria-label={tag.data.name}>
+            {tag.data.name}
+          </li>
+        );
+      })
+  }
+</ul>
