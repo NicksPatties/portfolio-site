@@ -14,11 +14,15 @@ const tags: Tag[] | undefined = Astro.props.tags;
   @default false
 */
 const links: boolean = Astro.props.links || false;
+/**
+  Centers the tags with `justify-content: center` CSS property.
+  Otherwise, it's `justify-content: start`.
+*/
 const center: boolean = Astro.props.links || false;
 ---
 
 <style></style>
-<ul class={center ? "tag-list center" : "tag-list"}>
+<ul class={center ? "tags-list center" : "tags-list"}>
   {
     project && (
       <>
