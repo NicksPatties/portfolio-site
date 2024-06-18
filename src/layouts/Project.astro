@@ -82,7 +82,7 @@ const posts = (await getPosts()).filter(
         <div class="prose">
           <div class="title">
             <h1>{name}</h1>
-            <TagsList {tags} links={true} />
+            <TagsList {tags} links={true} center={true} />
             <hr />
           </div>
           <slot />

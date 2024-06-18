@@ -2,13 +2,14 @@
   line-height: 1.7;
   list-style: none;
   padding: 0;
-}
-
-.tag-list.inline-flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
-  gap: 1rem 0;
+  gap: 0.7rem 0;
+}
+
+.tag-list.center {
+  justify-content: center;
 }
 
 .tag-pill {

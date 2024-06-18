@@ -84,7 +84,12 @@ const projectDetails = project && (await getEntry("projects", project.slug));
               }
             </div>
             <h1>{title}</h1>
-            <TagsList project={projectDetails} {tags} links={true} />
+            <TagsList
+              project={projectDetails}
+              {tags}
+              links={true}
+              center={true}
+            />
             <hr />
           </div>
           <slot />

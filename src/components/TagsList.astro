@@ -14,10 +14,11 @@ const tags: Tag[] | undefined = Astro.props.tags;
   @default false
 */
 const links: boolean = Astro.props.links || false;
+const center: boolean = Astro.props.links || false;
 ---
 
 <style></style>
-<ul class="tag-list">
+<ul class={center ? "tag-list center" : "tag-list"}>
   {
     project && (
       <>
