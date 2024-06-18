@@ -24,9 +24,8 @@
   margin: 0;
 }
 
-.card .tag-list li.project-name {
-  color: var(--bg);
-  transition: background-color var(--animation);
+.card .tag-list li {
+  transition: all var(--animation);
 }
 
 .card .title {
