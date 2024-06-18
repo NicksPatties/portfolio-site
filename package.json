@@ -9,7 +9,7 @@
     "preview": "astro preview --port=4322",
     "astro": "astro",
     "pw:test": "playwright test",
-    "pw:screenshots": "playwright test -c playwright-screenshots.config.ts --update-snapshots --headed"
+    "pw:screenshots": "playwright test -c playwright-screenshots.config.ts --update-snapshots"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
