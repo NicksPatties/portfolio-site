@@ -25,32 +25,37 @@ const center: boolean = Astro.props.links || false;
 <ul class={center ? "tags-list center" : "tags-list"}>
   {
     project && (
-      <>
-        <span class="sr-only">Part of the project</span>
+      <li>
         {links ? (
-          <a class="tag-pill project" href={"/projects/" + project.slug}>
-            <li>{project.data.name}</li>
+          <a
+            class="tag-pill project"
+            href={"/projects/" + project.slug}
+            aria-label={project.data.name + " project"}
+          >
+            {project.data.name}
           </a>
         ) : (
-          <li class="tag-pill project">{project.data.name}</li>
+          <span class="tag-pill project">{project.data.name}</span>
         )}
-      </>
+      </li>
     )
   }
-  {tags && <span class="sr-only">Contains the tags</span>}
   {
     tags &&
       tags.map(async (g: Tag) => {
         const tag: Tag = await getEntry("tags", g.id);
-        return links ? (
-          <a class="tag-pill" href={"/tags/" + tag.id}>
-            <li aria-label={tag.data.name}>{tag.data.name}</li>
+        const inner = links ? (
+          <a
+            class="tag-pill"
+            href={"/tags/" + tag.id}
+            aria-label={tag.data.name + " tag"}
+          >
+            {tag.data.name}
           </a>
         ) : (
-          <li class="tag-pill" aria-label={tag.data.name}>
-            {tag.data.name}
-          </li>
+          <span class="tag-pill">{tag.data.name}</span>
         );
+        return <li>{inner}</li>;
       })
   }
 </ul>

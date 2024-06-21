@@ -24,7 +24,7 @@
   margin: 0;
 }
 
-.card .tags-list li {
+.card .tags-list .tag-pill {
   transition: all var(--animation);
 }
 
@@ -34,13 +34,13 @@
 
 .card:hover .title,
 .card:hover .date,
-.card:hover .tags-list li {
+.card:hover .tags-list .tag-pill {
   color: var(--green2);
   border-color: var(--green2);
 }
 
-.card:hover .tags-list li.tag-pill.project,
-.card:focus .tags-list li.tag-pill.project {
+.card:hover .tags-list .tag-pill.project,
+.card:focus .tags-list .tag-pill.project {
   background-color: var(--green2);
   border-color: var(--green2);
   color: var(--bg);
@@ -48,7 +48,7 @@
 
 .card:focus .title,
 .card:focus .date,
-.card:focus .tags-list li {
+.card:focus .tags-list .tag-pill {
   border-color: var(--green2);
   color: var(--green2);
 }
