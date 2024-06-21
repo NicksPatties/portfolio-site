@@ -27,7 +27,11 @@ const center: boolean = Astro.props.links || false;
     project && (
       <li>
         {links ? (
-          <a class="tag-pill project" href={"/projects/" + project.slug}>
+          <a
+            class="tag-pill project"
+            href={"/projects/" + project.slug}
+            aria-label={project.data.name + " project"}
+          >
             {project.data.name}
           </a>
         ) : (
@@ -41,7 +45,11 @@ const center: boolean = Astro.props.links || false;
       tags.map(async (g: Tag) => {
         const tag: Tag = await getEntry("tags", g.id);
         const inner = links ? (
-          <a class="tag-pill" href={"/tags/" + tag.id}>
+          <a
+            class="tag-pill"
+            href={"/tags/" + tag.id}
+            aria-label={tag.data.name + " tag"}
+          >
             {tag.data.name}
           </a>
         ) : (
