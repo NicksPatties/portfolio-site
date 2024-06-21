@@ -12,6 +12,10 @@
   justify-content: center;
 }
 
+.tags-list li {
+  margin-right: 0.5rem;
+}
+
 .tag-pill {
   display: inline-block;
   text-decoration: none;
@@ -22,7 +26,6 @@
   border-width: 2px;
   border-style: solid;
   border-color: var(--orange2);
-  margin-right: 0.5rem;
   padding: 0 0.5rem;
   border-radius: 12px;
 }
