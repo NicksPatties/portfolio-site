@@ -2,7 +2,7 @@
 title: "Reading the news with Newsboat and Lynx"
 description: "I find a less annoying way to read the news using command line tools and RSS."
 startDate: "2024-06-21PDT"
-pubDate: "2024-06-21PDT"
+pubDate: "2024-06-28PDT"
 published: false
 tags:
   - "cli"
