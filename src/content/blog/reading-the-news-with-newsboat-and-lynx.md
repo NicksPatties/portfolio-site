@@ -2,8 +2,8 @@
 title: "Reading the news with Newsboat and Lynx"
 description: "I find a less annoying way to read the news using command line tools and RSS."
 startDate: "2024-06-21PDT"
-pubDate: "2024-06-28PDT"
-published: false
+pubDate: "2024-06-30PDT"
+published: true
 tags:
   - "cli"
   - "rss"
@@ -162,7 +162,7 @@ browser lynx
 
 Save the file, and then re-open `newsboat`. Try opening an article with the `o` command, and see what happens! Below is a video of the whole process from start to finish.
 
-![Opening the article with newsboat, and then the lynx browser](src/assets/blog/reading-the-news-with-newsboat-and-lynx/news.gif)
+<img src="/blog/reading-the-news-with-newsboat-and-lynx/news.gif" width="720" alt="Opening the article with newsboat, and then the lynx browser"/>
 
 If your flow looks similar to the one above, then **congratulations!** You're well on your way to a zen-like news reading experience!
 
