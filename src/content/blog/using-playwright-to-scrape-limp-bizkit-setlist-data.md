@@ -1,8 +1,9 @@
 ---
-title: "Limp Bizkit Scraper"
-description: "Can I figure out which songs I should practice to be the most prepared for a concert?"
+title: "Planning the ultimate Limp Bizkit experience with Playwright"
+description: "How can my friend and I get on stage to perform guitar and bass with Limp Bizkit? The answer lies in the data."
 startDate: "2024-06-06PDT"
 pubDate: "2024-07-08PDT" # Don't forget the timezone code at the end!
+heroImage: "/blog/using-playwright-to-scrape-limp-bizkit-setlist-data/cover.png"
 published: false
 tags:
   - "typescript"
@@ -11,29 +12,29 @@ tags:
   - "cli"
 ---
 
-Limp Bizkit has invited fans on stage in the past to perform with them. It's a once-in-a-lifetime opportunity that sounds fucking cool. Fans have rapped, played guitar, and even formed entire bands.
+Did you know that prolific nu-metal band Limp Bizkit invites fans on stage to perform with them? It's true! Fans have sung, rapped, and played instruments live with them before. Limp Bizkit even assembled entire bands made of fans to perform, to varying degrees of success.
 
-What is the likelihood that Limp Bizkit will invite us on stage to play a song? Which songs should we play that will give us the greatest chance of being picked? These are questions that can be answered when we have access to data.
+My friend and I want in. We're planning on seeing Limp Bizkit next month, which gives us plenty of time to prepare. The question is, _which song should we rehearse_? And although it's probably rare, _what is the likelihood that Limp Bizkit will invite us on stage to perform with them_?
 
-Fortunately, there's a resource that is a kind of wikipedia for live music called Setlist.fm. This will have the data we need to figure this out. Plus, due to Limp Bizkit's popularity, performances can be corroborated with video evidence from YouTube, Instagram, or other platforms.
+Fortunately, there's a resource that is the Wikipedia for live music called [setlist.fm](https://www.setlist.fm/). This site contains over 8 million set lists, so if you're interested in learning what your favorite artists like to play live, then this is a great resource.
 
-To obtain this data automatically, we can use playwright to automatically browse and select those elements. We'll then save the output to a file, and then use some command line applications to organize and understand the data.
+[With 104 pages worth of set lists at the time of writing](https://www.setlist.fm/setlists/limp-bizkit-33d69c2d.html), handling this data ourselves will take time. Generously, navigating to a set list and copying it to another document takes about 30 seconds. 10 set lists per page, and 104 pages put the total time of just moving the data elsewhere to **8 hours and 40 minutes**.
 
-# The data source
+This data needs to be obtained automatically to answer these questions and give ourselves the most time to rehearse. Fortunately, we can turn to Playwright and NodeJS to help! Once the data is in our hands, we can use some command line programs to organize our data, and some spreadsheet software to create some visualizations.
 
-This is the [Limp Bizkit page](https://www.setlist.fm/setlists/limp-bizkit-33d69c2d.html) that we will take our data from.
+With all this information, we'll be able to answer our questions: **How likely will we be invited to play music with Limp Bizkit**, and **what songs should we rehearse?**
 
-To access this data, we use playwright to connect to our page.
+# The data scraper
 
-# Obtaining data
-
-If you just want to see the repository where the scraper code is contained, you can [view it here](https://github.com/NicksPatties/lb-scraper). I'll share a quick rundown of my process below.
-
-If you're familiar with Playwright, you may have used it in end-to-end tests. Your project may have had some sort of configuration file, defining which browsers to use, or what commands to run to start the test. This is not necessary for us.
+If you'd like to read my code along with this post, you can [view the `lb-scraper` code here!](https://github.com/NicksPatties/lb-scraper) I'll explain some key details about the scraping process below.
 
 ## Initializing the browser
 
-Instead, we can obtain the variables to automate a webpage with the following statements.
+If you're familiar with Playwright, you may have used it to write end-to-end tests, verifying your website behaves as expected when user interact with it. Your project may have had some sort of configuration file to define which browsers to use during testing to ensure cross-compatibility.
+
+Since we're only interested in accessing Limp Bizkit's set lists through one browser, we don't need this configuration. However, this means we'll have to define our own `page` component. The `page` component requires a `context` to open, which in turn requires a `browser`.
+
+Here's me initializing the components required to open a web page with Playwright without the use of a test runner or configuration file.
 
 ```ts
 import { chromium } from "playwright";
@@ -44,21 +45,21 @@ const context = await browser.newContext();
 const page = await context.newPage();
 ```
 
-This code starts a new instance of Chromium browser, then opens a new browser context (think a user profile in a web browser), and then a new page. We'll be interacting with pages and browser contexts the most during this exercise. Now, which page will we open?
+This code starts an instance of the Chromium browser. Then, it starts a new browser context. Think of a browser context like a specific user profile that has its own preferences, like what color scheme to use. "Incognito mode" is another example of a browser context. Finally, a new page is created from the context.
+
+Once we have the `page` assigned, we'll be ready to navigate to where we need to go!
 
 ## Iterating through pages
 
-It may make sense to take the link from above and plug it into the `page.goto` function, which will navigate the page to the provided URL.
+It may make sense to take [this link to Limp Bizkit's setlist.fm page](https://www.setlist.fm/setlists/limp-bizkit-33d69c2d.html) and plug it into the `page.goto` function. This'll automatically navigate that Playwright page to the provided location.
 
 ```ts
 await page.goto("https://www.setlist.fm/setlists/limp-bizkit-33d69c2d.html");
 ```
 
-However, there's a simpler option. If you're looking at the Limp Bizkit setlist page linked above, try clicking on the next page links underneath the sets, and look at the URL. Notice the query parameter called `page` in the URL.
+However, there's a simpler option. If you're looking at the Limp Bizkit set list page, try clicking on the pagination links underneath the sets lists, and look at the URL. There's a query parameter called `page` in there!
 
-Instead of having playwright click the next page link, we can pass the URL with the query parameter directly into the `page.goto` function! This simplifies our code a little bit, only requiring us to loop through a range of page indices. It's a nice affordance. I'm interested in the data, not verifying that certain links work, like in an e2e test.
-
-So the `goto` function becomes this instead:
+Instead of having to locate the correct link to click to move to the next page (like you would in an e2e test), we can pass the set lists page index to the URL of our `goto` function! So the function becomes this instead:
 
 ```ts
 await page.goto(
@@ -66,34 +67,45 @@ await page.goto(
 );
 ```
 
-Well then how do we know what page we're currently on, and what are our bounds? I sloppily assigned some values for those starting and ending boundaries with the expectation that they would not change very often. Also, I'll only need to perform this scraping once since the analysis would only be relevant up until the point my friend and I decide what songs to play.
+So then how do we know what `currPage` is? We can find this easily by defining our start and end page indices. Additionally, I give the script user the option to define their own bounds with the `-s` and `-e` options. Here's the code below.
 
-In short, we'll start with `1`, and then go up to `105`, which is the number of total pages of Limp Bizkit set lists at the time of writing.
+```ts
+const argsInput: string[] = [...process.argv].slice(2);
+const args = {};
 
-## Obtaining data from a set list
+// ...
 
-Now that we know how to go from page to page, we can navigate to an individual set list, and start grabbing the data we need. To do this, we'll use locators to navigate to a set list page, and then to the individual songs and their details.
+// iterate through the arguments
+for (let i = 0; i < argsInput.length; i = i + 2) {
+  const name: string = argsInput[i];
+  const value: number = parseInt(argsInput[i + 1]);
+  if (!name.match("-[s|e]") || !value) {
+    console.error(`Error with arg ${name}, value ${value}`);
+    printUsage();
+    process.exit(1);
+  }
+  args[name] = value;
+}
 
-On the page of set lists, the following will get you the list of links to individual set lists. In other words, the songs played at a specific concert.
+const startPage = args["-s"] || 1;
+const endPage = args["-e"] || 105; // not inclusive
+```
+
+Notice how I'm skipping two arguments at a time in the loop above. I expect the flag and its value to appear next to each other in the argument list. If there are no values defined in the arguments, then we'll start with page `1` up until page `105` by default.
+
+We now have the code to iterate through all the pages of Limp Bizkit's set lists. Let's go one level deeper and find the links to each individual set list. We'll use a locator to help us out.
+
+## Locating the set list data
+
+Now that we know how to navigate to each page of Limp Bizkit's set lists, we can navigate to an individual set list to the data we need. To do this, we'll use [locators](https://playwright.dev/docs/locators). Playwright locators can represent an element or an array of elements on a web page. They contain built-in functions.
+
+[Although it's poor form to use CSS selectors as locators in end-to-end tests according to Playwright](https://playwright.dev/docs/locators#locate-by-css-or-xpath), we can use them in our scraper to find all the `<a>` tags with the `summary url` class. These are the links to each individual set list where the song data is located.
 
 ```ts
 const setLinks = await page.locator("a.summary.url").all();
 ```
 
-<details class="info">
-<summary>Why use <code>"a.summary.url"</code> as your locator?</summary>
-
-[Playwright's Locators documentation](https://playwright.dev/docs/locators) offers some best practices on the types of locators to use. Note that CSS locators, like the one above, should be used as a last resort. It's possible the DOM can change, and the locator will find an incorrect node, if at all.
-
-But again, I'm not verifying a page functions correctly, but I need the data from within the page. Changes in the DOM may be an issue if this script is called on a regular basis. However, I intend to only run this a few times. CSS selectors are good enough for my needs.
-
-To find the best selector, I recommend inspecting the page in a browser. Try experimenting with some selectors in the console by calling `document.querySelectorAll('.your.selector')`. Did you get all the elements you wanted to find? If so, then great! The selector will work perfectly as the input of the `locator` function.
-
-It's possible to [generate tests with Playwright to simplify finding the right locators](https://playwright.dev/docs/codegen#introduction), but the code generator prefers more accurate selectors that may be overkill for your application. That's why I found the correct selectors manually.
-
-</details>
-
-I wanted to open a new page for each URL in this list, just in case I don't accidentally lose any progress if I navigate to another location from the same page. (I'm not sure if creating separate windows matters. Perhaps I can simplify my code by just clicking a link with `setLink.click()`.)
+I wanted to open a new page for each URL in this list to keep the search page and individual set list pages separated. Call me paranoid, but I wanted to ensure no mischief in the `setLinkPage` below will make me lose my progress.
 
 ```ts
 for (const setLink of setLinks) {
@@ -113,13 +125,13 @@ for (const setLink of setLinks) {
 }
 ```
 
-The `setLinkPage` has the list of songs we want to copy. We'll use another locator to find the individual songs that we'd like to record. If you're looking at an individual set list page, notice there could be different _types_ of songs, performed songs and tape recordings. The distinction is made clear in the HTML and CSS selectors.
+The `setLinkPage` has the list of songs we want to copy. We'll use another locator to find the individual songs that we'd like to record. If you're looking at an individual set list page, you'll notice there could be different _types_ of songs: performed songs and tape recordings. The distinction is made clear in the HTML and CSS selectors, which can be seen by inspecting the page on a browser.
 
 ```html
 <!-- ... -->
 <ol class="songsList">
-  <li class="setlistParts tape"><!-- Sweet Home Alabama--></li>
-  <li class="setlistParts song"><!-- Break Stuff--></li>
+  <li class="setlistParts tape"><!-- Sweet Home Alabama --></li>
+  <li class="setlistParts song"><!-- Break Stuff --></li>
   <!-- ... -->
 </ol>
 <!-- ... -->
@@ -131,43 +143,82 @@ Therefore, our locators to find the songs that Limp Bizkit performed at a given 
 const songData = await setLinkPage.locator(".setlistParts.song").all();
 ```
 
-We now have all the songs for all the concerts Limp Bizkit has performed to work with. But what data specifically do we care about?
+Cool! We found the individual songs we were looking for! But what data specifically do we care about?
 
 ## Grabbing the right data
 
-It's safe to say that the more data that is obtained, the easier it is to see patterns within that data. The fewer data you have, the harder it is to work with.
+It's safe to say that the more data that is obtained, the easier it is to see patterns within that data.
 
-Since my friend and I are trying to figure out which songs we should learn to give ourselves the greatest chances of being invited on stage to perform, at the very least, we need to know:
+Since my friend and I are trying to optimize our chances to perform with Limp Bizkit, we need to know at minimum:
 
-- The name of the song
+- The name of the song that was performed
 - The notes regarding the song performed
 - The date when the song was performed
 
-With this information, we should be able to have a distinct list of performed songs and their corresponding notes, right? Not quite! There are some considerations to account for which will influence what data should be grabbed.
+With this information, we should have a distinct list of performed songs and their corresponding notes, right? _Not quite!_ There are some considerations to account for which will influence what data should be grabbed.
 
-### Encores?
+### Encores
 
 It's possible a song is played more than once, and it's also possible that one performance may not feature a guest, while another does. To distinguish between two performances of the same song, we can add another field to our data:
 
-- The order in which the song is played
+- The order in which the song is played in the set
 
-This order variable can also answer this question: When does Limp Bizkit like to invite a fan on stage to perform? This can influence our strategy of when we should show our interest in performing on stage.
+This order variable also helps answer another related question: _When within their set does Limp Bizkit like to invite a fan on stage to perform?_ This knowledge tells us when Limp Bizkit will start looking for fans to perform with them, and will dictate when we should make our move to the front of the stage.
 
 ### Multiple performances during one day
 
-Although highly unlikely, I wanted to make sure that my data would not get messed up if Limp Bizkit performed in multiple shows during a single day. To do so, I also added this data to the collection.
+Although highly unlikely, I wanted to make sure that my data would not get messed up if Limp Bizkit performed multiple shows in a single day. To do so, I also added this data to the collection.
 
-- The name of the show performed
+- The name of the concert performed
 
-This also helps ensure individual performances are unique enough that they are not accidentally double counted or filtered out.
+This, along with the date and order, ensures individual song performances are unique enough that they are not accidentally double counted or filtered out when we try to sanitize the data. Later, we'll find this information is useful for conducting additional research.
 
-# Handling the data
+## Writing the data
+
+I decided to write the song data to a `tsv`, or tab-separated values file. This is the simplest way to delimit fields. This helper function creates a row of data in `stdout`.
+
+```ts
+const writeRow = (data: string[]) => {
+  process.stdout.write(data.join("\t") + "\n");
+};
+
+// write the headers to stdout
+writeRow(["Order", "Song", "Info", "Concert", "Date"]);
+```
+
+Recall that we located all the songs on a set list page with the following code:
+
+```ts
+const songData = await setLinkPage.locator(".setlistParts.song").all();
+```
+
+When we iterate through each song, we can grab each column of data with the following code:
+
+```ts
+let order = 1;
+for (const songDatum of songData) {
+  const song = await songDatum.locator(".songPart").innerText();
+  const info = await songDatum.locator(".infoPart").innerText();
+  const concert = linkContent;
+  const row = [order + "", song, info, concert, date];
+  writeRow(row);
+  order++;
+}
+```
+
+Writing to our file is done via the command line. We can direct the output of the script to our data file.
+
+```sh
+node . >> data.tsv
+```
+
+Running this script for all pages takes some time, so feel free to take a break if you're following along. It'll take about 15 minutes for the process to complete, give or take.
 
 At this point, we can now run our script and save the file for further review. The script creates a `tsv` file containing all the songs performed by Limp Bizkit at each of their concerts, along with notes about special cases, like fan performances.
 
-Let's assume our data is called `data.tsv`.
+# Command line data manipulation
 
-We can use some built-in command line applications to sanitize our data, and filter it out into different categories as needed.
+Given our `data.tsv` file, we can use some built-in command line applications to sanitize our data, and filter it out into different categories as needed.
 
 ## `sort`
 
@@ -181,7 +232,7 @@ sort -u data.tsv >> data-uniq.tsv
 
 ## `wc`
 
-How many times in total did Limp Bizkit play a song? We can find this out by using the `wc` command.
+How many songs in total did Limp Bizkit perform? We can find this out by using the `wc` command.
 
 ```sh
 ❯ wc -l data.tsv
@@ -190,7 +241,7 @@ How many times in total did Limp Bizkit play a song? We can find this out by usi
 
 - `-l` means return the number of lines in the given files.
 
-If each line is a song that Limp Bizkit performed, then the total count is an impressive **9909** songs performed to a live audience.
+Since each line represents a song performance, then the total count is an impressive **9909** songs performed to a live audience.
 
 `wc` can also be used to verify if our previous `sort` command filtered out any data or not.
 
@@ -349,5 +400,7 @@ I'll admit, adding the data to a spreadsheet seemed like the easiest solution. H
 However, using an actual database will be easier to perform certain tasks, like verifying that entries are unique, or fetching data that meets certain conditions. Additionally, I wouldn't need to rely on command line tools to filter and sort data.
 
 For data visualization, instead of using a spreadsheet with extremely clunky cart generation, a data visualization library like D3 can be used to create interactive graphs and charts instead.
+
+## Thanks for reading!
 
 This has been a fun project, and I hope you enjoyed reading. I'm off to write more code and practice some more riffs. Stay tuned for more updates! I'll also let you all know if my strategy is successful. ;)
