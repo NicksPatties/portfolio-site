@@ -4,6 +4,7 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import Cards from "../../components/Cards.astro";
 import { type CollectionEntry, getCollection, getEntry } from "astro:content";
+import isDev from "@utils/isDev";
 
 type Blog = CollectionEntry<"blog">;
 type Tag = CollectionEntry<"tags">;
@@ -21,11 +22,10 @@ const { id } = Astro.params;
 const currTag: Tag = await getEntry("tags", id);
 const tagName = currTag.data.name;
 
-const isDev = import.meta.env.MODE === "development";
 const filteredPosts = await getCollection("blog", (p: Blog) => {
   const hasTag =
     p.data.tags && !!p.data.tags.find((tagRef) => tagRef.id === id);
-  return (isDev || (!isDev && p.data.published)) && hasTag;
+  return (isDev() || (!isDev() && p.data.published)) && hasTag;
 });
 
 const posts = filteredPosts.sort(
