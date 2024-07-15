@@ -90,6 +90,10 @@ Blog images
 - place them in the `src/assets/projects/<project-name>` directory
 - Images here will be processed by Astro
 
+#### Adding images to blog posts
+
+`![Image alt text](@assets/blog/{{blog-title}}/{{image-name}})`
+
 ## Screenshots
 
 You can automate screenshots for pages you want to check by using this command:
