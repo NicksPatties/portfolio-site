@@ -235,7 +235,7 @@ sort -u data.tsv >> data-uniq.tsv
 How many songs in total did Limp Bizkit perform? We can find this out by using the `wc` command.
 
 ```sh
-❯ wc -l data.tsv
+wc -l data.tsv
    9909 data.tsv
 ```
 
@@ -246,7 +246,7 @@ Since each line represents a song performance, then the total count is an impres
 `wc` can also be used to verify if our previous `sort` command filtered out any data or not.
 
 ```sh
-❯ wc -l data.tsv data-uniq.tsv
+wc -l data.tsv data-uniq.tsv
    9909 data.tsv
    9909 data-uniq.tsv
   19818 total
@@ -261,7 +261,7 @@ In this case, `sort` didn't filter anything out, so our data looks OK to use.
 How many concerts did Limp Bizkit play in their lifetime? We can find out using a combination of the above commands!
 
 ```sh
-❯ cut --fields=4 data.tsv | sort -u | wc -l
+cut --fields=4 data.tsv | sort -u | wc -l
 635
 ```
 
@@ -274,7 +274,7 @@ Notice that we're piping the output from each command and using it as the input 
 This command may be the most familiar to command line enthusiasts. `grep` is used to find instances of a search query within a file. How many times did Limp Bizkit perform with fans on stage? We can find out by using `grep` like so.
 
 ```sh
-❯ grep --extended-regexp "(fan|audience|guest)" data.tsv | wc -l
+grep --extended-regexp "(fan|audience|guest)" data.tsv | wc -l
 119
 ```
 
@@ -301,7 +301,7 @@ This is enough information to start estimating the likelihood we can perform wit
 This is a little bit discouraging. Note that this does not even filter out the fan performances with specifically fan performances with instruments.
 
 ```sh
-❯ grep --extended-regexp "(fan|audience|guest)" data.tsv | grep --extended-regex "(guitar|bass|band|instrument)" | wc -l
+grep --extended-regexp "(fan|audience|guest)" data.tsv | grep --extended-regex "(guitar|bass|band|instrument)" | wc -l
 15
 ```
 
@@ -356,7 +356,7 @@ Since we grabbed the order that each song was played, we can estimate when we sh
 
 After counting the total songs in each concert for each song that was performed with fans on instruments, I had the data at my disposal to calculate at what portion of the concert the song took place. Calculating the _timing ratio_ of each song played leads to this graph.
 
-[line graph of the moment when songs with fans on instruments were played in each concert]()
+![line graph of the moment when songs with fans on instruments were played in each concert](@assets/blog/using-playwright-to-scrape-limp-bizkit-setlist-data/timing-ratio-chart.png)
 
 On average, fans with instruments performed **about halfway through the concert**. Given that the average number of songs played in 2024 is 12, **we'll need to start positioning ourselves in the crowd by the time 5 songs have played**. This should give us plenty of time to make our way to the front.
 
@@ -370,7 +370,8 @@ Although this data was extremely discouraging at first, it was very useful for f
 
 This begs the question, **which songs should we pick to perform?** We'll refer to this chart below for the answer.
 
-[pie chart of times fans performed with Limp Bizkit on stage with instruments]()
+![pie chart of times fans performed with Limp Bizkit on stage with instruments](@assets/blog/using-playwright-to-scrape-limp-bizkit-setlist-data/fans-with-instruments-pie-chart.png)
+
 The majority of times that the stars align for these lucky fans, they'll play either **My Way** or **Hot Dog**. These are our second and third choice of song. So then what's our first choice?
 
 **9 Teen 90 Nine**, specifically to chug on this riff here.
