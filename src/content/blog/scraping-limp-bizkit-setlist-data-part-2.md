@@ -1,5 +1,5 @@
 ---
-title: "Scrapin' the Bizkit Part 2: Keep on Rollin', Baby"
+title: "Scrapin' the Bizkit Part 2: Re-Arranged"
 description: "My first scraper with Playwright was pretty good, but we can do better with bun and SQLite!"
 startDate: "2024-07-25PDT"
 pubDate: "2024-08-02PDT" # Don't forget the timezone code at the end!
@@ -16,28 +16,51 @@ I scraped some Limp Bizkit data from setlist.fm a while ago to perform some anal
 
 After some research, I ditched Playwright and used some other tools to grab the info I wanted. I also tossed out the spreadsheets and used SQLite to store and query my data. Today, I'll share my findings, and teach you everything I learned about SQLite as a result of this exercise, _which was a lot._
 
+If you'd like to follow along with my work, take a look at [this branch in the GitHub repository for my scraper](https://github.com/NicksPatties/lb-scraper/tree/bun-jsdom-sqlite). Let's talk about the improvements to the scraper first.
+
 # Improved scraping speed
 
-Previously, I used Playwright to grab information from my page. As I noted before, I can obtain the information I need by just requesting the HTML from the concert link I needed. I demonstrated this with the `curl` command, but since I wanted to use TypeScript, I decided to use the `axios` library to get that information in the simplest way possible.
+Previously, I used Playwright to grab information from setlist.fm. I opened each concert page one by one to find the data I wanted to grab. But, as I noted before, I can obtain the information I need by just requesting the HTML from the concert link I needed. This meant that **I did not need an entire browser to find what I'm looking for.**
 
-Now that I have the HTML I need, I needed a way to parse it, preferably using the HTML Document querying methods to which I've been accustomed. `jsdom` was a good fit.
+I demonstrated that I could request the HTML using the `curl` command. If you'd like, you could try it yourself, assuming `curl` is installed on your system.
 
-Compiling and running the code with `swc` was easy at first with just one file. But, I ran into trouble after attempting to separate my code into modules and import them into my main TypeScript file. To simplify my TypeScript compilation, I decided to use `bun` as my runtime, which handles TypeScript for me. I avoided `bun` last time since at the time of my previous writing, it did not support some Node.js functions to create and write to files. However, those issues have been fixed.
+```sh
+curl https://www.setlist.fm/setlist/limp-bizkit/2024/somerset-amphitheater-somerset-wi-4ba8b3ea.html
+```
 
-Once these changes were in place, I had to make some modifications to the code and how I iterated through each of the pages. If you'd like to see details, you can view them [in the project's repository here](https://github.com/NicksPatties/lb-scraper/blob/bun-jsdom-sqlite/index.ts).
+This HTML was obtained within milliseconds; grabbing the HTML by itself instead of waiting for assets to finish loading increased speed dramatically. But since I wanted to write my script in TypeScript rather than bash, I decided to use the `axios` library to request the HTML using a simple interface.
 
-Here's a table showing the time it took to scrape a single page's worth of concerts 10 times. I used `hyperfine` to perform my benchmarks.
+```ts
+let res = await axios.get(lbUrlBase + page, axiosOptions);
+```
+
+Now that I have the HTML I need saved into the `res` variable, I needed a way to parse it, preferably one that supports the HTML node querying methods to which I've been accustomed. `jsdom` was a good fit for this.
+
+```ts
+const dom = new JSDOM(res.data);
+const eventList = dom.window.document.querySelectorAll(".vevent");
+```
+
+Compiling and running the code with `swc` was easy at first with just one file, like in my previous iteration. But, I ran into hiccups after attempting to separate my code into modules. I decided to let `bun` compile my TypeScript for me instead.
+
+So, why didn't I use `bun` to begin with? At the time of my previous writing, `bun` did not support some Node.js functions to create and write to files. However, those issues have been fixed with later iterations.
+
+Once all of these pieces were put into place, I had to make some modifications to how I iterated through all the setlist.fm pages containing Limp Bizkit's concerts. Instead of entering each concert one at a time, I gathered all the URLs that pointed to individual concert page from the search results. Once I had this array, I requested the HTML from the concert, did my parsing, and moved to the next one until I was finished.
+
+So how much time did each of these approaches take? Here's a table showing the time it took to scrape a single page's worth of concerts 10 times. I used `hyperfine` to perform my benchmarks.
 
 | Scraper                   | Mean (s)  |
 | ------------------------- | --------- |
 | **Bun, Axios, and JSDom** | **5.151** |
 | Playwright                | 28.324    |
 
-That's about **six times faster** than before, and as you can expect, these savings add up. Suppose I would like to capture concert data for 100 pages worth of concerts. With Playwright, scraping would take about 45 minutes. With `bun` and `jsdom`, scraping would take **less than 10 minutes**.
+That's about **five and a half times faster** than before! As you can expect, these savings add up. Suppose I would like to capture concert data for 100 pages worth of concerts. With Playwright, scraping would take about 45 minutes. With `bun`, `axios`, and `jsodom`, scraping would take **less than 10 minutes**.
+
+Instead of writing the data to a TSV file like last time, I also wanted to use a relational database to see if that was a better experience.
 
 # Improved data storage
 
-I originally stored my scraped data into a `tsv` file that contained data which looked like this:
+I originally stored my scraped data into a TSV file that contained data which looked like this:
 
 | Order | Song               | Info                   | Concert                          | Date       |
 | ----- | ------------------ | ---------------------- | -------------------------------- | ---------- |
@@ -47,9 +70,9 @@ I originally stored my scraped data into a `tsv` file that contained data which 
 | 11    | Take a Look Around |                        | Limp Bizkit at Sonic Temple 2024 | 2024-05-19 |
 | ...   | ...                | ...                    | ...                              | ...        |
 
-As you can see, a lot of this data is repeated. The concert and date information is repeated for each performance that takes place in the same venue and date. Additionally, song names were repeated each time they played a specific song. With this previous implementation, you would see the name "Nookie" over 500 times in the table.
+As you can see, a lot of this data is repeated. The rows in the _Concert_ and _Date_ columns repeat for each performance that takes place in the same venue and day. Additionally, _Song_ names repeat each time that song was performed. You would see the name "Nookie" over 500 times in this file in my first iteration.
 
-This issue was remedied by using SQLite, a lightweight, relational database. With SQLite, I can create tables of data, and connect them to individual performances through the use of `JOIN`s. Instead of containing an entire song name, concert name or date over and over again, I can relate two groups of data by an ID, which takes up much less space.
+This issue was remedied by using SQLite, a lightweight, relational database. With SQLite, I can create tables of data, and connect them to individual performances via an ID by using `join` statements. Instead of repeating the same rows of data, I can relate two groups of data by an ID, which takes up less space.
 
 To see the space savings, I decided to test how large the TSV file and the SQLite database files would be after scraping one page, versus all the entries. Here are the results after one page.
 
@@ -65,46 +88,106 @@ Curiously, the size of the database was almost 2.5 times larger than the TSV fil
 | TSV with Playwright          | 813       |
 | **SQLite Database with Bun** | **308**   |
 
-Now the database size is about **2.6 times smaller** than the text file, even though **the database is more up to date than the TSV**.
+Now the database size is about **2.6 times smaller** than the text file, even though **the database contains more data than the TSV**. It's clear that using an SQLite database is more space efficient than using a TSV.
+
+But getting the data from these files to perform analysis is wildly different. How do spreadsheet functions and SQL queries compare with each other?
 
 # Comparing queries
 
-I previously used spreadsheets to filter and make queries on the data. I used 8 pages worth of spreadsheets for filtering and analysis. The logic behind those queries started to get out of control and illegible.
-
-For instance, here's a function that get the **total number of concerts Limp Bizkit performed in the year 2023** with LibreOffice's built-in functions.
+Last time, I used 8 pages worth of spreadsheets for filtering and analysis. The logic behind those queries started to get out of control and illegible. For instance, here's a function that get the **total number of concerts Limp Bizkit performed in the year 2023** with LibreOffice's built-in functions.
 
 ```
-=COUNTIFS($Concerts.$A$2:$B$769 , ">="&DATE($A209,1,1), $Concerts.$A$2:$B$769, "<"&DATE($A208,1,1))
+=COUNTIFS(
+  $Concerts.$A$2:$B$769 , ">="&DATE($A209,1,1),
+  $Concerts.$A$2:$B$769, "<"&DATE($A208,1,1)
+)
 ```
 
-This query requires knowledge of the location of data within the `$Concerts` spreadsheet, and can break if I reorganize the columns in the `$Concerts` sheet for whatever reason.
+- `COUNTIFS` is a function that increments a count if a certain condition is satisfied.
+  - Odd numbered parameters (the first and third in this case) are the ranges of data to consider.
+  - Even numbered parameters are the conditions that must pass to increment the counter.
+- `">="&DATE($A209,1,1)` is a condition that says "greater than or equal to the date at year `$A209`, month 1, and day 1," or January 1st, `$A209`
+  - `$A209` is the value in the cell of column `A`, row `209`
+- The second condition says any dates less than January 1st, `$A208`.
 
-The equivalent query in SQL looks like this.
+If `$A208` is 2024, and `$A209` is 2023, then this function will return the number of concerts within 2023. That is, if the `$Concerts` sheet contains the expected information.
+
+In fact, this command is very brittle. If the data in the `$Concerts` sheet changes for whatever reason, or the data from the `A` column where the years are located changes, the calculation is thrown off!
+
+Compare this to the equivalent query in SQL.
 
 ```sql
-select count(*) from concerts
+select count(*) as "Number of concerts" from concerts
 where strftime("%Y", date) = "2023";
 ```
 
-This query reads a little more like natural language compared to the query above. But what if I wanted the number of concerts performed in **every year since 2000?** In the spreadsheet, the function is (almost) copied for each year in an adjacent column, like so:
+- `select` is the statement that says "give me this data."
+- `count(*)` is a function that returns the number of all the rows in a query.
+- `from` indicates where I want to get this data. In this case, I want to get this info from the `concerts` database.
+- `where` filters out the data I receive that passes certain conditions. In this case, I'm only selecting rows that have a year of `2023`.
+
+Whichever you like more is a matter of opinion, but this SQL query reads a little more like natural language compared to the spreadsheet function above.
+
+But what if I wanted the number of concerts performed in **every year since 2000?** It's trivial to copy and paste the function into the following rows, assuming you have a column of years iterating from 2024 to 2000. In the spreadsheet, the function is (almost) copied for each year in an adjacent column, like so:
 
 | Year | Number of concerts query                                                                                                  |
 | ---- | ------------------------------------------------------------------------------------------------------------------------- |
 | 2024 | `=COUNTIFS($Concerts.$A$2:$Concerts.$B$769 , ">="&DATE($A208,1,1))`                                                       |
 | 2023 | `=COUNTIFS($Concerts.$A$2:$Concerts.$B$769 , ">="&DATE($A209,1,1), $Concerts.$A$2:$Concerts.$B$769, "<"&DATE($A208,1,1))` |
+| 2022 | `=COUNTIFS($Concerts.$A$2:$Concerts.$B$769 , ">="&DATE($A210,1,1), $Concerts.$A$2:$Concerts.$B$769, "<"&DATE($A209,1,1))` |
+| ...  | ...                                                                                                                       |
 
-That's a lot of noise, but fortunately most spreadsheet software will automatically handle incrementing indexes that are not prepended with a `$`.
-
-To get this information with SQLite, the query is much simpler.
+That's a lot of noise, but fortunately most spreadsheet software will automatically handle incrementing indexes that are not prepended with a `$`. To get this information with SQLite, we can try this.
 
 ```sql
-select strftime("%Y", date) as year, count(date) as count
-from concerts group by year order by year desc;
+select
+  strftime("%Y", date) as year,
+  count(*) as count
+from concerts
+where year >= "2000"
+group by year
+order by year desc;
 ```
 
-Note this is _almost_ the same as the data from my spreadsheets. The only thing that's missing are years when there are _zero concerts_. They are skipped in the SQL query above. I'll explain more in the section below.
+- `group by` groups all the rows together by year. Once the rows are grouped together, then `count(*)` will count the number of rows per group.
+- `order by` orders the data by a given column. `desc` indicates the data should be descending.
 
-There are pros and cons between these two ways of querying data, and both are useful to know. Let's dig into the SQL a little bit to see how I organized my data.
+Note this is _almost_ the same as the data from my spreadsheets. The only thing that's missing are years when there are _zero concerts_. They are skipped in the SQL query above. To get all the years including ones that have no concerts, you would need to do additional work. It's challenging to iterate over a series of values with SQLite.
+
+Whatever your needs are, spreadsheets and databases can be useful. However, my intuition is that SQL is a hotter skill than spreadsheets, and a quick LinkedIn search seems to agree.
+
+| Skill        | Number of job search results |
+| ------------ | ---------------------------- |
+| **SQL**      | **426,766**                  |
+| Spreadsheets | 69,254                       |
+
+This is the part where I talk a lot about SQL. I'll go through the steps I took to organize and query my data. First, let's talk about the tables.
+
+<details class="info">
+<summary>Want to try these queries yourself?</summary>
+
+If you'd like to try some of these commands yourself, I recommend installing `sqlite3`, and using it to open the `lb.db` database file within my repository like so:
+
+```sh
+# assuming you're in the root of the lb-scraper directory
+sqlite3 data/lb.db
+```
+
+Try running the `.tables` command once you're within the SQLite shell. If your output looks like this, then you should be good!
+
+```sh
+sqlite> .tables
+concerts                           performances
+fan_performances                   performances_view
+fan_performances_small             performances_view_small
+fan_performances_with_instruments  songs
+```
+
+Alternatively, you can use a GUI such as DB Browser for SQLite to view the data. Type the queries in the "Query" tab and click the run button to give them a try!
+
+</details>
+
+# Intro to SQL
 
 ## The data schema
 
@@ -112,12 +195,12 @@ I'll be using the following definitions in this project:
 
 - A **performance** is the performing of one song at one concert. It also has an order in which the performance occurs in the show.
 - A **concert** is a collection of performances on a day and location
-- A **song** is a song that is performed at a concert. This song can be performed multiple times across multiple concerts
+- A **song** is a song that is performed at a concert. This song can be performed multiple times across multiple concerts.
 
 I defined these SQL tables to represent this data. Here are the `concerts`.
 
 ```sql
-CREATE TABLE concerts(
+create table concerts(
   concertId integer not null primary key,
   date string not null, -- YYYY-MM-DD
   venue string not null
@@ -131,18 +214,18 @@ CREATE TABLE concerts(
 Next comes the `songs`.
 
 ```sql
-CREATE TABLE songs(
+create table songs(
   songId integer not null primary key,
   name varchar not null unique
 );
 ```
 
-- I don't want multiple rows of songs to have the same name, so I use the keyword `unique` to verify this
+- I don't want multiple rows of songs to have the same `name`, so I use the `unique` keyword here.
 
 Finally, the most important table, the `performances`. Notice the `foreign key` declarations in the schema below.
 
 ```sql
-CREATE TABLE performances(
+create table performances(
   performanceId integer not null primary key,
   notes varchar, -- performance notes (optional)
   songOrder integer not null, -- order in which the song was played
@@ -153,7 +236,7 @@ CREATE TABLE performances(
 );
 ```
 
-The `foreign key` command creates a relationship between a performance, concert, and song tables. A performance contains a reference to one song and one concert. Take a look at this line below:
+The `foreign key` command creates a relationship between performances and concert tables, and performances and song tables. A performance contains references to one song and one concert. Take a look at this line below:
 
 ```sql
 concertId integer not null,
@@ -163,7 +246,7 @@ foreign key (concertId) references concerts(concertId)
 
 The `concertId` of the performance references the `concertId` of a concert in the `concerts` table. And because the `concertId` in a performance cannot be `null`, I need to know the concert the performance takes place before I can create a new performance in the database. I also need to know the song as well.
 
-This is the key to the increase in storage efficiency mentioned above. By only saving IDs for each performance, I no longer need to duplicate song names and venues across thousands of performances, saving space.
+Foreign keys are the key to the increased storage efficiency mentioned above. By only saving IDs for `songs` and `concerts` in the `performances` table, I no longer need to duplicate song names and venues across thousands of performances.
 
 Let's see how we can query the data to get the same information from my old TSV.
 
@@ -190,9 +273,7 @@ select
   concerts.date as Date
 ```
 
-- `select` is the command to query data
-- The `as` keyword allows you to rename a column, and use that name as reference.
-- You'll notice some columns refer to our `songs` and `concerts` database, such as `songs.name` and `concerts.venue`. This queries the column that belongs in those respective databases.
+- You'll notice some columns refer to our `songs` and `concerts` database, such as `songs.name` and `concerts.venue`. This queries the column that belongs in those respective databases, which we'll address soon.
 
 <details class="warning">
 <summary>Why do I need quotes around <code>"Order"</code>?</summary>
@@ -215,13 +296,13 @@ from performances
 
 - `songOrder` and `notes` are obtained straight from the `performances` database
 
-But what about the other columns? To share data from the other databases, we'll use a `join` statement. With this statement, we can add data from other tables to the row that matches a certain condition. Below, we'll add concert data from the `concerts` table when there's a match between the `concertId` in the `performances` table.
+But what about the `Song`, `Concert`, and `Date` columns? To share data from the other databases, we'll use a `join` statement. With this, we can add data from other tables to the row that matches a certain condition. Below, we'll add concert data from the `concerts` table when there's a match between the `concertId` in the `performances` table.
 
 ```sql
 join concerts on performances.concertId = concerts.concertId
 ```
 
-As a shortcut, you can use the `using` clause in your `join` statement if the columns you're connecting have the same name. Don't forget the parentheses around the column name here! We'll add the songs here too, since the command is similar.
+As a shortcut, you can use the `using` clause in your `join` statement if the columns you're connecting have the same name. We'll add the songs here too, since the command is similar. Don't forget the parentheses around the column names!
 
 ```sql
 join concerts using (concertId)
@@ -241,6 +322,16 @@ from performances
 join concerts using (concertId)
 join songs using (songId);
 ```
+
+And you can see it's output below.
+| Order | Song | Info | Concert | Date |
+|-------|----------------------------|--------------|------------------------------------------|------------|
+| 1 | Break Stuff | | Ruoff Music Center, Noblesville, IN, USA | 2024-07-21 |
+| 2 | Just Like This | (Tour debut) | Ruoff Music Center, Noblesville, IN, USA | 2024-07-21 |
+| 3 | Hot Dog | | Ruoff Music Center, Noblesville, IN, USA | 2024-07-21 |
+| 4 | My Generation | | Ruoff Music Center, Noblesville, IN, USA | 2024-07-21 |
+| 5 | Rollin' (Air Raid Vehicle) | | Ruoff Music Center, Noblesville, IN, USA | 2024-07-21 |
+| ... | ... | ... | ... | ... |
 
 ## Creating SQL views
 
