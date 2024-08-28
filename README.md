@@ -103,3 +103,32 @@ pnpm pw:screenshots
 ```
 
 Check the `screenshots` directory for the screenshots and do your visual testing.
+
+## Debugging the Caddy server
+
+This creates a server that is close to the actual `nickspatties.com` site.
+
+```sh
+pnpm build # builds the assets
+pnpm docker:build # builds the image
+pnpm docker:run # runs the container with that image
+```
+
+This runs a Caddy server that serves my assets. To visit it, use the local IPv4 address `http://127.0.0.1`.
+
+## Deploying changes to production server
+
+```
+pnpm build
+scp -r dist aws-ubuntu-t2micro:~
+ssh aws-ubuntu-t2micro
+sudo mv dist/* /var/www/html/
+```
+
+I'll need to configure this better to support a directory that the user actually has access to.
+
+## Important Caddy server files
+
+- `/var/www/html` directory to place built site assets
+- `/var/log/caddy/access.log` Caddy server access logs
+- `/etc/caddy/Caddyfile` Caddy server configuration
