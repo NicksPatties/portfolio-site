@@ -126,3 +126,9 @@ sudo mv dist/* /var/www/html/
 ```
 
 I'll need to configure this better to support a directory that the user actually has access to.
+
+## Important Caddy server files
+
+- `/var/www/html` directory to place built site assets
+- `/var/log/caddy/access.log` Caddy server access logs
+- `/etc/caddy/Caddyfile` Caddy server configuration
