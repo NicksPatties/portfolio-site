@@ -1,0 +1,14 @@
+{
+	email nickspatties@proton.me
+}
+
+# nickspatties.com, www.nickspatties.com
+:80 {
+	root * /var/www/html
+	file_server
+	encode gzip
+
+	log {
+		output file /var/log/caddy/access.log
+	}
+}
