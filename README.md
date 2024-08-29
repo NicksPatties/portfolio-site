@@ -19,18 +19,9 @@ This file follows the JSON format as seen in MegaResume. Here are some [details]
 
 ## Adding a blog post
 
-```md
----
-title: "Blog title"
-description: "A description of the blog I'm writing."
-pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
-# optional, assumes image is in the `public` folder
-# if you don't need it, just remove this property
-heroImage: "/blog/blog-title/cover.png"
-# optional, set this to true if you want it on the site
-published: true
----
-```
+`pnpm new:blog {{name-of-the-article}}`
+
+- `name-of-the-article` should not have spaces
 
 ### Images
 
