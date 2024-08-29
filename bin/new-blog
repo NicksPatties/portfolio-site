@@ -1,0 +1,36 @@
+#!/bin/bash
+
+print_error() {
+  echo "Error: $1"
+  echo "Usage: $0 [article-name]"
+}
+
+if [ -z "$1" ]; then 
+  print_error "Article name not found"
+  exit 1
+fi 
+
+blog_file="src/content/blog/$1.md"
+blog_template="bin/blog-template.md"
+if [ -f "$blog_file" ]; then
+  echo "$blog_file already exists! Continuing..."
+else
+  cp $blog_template "$blog_file"
+fi
+
+assets_dir="src/assets/blog/$1"
+if [ -d "$assets_dir" ]; then
+  echo "$assets_dir already exists! Continuing..."
+else
+  mkdir "$assets_dir"
+fi
+
+public_dir="public/blog/$1"
+if [ -d "$public_dir" ]; then
+  echo "$public_dir already exists! Continuing..."
+else
+  mkdir "$public_dir"
+fi
+
+echo "Article $1 successfully created. Happy writing!"
+exit 0

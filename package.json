@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview --port=4322",
     "astro": "astro",
+    "new:blog": "./bin/new-blog",
     "pw:test": "playwright test",
     "pw:screenshots": "playwright test -c playwright-screenshots.config.ts --update-snapshots",
     "docker:build": "docker build -t portfolio-site-caddy .",
