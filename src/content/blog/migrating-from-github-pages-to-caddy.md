@@ -110,7 +110,7 @@ After some time, my micro Ubuntu machine was ready to use, so I logged in via SS
 
 Once installation is complete, the Caddy server will automatically start running. If I visit the Public IPv4 DNS assigned to my EC2 instance, then the default Caddy server message will appear!
 
-[default caddy message]()
+![A message congratulating the user for properly configuring Caddy](src/assets/blog/migrating-from-github-pages-to-caddy/default-caddy-message.png)
 
 ## Moving my files to the server
 
@@ -342,7 +342,7 @@ Feel free to find `whois` tied to these addresses yourself!
 
 ### Visitors from other sites?
 
-![Metrics of ](src/assets/blog/migrating-from-github-pages-to-caddy/referring-sites.png)
+![Metrics of referring sites that link to nickspatties.com](src/assets/blog/migrating-from-github-pages-to-caddy/referring-sites.png)
 
 There are times when I post my blog to other sites, including LinkedIn and Twitter (now X). I can use these metrics to verify if posting on other platforms is worth the investment.
 
