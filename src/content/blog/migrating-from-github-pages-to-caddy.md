@@ -17,7 +17,7 @@ GitHub Pages has served this site well. It was easy to configure an automatic de
 
 However, I wanted to know more about how my site was being used. How many people visited the site and read my posts? How much computer resources was my site using? GitHub Pages does not reveal this information.
 
-The time has come to move this site to a different location. Once that gives me more control and more visibility on how my software is run. Today I'll share where my moved my site, the web server I chose to run, and how I quickly see what's going on.
+The time has come to move this site to a different location; one that gives me more control and visibility on how my software is run. Today I'll share where I moved my site, the web server I chose to run, and how I monitor my website.
 
 # Which VPS to use?
 
@@ -43,7 +43,9 @@ I considered tried and tested methods including Apache HTTP Server or Nginx, but
 
 ## Caddy server configuration
 
-Caddy web server uses a `Caddyfile` to configure a server. Since it's simple, there isn't much going on, but this is a nice introduction. You can also see it in [this site's repository](https://github.com/NicksPatties/portfolio-site/blob/main/Caddyfile).
+The Caddy web server uses a `Caddyfile` for configuration. [Caddy's documentation can be found here.](https://caddyserver.com/docs/)
+
+Since my web server is simple, there isn't much going on, but this is a nice introduction to how Caddy works. You can also see my Caddy configuration file in [this site's repository](https://github.com/NicksPatties/portfolio-site/blob/main/Caddyfile).
 
 ```Caddyfile
 nickspatties.com, www.nickspatties.com {
