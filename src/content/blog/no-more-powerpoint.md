@@ -51,11 +51,12 @@ There are some features in typical presentation software that I like, but I don'
 
 - Speaker notes
 
-While it's nice to have notes for specific details, I'll let the main slides take care of that for me if I can. I can use the slides to guide my presentation, so notes aren't a requirement
+While it's nice to have notes for specific details, I'll let the main slides take care of that for me if I can. I can use the slides to guide my presentation, so notes aren't a requirement.
 
 - Animations and transitions
 
-These can guide a viewers attention to a relevant point, but so can I. Within presentation software, tweaking animations to my liking takes too much effort. 
+These can guide a viewer's attention to a relevant point, but so can I. Within presentation software, tweaking animations to my liking takes too much effort. 
+
 Let's see what software I'm working with, and find out if I can make presentations in the terminal actually happen.
 
 # Alacritty: The terminal emulator
@@ -243,5 +244,5 @@ Overall, I'm glad I decided to explore new options for presenting. Figuring this
 
 And as I mentioned above, I already gave a talk using the terminal, and it worked excellently! I got some good feedback about text placement (people in the back had to crane their heads to read content on the bottom of my slides), but overall, the slides were easy to read! During the presentation, I did notice it was more difficult typing commands while my adrenaline was pumping. Perhaps it's time to make my commands _even easier_ to type...
 
-That'll do it for now. If you're interested in looking at some sample configuration files if you'd like to do something similar, you can find the on [this GitHub repository](). Thanks for reading, and I'll see you again soon!
+That'll do it for now. If you're interested in looking at some sample configuration files if you'd like to do something similar, you can find the on [this GitHub repository](https://github.com/NicksPatties/presentation-config). Thanks for reading, and I'll see you again soon!
 
