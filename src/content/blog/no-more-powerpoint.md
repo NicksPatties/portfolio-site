@@ -3,7 +3,7 @@ title: "No More PowerPoint: Presentations in the terminal?!"
 description: "Presentation software is clunky to me, so can I improve my process by using the terminal?"
 startDate: "2024-09-12PDT"
 pubDate: "2024-09-12PDT" # YYYY-MM-DDPDT
-published: false # Set to true when you're ready
+published: true # Set to true when you're ready
 heroImage: "/blog/no-more-powerpoint/cover.png"
 tags:
   - "presenting"
@@ -13,47 +13,72 @@ tags:
 
 TLDR: **Yes, it's possible!** I used this technique to present my Limp Bizkit data analysis project at SeattleJS this week! If you'd like to dig into the details, keep reading!
 
-I wanted to create presentations quickly and easily, but I didn't want to work with presentation software. I've always found it clunky and annoying. I enjoy a little branding here or there, but doing so in presentation software is a challenge. I've seen enough black-text-on-white-background presentations to know how software engineers avoid adding life to their slides.
+I wanted to create presentations quickly and easily. But, I didn't want to work with software like Microsoft PowerPoint. In spite of all its features, I've always found it clunky and annoying. 
 
-There's other software that gives presenters more control and pretty animations. [Spectacle](https://commerce.nearform.com/open-source/spectacle/) and [RevealJS](https://revealjs.com/) come to mind, but I wanted a process that was even more braindead and lean. _Could I give a presentation using just the terminal?_
+In the past few years, other presentation software, such as [Spectacle](https://commerce.nearform.com/open-source/spectacle/) and [RevealJS](https://revealjs.com/), offer interactive presentation slides built with familiar tools like ReactJS and HTML. [Prezi](https://prezi.com/) is also a fun alternative to PowerPoint, offering built-in animations that send viewers on a ride from slide to slide.
+
+These are cool, but _they're not dumb enough for my needs._ I wanted a process that was lean and braindead to get my thoughts into slides as quickly as possible. This gave me an idea...
+
+_Could I give a presentation using just the terminal?_ Let's find out!
 
 # Requirements
 
 For my presentations, I would like to do the following things.
+
 - [ ] Move from one slide to the next
+
+If I cannot do this, then I don't have a presentation.
+ 
 - [ ] Display text in a hierarchy
+
+Typically, a presentation slide will show a series of bullet points while the speaker ellaborates on those points. This is also a presentation staple I cannot live without.
+
 - [ ] **Syntax highlighting**
-  - I write code, so I would like syntax to be easy to see
+
+I write software, and usually present about software. If I can show code in a legible way, my audience will spend more effort parsing my code than I'd like.
+
 - [ ] Play audio and video
+
+In my experience, when people attempt to use video or audio during a presentation, it usually goes wrong. This is especially true with PowerPoint. Easier multimedia support sounds extremely valuable to me.
+
 - [ ] Make creating slides *as quickly as possible*
 
-Here are some things I'd like to avoid:
-- Cloud based, SaaS solutions
-  - These typically require creating an account on some third party source. I don't want to do this.
+This is self explanitory, but the less time I'm taking writing slides and the more time I can refine and present my speeches, the better.
+
+## Things I can live without
 
 There are some features in typical presentation software that I like, but I don't need.
+
 - Speaker notes
+
+While it's nice to have notes for specific details, I'll let the main slides take care of that for me if I can. I can use the slides to guide my presentation, so notes aren't a requirement
+
 - Animations and transitions
 
-So let's talk about how I get things set up. If you're in a similar position and struggle to get your ideas out into the world, then this may help you too, so let's go! This is the software I use to create quick and easy presentations
+These can guide a viewers attention to a relevant point, but so can I. Within presentation software, tweaking animations to my liking takes too much effort. 
+Let's see what software I'm working with, and find out if I can make presentations in the terminal actually happen.
 
 # Alacritty: The terminal emulator
 
-This acts as the canvas of my presentation. Here are some reasons why I find this useful.
+This acts as the "canvas" of my presentation: the window that contains all things related to my talk. Let's see if this software can satisfy some of my requirements.
 
-## Rendering colors and characters
+## Colors and characters
 
-Alacritty supports 256 colors. It also supports 
+Alacritty supports 256 colors and bold, italic, and bold italic fonts. It can also handle emoji!
+
+![Example slide with bold, italic, and bold italic fonts, colors, and emoji](@assets/blog/no-more-powerpoint/alcritty-font-capabilities.png)
 
 ## Zoom controls
 
 Pressing `Ctrl+` and `Ctrl-` increases and decreases the font size, respectively. Doing so allows me to display my text large enough for an audience to clearly see what's happening.
 
-If needed, I can also change the font during my presentation. This is useful if I ever need to zoom out to show things like code snippets or application output.
+![The font size of my terminal session increasing in size](@assets/blog/no-more-powerpoint/alacritty-zoom.gif)
+
+If needed, I can also change the font size during my presentation. This is useful if I ever need to zoom out to show things like code snippets or application output.
 
 ## Borderless window configuration
 
-Alacritty can be configured to hide the top window bar. This lets me save valuable screen real-estate, keeping attention to the content of the slides. Here's what the configuration looks like.
+Alacritty can be configured to hide the top window bar. Here's what the configuration looks like.
 
 ```toml
 # $HOME/.config/alacritty/alacritty.toml
@@ -61,11 +86,15 @@ Alacritty can be configured to hide the top window bar. This lets me save valuab
 decorations = "none"
 ```
 
+This lets me save valuable screen real-estate, keeping attention to the content of the slides.
+
+So far, Alacritty offers a nice foundation to satisfy my presentation requirements. Let's look at my text editor to find out how it can help!
+
 # Helix: The text editor
 
 [I have mentioned Helix in previous articles before](/tags/hx), and I like it a lot! I've become pretty comfortable using it, so the more time I can spend in Helix, the happier I am.
 
-Let's see if Helix can satisfy my needs when it comes to presenting slides.
+So, can Helix help me present slides? Let's see how it can address my requirements.
 
 ## Next slide?
 
@@ -79,11 +108,11 @@ Doing so opens all of my slides in order, starting with `01.md`. To move to the 
 - `g` opens the `Goto` menu
 - `n` moves to the next buffer, while the Goto menu is open
 
-This takes care of one of my requirements! Here's what it looks like in action.
+Here's what it looks like in action.
 
-[Chaging from file 01 to file 02 in Helix]()
+![Chaging from file 01 to file 02 in Helix](@assets/blog/no-more-powerpoint/helix-next-slide.gif)
 
-Let's check that of the list of requirements and keep going.
+This takes care of one of my requirements! Let's check that of the list of requirements and keep going.
 
 - [x] Move from one slide to the next
 
@@ -103,25 +132,25 @@ Easy peasy! We'll cross this off the list, too.
 
 ## Syntax highlighting?
 
-Presentations about code require showing code in a way that's easy to read. Because of this, syntax highlighting is an absolute requirement. Alacritty in part satisfies this need by supporting color output, but does Helix help out?
+Alacritty in part satisfies this need by supporting color output, but does Helix help out?
 
 Having used it for coding, it's clear that Helix does, in fact, support syntax highlighting. This is not surprising, but are there any caveats? My slides are in Markdown format. Will this be a problem?
 
-[Image of a markdown file with a code snippet in Helix]()
+![Image of a markdown file with a code snippet in Helix](@assets/blog/no-more-powerpoint/helix-syntax-highlighting.png)
 
 No problem here! This checks off a big requirement for me.
 
 - [x] **Syntax highlighting**
 
-So far we've satisfied three of five requirements.
+Just like that, we've satisfied three of five requirements.
 
 ## Bonus: optional themes!
 
 After taking about half an hour to create a master slide, which contains the font and background styles in a presentation template, I further appreciated Helix's `:theme` command. If I wanted to change the colors of my presentation, wether for branding or lighting conditions, I could easily do so!
 
-[Changing from a dark theme to a light theme in Helix]()
+![Changing from a dark theme to a light theme in Helix](@assets/blog/no-more-powerpoint/helix-change-theme.gif)
 
-Although not a requirement, I wanted to share that discovery which, if you wanted to follow along, could save you some time in the end.
+Although not a requirement, I just wanted to share that fun fact!
 
 ## Some gotchas
 
@@ -129,20 +158,15 @@ Although Helix checks off some of my boxes for presentation software, there are 
 - The `Goto` menu from earlier quickly flashes on the screen when I move to another slide. This can cause discomfort for some viewers.
 - I use macros to quickly select text in between parentheses to use them with scripts. If I quit and re-open Helix, I need to record them again.
 
-In spite of that, I find Helix to be an effective tool for creating presentation slides.
+To address the flashing `Goto` menu, however, I could record a macro that goes to the next slide for me! Here's what that looks like:
+
+![Setting a macro, and moving to a new slide without a flashing menu](@assets/blog/no-more-powerpoint/helix-gn-macro.gif)
+
+With that taken care of, I have less reservations using Helix as a slide presenter!
 
 # Shell scripts: the multimedia playback
 
-In my experience, when people attempt to use video or audio during a presentation, it usually goes wrong. This is especially true with PowerPoint.
-
-To simplify my presentations as much as possible, I wanted to create short scripts to run commands within Helix. For instance, I can play a video in Helix with the following command:
-
-```
-:sh v my-video.mp4
-```
-- `:sh` tells Helix to run a shell command. In this case, it's `v my-video.mp4`
-
-And here's the definition of the `v` command:
+Lets avoid audio and video hiccups by creating some scripts to play those files easily. Here's the `v` command, for example:
 
 ```bash
 #!/bin/bash
@@ -151,9 +175,16 @@ cvlc --play-and-exit "$@"
 - Uses the command line version of [VLC](https://www.videolan.org/vlc/), AKA `cvlc`
 - `"$@"` passes all other parameters to the script. This let's me pass the path of the video, and any other options I may need.
 
-The results are surprisingly effective! Here's a sample:
+Once that script is placed in a directory on my `$PATH`, I can use the `:sh` command to run it:
+ 
+```
+:sh v my-video.mp4
+```
+- `:sh` tells Helix to run a shell command. In this case, it's `v my-video.mp4`
 
-[A video appearing in the center of the screen after running a command]()
+The results are surprisingly effective!
+
+![A video appearing in the center of the screen after running a command](@assets/blog/no-more-powerpoint/scripts-play-video.gif)
 
 I defined similar commands for showing images (`i`), gifs (`g`), and playing audio (`a`). This covers my multimedia requirement!
 
@@ -167,7 +198,7 @@ The terminal multiplexer, or `tmux`, is an excellent tool that allows users to c
 
 Here's an example of what I can do with `tmux`!
 
-[Switching from a presentation to a code project with tmux]()
+![Switching from a presentation to a code project with tmux](@assets/blog/no-more-powerpoint/tmux-switching-windows.gif)
 
 `tmux` is useful, but it's usefulness is multipled thanks to this next tool.
 
@@ -181,6 +212,10 @@ To start a given presentation, I just have to call this:
 tmuxifier s my-talk
 ```
 - `s` stands for "session." Tmuxifier will run the session configuration named `my-talk`.
+
+Here's an example of me opening my slides, and the relevant development environments for a talk!
+
+![Opening windows for slides, and code environments within the terminal](@assets/blog/no-more-powerpoint/tmuxifier-start-presentation.gif)
 
 This completes my coverage of the software I use to run my presentations. So, how did I do?
 
@@ -198,13 +233,13 @@ Most of these requirements were satisfied thanks to Alacritty and Helix, since t
 
 Although anecdotal, my experience creating a similar slide deck with actual presentation software was a struggle. I'm ashamed to admit that I took about an hour and a half creating a master slide, and some data slides based off that template. I didn't even attempt to add video and audio before I quit, wondering if there was a better way.
 
-Later, I started a stopwatch and created a slide deck to present a talk on this very topic in the aforementioned method. According to my watch, I created a first draft of my presentation, 14 slides of data, in _just under half an hour_. This improvement was significant enough to check this last box off my list of requirements.
+I started a stopwatch and created a slide deck to present a talk on this very topic. According to my watch, I created a first draft of my presentation, 14 slides of data, in _just under half an hour_. This improvement was significant enough to check this last box off my list of requirements.
 
 - [x] Make creating slides *as quickly as possible*
 
 # Conclusion
 
-Overall, I'm glad I decided to explore new options for presenting. Figuring this out opens new avenues to sharing my ideas. By making presentations really simple to create and present. I can go from idea to talk in a fraction of the time and resources compared to using dedicated presentation software. Although I may not have beautiful graphics in my slides, my scripts allow me to engage audiences with images, video, and audio in an easy and fault-tolerant way. From now on, I'll pick this method over using PowerPoint any day of the week.
+Overall, I'm glad I decided to explore new options for presenting. Figuring this out opens new avenues to sharing my ideas. By making presentations really simple to create and present, I can go from idea to talk in a fraction of the time and resources compared to using dedicated presentation software. Although I may not have beautiful graphics in my slides, my scripts allow me to engage audiences with images, video, and audio in an easy and fault-tolerant way. From now on, If I need to make a presentation, I'll pick this method over using PowerPoint any day of the week.
 
 And as I mentioned above, I already gave a talk using the terminal, and it worked excellently! I got some good feedback about text placement (people in the back had to crane their heads to read content on the bottom of my slides), but overall, the slides were easy to read! During the presentation, I did notice it was more difficult typing commands while my adrenaline was pumping. Perhaps it's time to make my commands _even easier_ to type...
 
