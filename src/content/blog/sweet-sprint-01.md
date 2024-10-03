@@ -22,12 +22,6 @@ Running the command opens a random exercise to practice. Type in the exercise, a
 
 ![Default behavior of sweet](@assets/blog/sweet-sprint-01/original-behavior.gif)
 
-## Why `sweet`?
-
-Why make this application anyway? Aside from wanting to learn a new language and writing applications for the command line, I wanted to start a touch typing exercise *as quickly as possible* once I got into my terminal. I didn't want to open a web browser to get my reps in.
-
-If you're interested in practicing your typing, I hope you give `sweet` a try, and that it helps you improve!
-
 # Fixes
 
 ## Improve argument handling
@@ -38,7 +32,7 @@ To that end, I decided to hand that responsibility to the [Cobra package](https:
 
 # Updates
 
-To that end, I created some new commands, and improved the touch typing game with some new features!
+With the time I saved, I created some new commands, and improved the touch typing game with some new features!
 
 ## New commands: `about` and `version`
 
@@ -46,7 +40,7 @@ These commands are useful for displaying information about the program (In truth
 
 ## Better exercise inputs
 
-Previously, `sweet` would read files from an exercise folder in a configuration directory, located in `$HOME/.sweet/exercises`. If the file was not located in that directory, then that exercise would not be added in the rotation. Selecting an individual file to practice was also very cumbersome.
+Previously, `sweet` would grab an exercise from the `$HOME/.sweet/exercises` directory. However, if there was a specific file you'd like to practice that was not included in that directory, then there was no was to select it. Selecting a file via a pathname was not implemented.
 
 I decided to redo how exercises were read into the application, which in turn, made it easier to support different use cases. As of `v0.1.0` of `sweet`, you can do the following things:
 
@@ -64,21 +58,34 @@ If you would like to select a random exercise from a different directory, you ca
 
 ### Selecting an exercise from a file
 
-You can now practice any file you'd like with `sweet`! Since some files are pretty large, use the `-s` and `-e` flags to select a start and an end number to practice!
+You can now select any file you'd like with `sweet`! Since some files are pretty large, use the `-s` and `-e` flags to select the start and end of a range of lines to practice.
 
 ![Select a file from start to end](@assets/blog/sweet-sprint-01/new-behavior-start-and-end-lines.gif)
 
 ### Selecting an exercise from STDIN
 
-Pipe output to `sweet` and use the `-` filename to perform an exercise from anywhere you'd like! You can use the `-s` and `-e` flags as well!
+Pipe the output of one command into `sweet`, and use the `-` filename to perform an exercise with anything you'd like! You can use the `-s` and `-e` flags as well!
 
 ![Exercise from stdin](@assets/blog/sweet-sprint-01/new-behavior-select-via-pipe.gif)
 
 # What's next?
 
 In the next sprint, I would like to work on the following things:
-- Writing tests and locking in exercise behavior
-- Displaying stats plot at the end of an exercise
-- Saving exercises (but would like feedback)
 
-And that's it for the update! If you'd like to try out `sweet` for yourself, check out the [releases page](https://github.com/NicksPatties/sweet/releases) to download a copy yourself. If you have any issues, you can either submit them in the [project's issues page](https://github.com/NicksPatties/sweet/issues), or [send me an email](mailto:nickspatties@proton.me?subject=Sweet%20Issue%3A%20%3CYour%20issue%20title%20here%3E&body=Sweet%20version%3A%20%3Csweet%20version%3E%0D%0ADetails%3A%20%3Cadd%20details%20here%3E).
+## Finish writing tests
+
+I'd like to lock in the current behavior of my commands so I can be extra confident `sweet`'s behavior is working as intended.
+
+## Add more interesting stats
+
+I would be useful to know what kinds of things to practice to improve. Some stats that I would like to record and display at the end of an exercise include:
+- Keys with the most mistakes
+- Key combinations that take up the most time
+- A plot that displays the average and raw words per minute over time
+
+## Saving exercises
+
+I originally thought it would make saving exercises easier to add a sub-command that handles placing the exercise in the right place for you. For instance, you provide a URL to a text file from a code repository, for instance, and you download the text, and save it into the default `SWEET_EXERCISES_DIR` location.
+Would this feature be useful? Would it be more convenient to just use other tools that you're used to, like `curl` and `mv`? Some feedback would be helpful to guide this new feature!
+
+And that's it for the update! If you'd like to try out `sweet` for yourself, check out the [releases page](https://github.com/NicksPatties/sweet/releases) to download a copy yourself. If you have any issues, you can either submit them in the [project's issues page](https://github.com/NicksPatties/sweet/issues), or [send me an email](mailto:nickspatties@proton.me?subject=Sweet%20Issue%3A%20%3CYour%20issue%20title%20here%3E&body=Sweet%20version%3A%20%3Csweet%20version%3E%0D%0ADetails%3A%20%3Cadd%20details%20here%3E). See you next time!
