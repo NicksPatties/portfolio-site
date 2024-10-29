@@ -3,7 +3,7 @@ name: "Sweet"
 description: "A touch typing game written in Go"
 heroImage: "/sweet-cover.jpg"
 published: true
-order: 7
+order: 0
 tags:
   - "cli"
   - "go"

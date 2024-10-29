@@ -3,7 +3,7 @@ name: "MegaResume"
 description: "A resume building application that lets you filter your experience"
 heroImage: "/megaresume-cover.jpg"
 published: true
-order: 1
+order: 3
 tags:
   - "web-development"
   - "typescript"
