@@ -111,7 +111,7 @@ This runs a Caddy server that serves my assets. To visit it, use the local IPv4 
 
 ```
 pnpm build
-scp -r dist/* aws-ubuntu-t2-micro:/var/www/html
+scp -r dist/* aws-ubuntu-t2micro:/var/www/html
 ```
 
 I'll need to configure this better to support a directory that the user actually has access to.
