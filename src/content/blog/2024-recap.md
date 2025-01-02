@@ -2,7 +2,7 @@
 title: "2024: Reviewing the year with Bash"
 description: "A high level view of my software development highlights, made easier with command substitutions."
 startDate: "2024-12-30"
-pubDate: "2024-01-02PST"
+pubDate: "2025-01-02PST"
 published: true
 heroImage: "/blog/2024-recap/cover.jpg"
 tags:
