@@ -353,7 +353,7 @@ Once created, you can use the view in `select` queries like you would with any S
 select * from performances_view;
 ```
 
-Remember when I was [manipulating my old data with command line tools to sort and filter my output?](/blog/using-playwright-to-scrape-limp-bizkit-setlist-data#command-line-data-manipulation) That was pretty cool, but SQL allows me to perform these actions within the database itself, and I can save those queries into their own views. This will make comparing performances with and without fans much simpler.
+Remember when I was [manipulating my old data with command line tools to sort and filter my output?](/blog/using-playwright-to-scrape-limp-bizkit-setlist-data/#command-line-data-manipulation) That was pretty cool, but SQL allows me to perform these actions within the database itself, and I can save those queries into their own views. This will make comparing performances with and without fans much simpler.
 
 First, we'll create a view that filters the performances by fan interactions.
 
@@ -775,7 +775,7 @@ Let's figure out at what point My Way and Hot Dog are played during a concert in
 - The order in which our song of choice is performed. We already have this with the `songOrder` column.
 - The total number of songs performed per concert. This is something we can calculate.
 
-With these two values, we can create a ratio that will tell us at what point in the concert we should start making our way to the front. [I called this a _timing ratio_ last time.](/blog/using-playwright-to-scrape-limp-bizkit-setlist-data#order-and-timing) A timing ratio of 0 means the very beginning of the concert, while a timing ratio of 1 means the very last song.
+With these two values, we can create a ratio that will tell us at what point in the concert we should start making our way to the front. [I called this a _timing ratio_ last time.](/blog/using-playwright-to-scrape-limp-bizkit-setlist-data/#order-and-timing) A timing ratio of 0 means the very beginning of the concert, while a timing ratio of 1 means the very last song.
 
 First, let's get the orders when "My Way" was performed.
 

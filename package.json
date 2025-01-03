@@ -12,7 +12,8 @@
     "pw:test": "playwright test",
     "pw:screenshots": "playwright test -c playwright-screenshots.config.ts --update-snapshots",
     "docker:build": "docker build -t portfolio-site-caddy .",
-    "docker:run": "docker run -p 80:80 -p 443:443 portfolio-site-caddy"
+    "docker:run": "docker run -p 80:80 -p 443:443 portfolio-site-caddy",
+    "docker:serve": "pnpm build && pnpm docker:build && pnpm docker:run"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",

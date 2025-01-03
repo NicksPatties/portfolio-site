@@ -13,7 +13,7 @@ tags:
   - "css"
 ---
 
-Hello again! This is a continuation of my previous article about picking the technology to power my site. [If you'd like to catch up, read it here.](/blog/welcome-to-the-new-site)
+Hello again! This is a continuation of my previous article about picking the technology to power my site. [If you'd like to catch up, read it here.](/blog/welcome-to-the-new-site/)
 
 Today, I'll share what I did to quickly get this site off the ground.
 
@@ -215,7 +215,7 @@ Although this is a JSX component, and not a typical HTML `<a>` tag, this works b
 After Astro builds this component, the result looks like this:
 
 ```html
-<a href="/resume" aria-label="résumé" <!-- ... -->> Resume </a>
+<a href="/resume/" aria-label="résumé" <!-- ... -->> Resume </a>
 ```
 
 With these attributes assigned to these elements, screen readers will now read the link correctly, while keeping the appearance of the link that I like.

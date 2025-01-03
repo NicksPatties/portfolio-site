@@ -11,7 +11,7 @@ tags:
   - "css"
 ---
 
-[In my last article, I shared how I made my site more accessible to use.](/blog/building-the-site) Today, I'll talk about how I customized Astro's original blog template to include some more personality and enhance the reading experience.
+[In my last article, I shared how I made my site more accessible to use.](/blog/building-the-site/) Today, I'll talk about how I customized Astro's original blog template to include some more personality and enhance the reading experience.
 
 First, we'll look at what Astro's template has to offer. [For reference, you can find the code for the template here.](https://github.com/withastro/astro/tree/main/examples/blog)
 

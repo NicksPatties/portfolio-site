@@ -29,7 +29,7 @@ const center: boolean = Astro.props.links || false;
         {links ? (
           <a
             class="tag-pill project"
-            href={"/projects/" + project.slug}
+            href={"/projects/" + project.slug + "/"}
             aria-label={project.data.name + " project"}
           >
             {project.data.name}
@@ -47,7 +47,7 @@ const center: boolean = Astro.props.links || false;
         const inner = links ? (
           <a
             class="tag-pill"
-            href={"/tags/" + tag.id}
+            href={"/tags/" + tag.id + "/"}
             aria-label={tag.data.name + " tag"}
           >
             {tag.data.name}

@@ -11,7 +11,7 @@ tags:
   - "bash"
 ---
 
-Although I've been slacking in keeping this blog up to date, there have been five releases to `sweet` since [my previous post](/blog/sweet-sprint-01). Let's take a look at some highlights!
+Although I've been slacking in keeping this blog up to date, there have been five releases to `sweet` since [my previous post](/blog/sweet-sprint-01/). Let's take a look at some highlights!
 
 # Improvements to the results screen
 

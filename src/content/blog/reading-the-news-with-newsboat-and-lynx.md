@@ -10,7 +10,7 @@ tags:
   - "rss"
 ---
 
-I like to read the news, but I don't like being bombarded with autoplaying videos, popups, or other distracting elements. Additionally, I would like to use tools that help me parse through articles quicker if I want, [like I did with YouTube videos](/blog/using-fabric-to-learn-fast). Because of this, **I want to read news on the command line in plain text.**
+I like to read the news, but I don't like being bombarded with autoplaying videos, popups, or other distracting elements. Additionally, I would like to use tools that help me parse through articles quicker if I want, [like I did with YouTube videos](/blog/using-fabric-to-learn-fast/). Because of this, **I want to read news on the command line in plain text.**
 
 To point us in the right direction, let's take a look at file format that is well suited for reading news: RSS feeds.
 

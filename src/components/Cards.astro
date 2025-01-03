@@ -27,7 +27,7 @@ const posts: Blog[] = Astro.props.posts;
           <li>
             <Card
               heroImage={post.data.heroImage}
-              href={`/blog/${post.slug}`}
+              href={`/blog/${post.slug}/`}
               title={post.data.title}
               date={post.data.pubDate}
               {project}
