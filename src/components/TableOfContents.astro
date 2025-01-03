@@ -1,6 +1,23 @@
 ---
-import type { MarkdownHeading } from "astro";
+import TableOfContentsHeading from "@components/TableOfContentsHeading.astro";
 const { headings } = Astro.props;
+
+function buildToc(headings) {
+  const toc = [];
+  const parentHeadings = new Map();
+  headings.forEach((h) => {
+    const myHeading = { ...h, subheadings: [] };
+    parentHeadings.set(myHeading.depth, myHeading);
+    if (myHeading.depth === 1) {
+      toc.push(myHeading);
+    } else {
+      parentHeadings.get(myHeading.depth - 1).subheadings.push(myHeading);
+    }
+  });
+  return toc;
+}
+
+const toc = buildToc(headings)
 ---
 
 <style>
@@ -25,32 +42,7 @@ const { headings } = Astro.props;
 
   input[type="checkbox"]:checked + nav {
     display: block;
-  }
-
-  li.d2 {
-    margin-inline-start: calc(var(--list-spacing) * 1);
-    list-style-type: circle;
-  }
-
-  li.d3 {
-    margin-inline-start: calc(var(--list-spacing) * 2);
-    list-style-type: square;
-  }
-
-  li.d4 {
-    margin-inline-start: calc(var(--list-spacing) * 3);
-    list-style-type: disc;
-  }
-
-  li.d5 {
-    margin-inline-start: calc(var(--list-spacing) * 4);
-    list-style-type: circle;
-  }
-
-  li.d6 {
-    margin-inline-start: calc(var(--list-spacing) * 5);
-    list-style-type: square;
-  }
+  }  
 </style>
 <div class="toc">
   <label for="toc-toggle">
@@ -60,15 +52,7 @@ const { headings } = Astro.props;
   <nav>
     <ul>
       {
-        headings.map((h: MarkdownHeading) => {
-          const className = `d${h.depth}`;
-          const href = `#${h.slug}`;
-          return (
-            <li class={className}>
-              <a href={href}>{h.text}</a>
-            </li>
-          );
-        })
+        toc.map((heading) => <TableOfContentsHeading myHeading={heading} />)
       }
     </ul>
   </nav>
