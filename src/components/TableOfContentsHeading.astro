@@ -1,0 +1,19 @@
+---
+const { myHeading } = Astro.props;
+---
+
+<li>
+  <a href={'#' + myHeading.slug}>
+    {myHeading.text}
+  </a>
+  {
+    myHeading.subheadings.length > 0 && (
+      <ul>
+        {myHeading.subheadings.map((subheading) => (
+          <Astro.self myHeading={subheading} />
+        ))}
+      </ul>
+    )
+  }
+</li>
+
