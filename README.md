@@ -100,9 +100,7 @@ Check the `screenshots` directory for the screenshots and do your visual testing
 This creates a server that is close to the actual `nickspatties.com` site.
 
 ```sh
-pnpm build # builds the assets
-pnpm docker:build # builds the image
-pnpm docker:run # runs the container with that image
+pnpm docker:serve
 ```
 
 This runs a Caddy server that serves my assets. To visit it, use the local IPv4 address `http://127.0.0.1`.
@@ -121,3 +119,11 @@ I'll need to configure this better to support a directory that the user actually
 - `/var/www/html` directory to place built site assets
 - `/var/log/caddy/access.log` Caddy server access logs
 - `/etc/caddy/Caddyfile` Caddy server configuration
+
+## Gotchas
+
+### Avoiding links with automatic redirects
+
+- Add a trailing slash to html pages (ex: `/blog/my-article/`)
+- Add a slash before a section link (ex: `/blog/my-article/#my-section`)
+- You don't need trailing slashes when linking to assets (ex: `/rss.xml`)
