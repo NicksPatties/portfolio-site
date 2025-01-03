@@ -1,16 +1,13 @@
 ---
-import type { MarkdownHeading } from "astro";
-import  TableOfContentsHeading  from "@components/TableOfContentsHeading.astro";
+import TableOfContentsHeading from "@components/TableOfContentsHeading.astro";
 const { headings } = Astro.props;
 
 function buildToc(headings) {
   const toc = [];
-  // map of int depth and myHeading type
   const parentHeadings = new Map();
   headings.forEach((h) => {
     const myHeading = { ...h, subheadings: [] };
     parentHeadings.set(myHeading.depth, myHeading);
-    // Change 2 to 1 if your markdown includes your <h1>
     if (myHeading.depth === 1) {
       toc.push(myHeading);
     } else {
@@ -54,7 +51,9 @@ const toc = buildToc(headings)
   <input id="toc-toggle" type="checkbox" />
   <nav>
     <ul>
-      {toc.map((heading) => <TableOfContentsHeading myHeading={heading} />)}
+      {
+        toc.map((heading) => <TableOfContentsHeading myHeading={heading} />)
+      }
     </ul>
   </nav>
 </div>
