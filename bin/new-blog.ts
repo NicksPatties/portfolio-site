@@ -76,9 +76,8 @@ try {
   process.exit(1)
 }
 
-console.log(`All done!
-  blog file:             ${blogPath}
-  blog image location:   ${assetsPath}
-    hint: ![Image description](@assets/blog/${kebabbedTitle}/image.png)
-  cover image location:  ${coverDstPath}
+console.log(`Finshed creating "${arg}" blog!
+  blog file:               ${blogPath}
+  blog images directory:   ${assetsPath}
+  cover image location:    ${coverDstPath}
 `)
