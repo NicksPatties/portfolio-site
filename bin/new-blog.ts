@@ -25,14 +25,26 @@ if (arg === '-h' || arg === '--help') {
 }
 
 const kebabbedTitle = arg.toLowerCase().replaceAll(/\W+/g, '-')
-const startDate = new Date().toISOString().split('T')[0] + "PST"
+const getStartDate = () => {
+  const d = new Date()
+  const tzOffsetMillis = d.getTimezoneOffset() * 60000
+  // new Date() always returns a date in UTC timezone,
+  // so subtracting the tz offset from it will get me the correct date
+  const todayISO = new Date(d.getTime() - tzOffsetMillis)
+    .toISOString()
+    .slice(0, "YYYY-MM-DD".length)
+  return todayISO + "PST" 
+}
+const startDate = getStartDate()
+const coverFilename = 'cover.png'
+const helloFilename = 'hello.png'
 const postContent = `---
 title: "${arg}"
 description: "A description of the article"
 startDate: "${startDate}" # YYYY-MM-DDPST Not actually used, but helps me know how long it takes me to write blog posts
 pubDate: "${startDate}" # YYYY-MM-DDPST Don't forget to set this to today's date!
 published: false # Set to true when you're ready
-heroImage: "/blog/${kebabbedTitle}/cover.png"
+heroImage: "/blog/${kebabbedTitle}/${coverFilename}"
 # project: "portfolio-site"
 # tags:
 #   - "tags"
@@ -40,17 +52,17 @@ heroImage: "/blog/${kebabbedTitle}/cover.png"
 #   - "here"
 ---
 
-![Hello image](@assets/blog/${kebabbedTitle}/hello.png)
+![Hello image](@assets/blog/${kebabbedTitle}/${helloFilename})
 
 This is your new article! Happy writing!
 `
 const blogPath = path.join('src', 'content', 'blog', kebabbedTitle + '.md')
-const coverSrc = path.join('bin', 'cover.png')
+const coverSrc = path.join('bin', coverFilename)
 const publicPath = path.join('public', 'blog', kebabbedTitle)
-const coverDstPath = path.join(publicPath, 'cover.png')
-const sampleImageSrc = path.join('bin', 'hello.png')
+const coverDstPath = path.join(publicPath, coverFilename)
+const sampleImageSrc = path.join('bin', helloFilename)
 const assetsPath = path.join('src', 'assets', 'blog', kebabbedTitle)
-const sampleImageDst = path.join(assetsPath, 'hello.png')
+const sampleImageDst = path.join(assetsPath, helloFilename)
 
 try {
   fs.writeFileSync(blogPath, postContent)
