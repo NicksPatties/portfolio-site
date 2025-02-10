@@ -16,18 +16,17 @@
     "docker:serve": "pnpm build && pnpm docker:build && pnpm docker:run"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.3",
-    "@astrojs/mdx": "^3.1.4",
-    "@astrojs/rss": "^4.0.7",
-    "@astrojs/sitemap": "^3.1.6",
-    "astro": "^4.14.5",
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.2.5",
     "markdown-it": "^14.1.0",
     "rehype-autolink-headings": "^7.1.0",
     "sanitize-html": "^2.13.0",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@astrojs/markdown-remark": "^5.2.0",
+    "@astrojs/markdown-remark": "^6.1.0",
     "@playwright/test": "^1.44.0",
     "@types/markdown-it": "^14.1.1",
     "@types/node": "^20.12.11",

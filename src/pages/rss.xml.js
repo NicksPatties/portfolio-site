@@ -18,7 +18,7 @@ export async function GET(context) {
     site: isDev() ? "http://localhost:4321": context.site,
     items: posts.map((post) => ({
       ...post.data,
-      link: `/blog/${post.slug}/`,
+      link: `/blog/${post.id}/`,
       content: sanitizeHtml(parser.render(post.body), {
         allowedTags:
           sanitizeHtml.defaults.allowedTags.concat(['details', 'summary', 'img'])
