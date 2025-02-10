@@ -1,7 +1,7 @@
 ---
 import "../styles/tags.css";
 
-import { type CollectionEntry, getEntry } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -10,13 +10,12 @@ import getPosts from "@utils/posts";
 import TagsList from "@components/TagsList.astro";
 
 type Project = CollectionEntry<"projects">;
-type Tag = CollectionEntry<"tags">;
 type Post = CollectionEntry<"blog">;
 
 const props: Project = Astro.props.project as Project;
 const { name, description, heroImage, tags } = props.data;
 const posts = (await getPosts()).filter(
-  (post: Post) => post.data.project && post.data.project.slug === props.slug,
+  (post: Post) => post.data.project && post.data.project.id === props.id,
 );
 ---
 

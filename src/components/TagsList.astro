@@ -29,7 +29,7 @@ const center: boolean = Astro.props.links || false;
         {links ? (
           <a
             class="tag-pill project"
-            href={"/projects/" + project.slug + "/"}
+            href={"/projects/" + project.id + "/"}
             aria-label={project.data.name + " project"}
           >
             {project.data.name}
