@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
 /**
@@ -14,7 +13,7 @@ const autolinkOptions = {
 // https://astro.build/config
 export default defineConfig({
   site: "https://nickspatties.com",
-  integrations: [mdx(), sitemap()],
+  integrations: [sitemap()],
   markdown: {
     syntaxHighlight: "prism",
     rehypePlugins: [

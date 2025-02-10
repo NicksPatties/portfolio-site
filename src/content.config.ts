@@ -1,7 +1,8 @@
 import { defineCollection, reference, z } from "astro:content";
+import { glob } from 'astro/loaders'
 
 const blog = defineCollection({
-  type: "content",
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/blog" }),
   // Type-check frontmatter using a schema
   schema: z.object({
     title: z.string(),
@@ -17,7 +18,7 @@ const blog = defineCollection({
 });
 
 const projects = defineCollection({
-  type: "content",
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/projects" }),
   schema: z.object({
     name: z.string(),
     description: z.string(),
@@ -29,7 +30,7 @@ const projects = defineCollection({
 })
 
 const tags = defineCollection({
-  type: "data",
+  loader: glob({ pattern: '**/[^_]*.{yml,yaml}', base: "./src/content/tags" }),
   schema: z.object({
     name: z.string(),
     // TODO add additional properties for tags here once you need them

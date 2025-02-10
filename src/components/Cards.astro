@@ -21,13 +21,13 @@ const posts: Blog[] = Astro.props.posts;
     {
       posts.map(async (post: Blog) => {
         const project: Project | undefined = post.data.project
-          ? await getEntry("projects", post.data.project.slug)
+          ? await getEntry("projects", post.data.project.id)
           : undefined;
         return (
           <li>
             <Card
               heroImage={post.data.heroImage}
-              href={`/blog/${post.slug}/`}
+              href={`/blog/${post.id}/`}
               title={post.data.title}
               date={post.data.pubDate}
               {project}
