@@ -1,7 +1,7 @@
 ---
 title: "Adding tags"
 description: "The description for me adding tags"
-pubDate: "2024-04-18PDT" # Don't forget the timezone code at the end!
+pubDate: "2024-04-18PST" # Don't forget the timezone code at the end!
 published: false
 project: "portfolio-site"
 tags:

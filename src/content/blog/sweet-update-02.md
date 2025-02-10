@@ -1,8 +1,8 @@
 ---
 title: "Sweet Update 02"
 description: "New features have been added to sweet's results screen, including a words per minute graph!"
-startDate: "2024-10-29PDT"
-pubDate: "2024-10-29PDT"
+startDate: "2024-10-29PST"
+pubDate: "2024-10-29PST"
 published: true
 heroImage: "/blog/sweet-update-02/cover.png"
 project: "sweet"

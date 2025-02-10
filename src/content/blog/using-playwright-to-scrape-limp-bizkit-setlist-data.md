@@ -1,8 +1,8 @@
 ---
 title: "Planning the ultimate Limp Bizkit experience with Playwright"
 description: "How can my friend and I get on stage to perform guitar and bass with Limp Bizkit? The answer lies in the data."
-startDate: "2024-06-06PDT"
-pubDate: "2024-07-08PDT" # Don't forget the timezone code at the end!
+startDate: "2024-06-06PST"
+pubDate: "2024-07-08PST" # Don't forget the timezone code at the end!
 heroImage: "/blog/using-playwright-to-scrape-limp-bizkit-setlist-data/cover.png"
 published: true
 tags:

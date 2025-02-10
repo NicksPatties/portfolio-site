@@ -1,8 +1,8 @@
 ---
 title: "Using Fabric to Learn Fast"
 description: "How much time can I save using fabric, a CLI powered by AI, to gather info from YouTube videos?"
-startDate: "2024-06-04PDT" # No option for this yet
-pubDate: "2024-06-14PDT"
+startDate: "2024-06-04PST" # No option for this yet
+pubDate: "2024-06-14PST"
 heroImage: "/blog/using-fabric-to-learn-fast/guillaume-meurice-cover.png"
 published: true
 tags:
