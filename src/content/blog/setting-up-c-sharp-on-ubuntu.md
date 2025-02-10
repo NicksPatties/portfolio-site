@@ -1,7 +1,7 @@
 ---
 title: "Minimal C# Setup on Ubuntu"
 description: "I find the easiest way to set up .NET for writing C# code in Helix on Ubuntu"
-pubDate: "2024-06-03PDT"
+pubDate: "2024-06-03PST"
 heroImage: "/blog/setting-up-c-sharp-on-ubuntu/cover.png"
 published: true
 tags:

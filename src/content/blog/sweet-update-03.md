@@ -1,8 +1,8 @@
 ---
 title: "Sweet Update 03"
 description: "View your performance over time with `sweet stats`!"
-startDate: "2024-12-19PDT"
-pubDate: "2024-12-19PDT"
+startDate: "2024-12-19PST"
+pubDate: "2024-12-19PST"
 published: true
 heroImage: "/blog/sweet-update-03/cover.png"
 project: "sweet"

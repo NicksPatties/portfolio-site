@@ -2,8 +2,8 @@
 title: "Reading the news with Newsboat and Lynx"
 description: "I find a less annoying way to read the news using command line tools and RSS."
 heroImage: "/blog/reading-the-news-with-newsboat-and-lynx/pexels-ivan-samkov-4238516.jpg"
-startDate: "2024-06-21PDT"
-pubDate: "2024-06-30PDT"
+startDate: "2024-06-21PST"
+pubDate: "2024-06-30PST"
 published: true
 tags:
   - "cli"

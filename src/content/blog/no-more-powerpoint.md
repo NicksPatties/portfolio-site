@@ -1,8 +1,8 @@
 ---
 title: "No More PowerPoint: Presentations in the terminal?!"
 description: "Presentation software is clunky to me, so can I improve my process by using the terminal?"
-startDate: "2024-09-12PDT"
-pubDate: "2024-09-12PDT" # YYYY-MM-DDPDT
+startDate: "2024-09-12PST"
+pubDate: "2024-09-12PST" # YYYY-MM-DDPDT
 published: true # Set to true when you're ready
 heroImage: "/blog/no-more-powerpoint/cover.png"
 tags:

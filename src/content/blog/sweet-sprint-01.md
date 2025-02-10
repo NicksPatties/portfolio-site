@@ -1,8 +1,8 @@
 ---
 title: "Sweet Sprint Update 01"
 description: "Time for a do-over. I rewrite argument and file handling for typing exercise selection."
-startDate: "2024-10-02PDT"
-pubDate: "2024-10-02PDT"
+startDate: "2024-10-02PST"
+pubDate: "2024-10-02PST"
 published: true
 heroImage: "/blog/sweet-sprint-01/cover.png"
 project: "sweet"

@@ -1,8 +1,8 @@
 ---
 title: "Attack of the Macs?! Migrating from GitHub Pages to Caddy"
 description: "GitHub Pages served me well, but I want to actually see what's going on with my site."
-startDate: "2024-08-28PDT"
-pubDate: "2024-08-28PDT"
+startDate: "2024-08-28PST"
+pubDate: "2024-08-28PST"
 published: true # Set to true when you're ready
 heroImage: "/blog/migrating-from-github-pages-to-caddy/cover.png"
 project: "portfolio-site"

@@ -1,8 +1,8 @@
 ---
 title: "Scrapin' the Bizkit Part 2: Re-Arranged"
 description: "My first scraper with Playwright was pretty good, but we can do better with bun and SQLite!"
-startDate: "2024-07-25PDT"
-pubDate: "2024-08-02PDT" # Don't forget the timezone code at the end!
+startDate: "2024-07-25PST"
+pubDate: "2024-08-02PST" # Don't forget the timezone code at the end!
 heroImage: "/blog/scraping-limp-bizkit-setlist-data-part-2/cover.png"
 published: true
 tags:
