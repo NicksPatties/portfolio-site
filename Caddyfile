@@ -8,6 +8,11 @@
 	file_server
 	encode gzip
 
+	handle_errors 404 {
+		rewrite * /{err.status_code}.html
+		file_server
+	}
+
 	log {
 		output file /var/log/caddy/access.log
 	}
